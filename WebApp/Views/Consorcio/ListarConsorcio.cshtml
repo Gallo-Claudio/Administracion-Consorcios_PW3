@@ -1,0 +1,42 @@
+﻿@using Entidades
+@model List<Entidades.Consorcio>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListarConsorcio</title>
+</head>
+<body>
+    <div>
+        <table>
+            <a href="/consorcio/agregarConsorcio">Nuevo Consorcio</a>
+            <tr>
+                <td>Nombre</td>
+                <td>Provincia</td>
+                <td>Ciudad</td>
+                <td>Unidades</td>
+                <td>Expensas</td>
+                <td>Gastos</td>
+                <td>Eliminar</td>
+            </tr>
+            @foreach (Entidades.Consorcio consorcio in Model)
+            {
+                <tr>
+                    <td>@consorcio.Nombre</td>
+                    <td>@consorcio.IdProvincia.Nombre</td>
+                    <td>@consorcio.Ciudad</td>
+                    <td><a href="/unidad/listarUnidad/@consorcio.IdConsorcio">Unidades</a></td>
+                    <td>@consorcio.IdConsorcio</td>
+                    <td><a href="/gasto/listarGasto/@consorcio.IdConsorcio">Gastos</a></td>
+                    <td></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
