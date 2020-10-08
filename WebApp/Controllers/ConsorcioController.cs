@@ -25,11 +25,21 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarConsorcio(Entidades.Consorcio consorcio, int IdProvincia)
+        public ActionResult AgregarConsorcio(Entidades.Consorcio consorcio, int IdProvincia, int? id)
         {       
             ConsorcioServicio.AgregarConsorcio(consorcio, IdProvincia);
-            List<Entidades.Consorcio> listadoConsorcio = ConsorcioServicio.ListarConsorcios();
-            return RedirectToAction("ListarConsorcio", listadoConsorcio);
+
+            switch (id)
+            {
+                case 1:
+                    return RedirectToAction("AgregarConsorcio");
+                    break;
+                case 2:
+                    return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador") 
+                default:
+                    List<Entidades.Consorcio> listadoConsorcio = ConsorcioServicio.ListarConsorcios();
+                    return RedirectToAction("ListarConsorcio", listadoConsorcio);
+            }            
         }
     }
 }
