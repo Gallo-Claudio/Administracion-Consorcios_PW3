@@ -16,13 +16,15 @@
             <label>Nombre *</label><br />
             <input name="Nombre" value="" /><br /><br />
 
-            <label>Provincia *</label><br />
-            <select name="IdProvincia" size="1">
-                @foreach (Entidades.Provincia provincia in ViewData["listadoProvincias"] as List<Provincia>)
-                {
-                    <option value="@provincia.IdProvincia">@provincia.Nombre</option>
-                }
-            </select><br /><br />
+            @*<label>Provincia *</label><br />
+        <select name="IdProvincia" size="1">
+            @foreach (Entidades.Provincia provincia in ViewData["listadoProvincias"] as List<Provincia>)
+            {
+                <option value="@provincia.IdProvincia">@provincia.Nombre</option>
+            }
+        </select><br /><br />*@
+
+            @Html.DropDownList("IdProvincia", new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
 
             <label>Ciudad *</label><br />
             <input name="Ciudad" value="" /><br /><br />
@@ -38,7 +40,7 @@
 
 
             <button type="submit">Guardar</button><br />
-            <button type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button><br /> @*//flag*@
+            <button type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button><br />
             <button type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button><br />
             <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button>
 

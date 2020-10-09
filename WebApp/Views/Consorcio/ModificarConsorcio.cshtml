@@ -1,0 +1,68 @@
+﻿@using Entidades
+@model Entidades.Consorcio
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ModificarConsorcio</title>
+</head>
+<body>
+    <div>
+        <form action="/consorcio/modificarConsorcio" method="post">
+            <input hidden name="IdConsorcio" value="@Model.IdConsorcio" />
+            <input hidden name="IdUsuarioCreador" value="@Model.IdUsuarioCreador" />
+            <input hidden name="FechaCreacion" value="@Model.FechaCreacion" />
+
+            <label>Nombre *</label><br />
+            <input name="Nombre" value="@Model.Nombre" /><br /><br />
+
+            @*<label>Provincia *</label><br />
+        <select name="IdProvincia" size="1">
+            @foreach (Entidades.Provincia provincia in ViewData["listadoProvincias"] as List<Provincia>)
+            {
+                <option value="@provincia.IdProvincia">@provincia.Nombre</option>
+            }
+        </select><br /><br />*@
+
+            <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function () {
+                $('#IdProvincia > option[value="@Model.IdProvincia.IdProvincia"]').attr('selected', 'selected');
+            });
+            </script>
+
+            @Html.DropDownList("IdProvincia", new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"))
+
+            <label>Ciudad *</label><br />
+            <input name="Ciudad" value="@Model.Ciudad" /><br /><br />
+
+            <label>Calle *</label><br />
+            <input name="Calle" value="@Model.Calle" /><br /><br />
+
+            <label>Altura *</label><br />
+            <input name="Altura" value="@Model.Altura" /><br /><br />
+
+            <label>Dia Venc. Expensas *</label><br />
+            <input name="DiaVencimientoExpensas" value="@Model.DiaVencimientoExpensas" /><br /><br />
+
+
+            <button type="submit">Guardar</button><br />
+            <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button><br /><br /><br /><br />
+        </form>
+
+
+
+        @ViewBag.cantidadUnidades Unidades<br /><br />
+        <a href="/unidad/listarUnidad/@Model.IdConsorcio">Ver Unidades</a><br />
+        <a href="/expensa/listarExpensa/@Model.IdConsorcio">Ver Expensas</a><br />
+        <a href="/gasto/listarGasto/@Model.IdConsorcio">Ver Gastos</a><br />
+        <a href="/consorcio/eliminarConsorcio/@Model.IdConsorcio">Eliminar Consorcio</a>
+
+    </div>
+</body>
+</html>

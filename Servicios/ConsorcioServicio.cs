@@ -24,5 +24,26 @@ namespace Servicios
             Hardcodeo.consorcio.Add(nuevoConsorcio);
         }
 
+        public static Consorcio BuscarConsorcio(int id)
+        {
+            Consorcio busquedaConsorcio = Hardcodeo.consorcio.Find(c => c.IdConsorcio == id);
+            return busquedaConsorcio;
+        }
+
+        public static void ModificarConsorcio(Consorcio consorcioModificacion, int IdProvincia)
+        {
+            int id = consorcioModificacion.IdConsorcio;
+            Consorcio edicionConsorcio = Hardcodeo.consorcio.Find(c => c.IdConsorcio == id);
+
+            edicionConsorcio.Altura = consorcioModificacion.Altura;
+            edicionConsorcio.Calle = consorcioModificacion.Calle;
+            edicionConsorcio.Ciudad = consorcioModificacion.Ciudad;
+            edicionConsorcio.DiaVencimientoExpensas = consorcioModificacion.DiaVencimientoExpensas;
+            edicionConsorcio.FechaCreacion = consorcioModificacion.FechaCreacion;
+            edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
+            edicionConsorcio.Nombre = consorcioModificacion.Nombre;
+            edicionConsorcio.IdUsuarioCreador = consorcioModificacion.IdUsuarioCreador;
+            edicionConsorcio.IdProvincia = ProvinciaServicio.BuscarProvincia(IdProvincia);
+        }
     }
 }
