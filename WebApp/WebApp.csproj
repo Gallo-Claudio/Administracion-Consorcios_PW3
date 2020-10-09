@@ -106,6 +106,7 @@
     <Content Include="Views\Consorcio\ListarConsorcio.cshtml" />
     <Content Include="Views\Consorcio\AgregarConsorcio.cshtml" />
     <Content Include="Views\Consorcio\ModificarConsorcio.cshtml" />
+    <Content Include="Views\Consorcio\EliminarConsorcio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
