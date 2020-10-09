@@ -59,5 +59,20 @@ namespace WebApp.Controllers
             ConsorcioServicio.ModificarConsorcio(consorcio, IdProvincia);
             return RedirectToAction("ListarConsorcio");
         }
+
+        public ActionResult EliminarConsorcio(int id)
+        {
+            Consorcio consorcioAEliminar = ConsorcioServicio.BuscarConsorcio(id);
+            return View(consorcioAEliminar);
+        }
+        
+        [HttpPost]
+        public ActionResult EliminarConsorcio(Consorcio consorcioEliminar)
+        {
+            ConsorcioServicio.EliminarGastos(consorcioEliminar);
+            ConsorcioServicio.EliminarUnidades(consorcioEliminar);
+            ConsorcioServicio.EliminarConsorcio(consorcioEliminar);
+            return RedirectToAction("ListarConsorcio");
+        }
     }
 }

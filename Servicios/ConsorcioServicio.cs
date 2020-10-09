@@ -45,5 +45,36 @@ namespace Servicios
             edicionConsorcio.IdUsuarioCreador = consorcioModificacion.IdUsuarioCreador;
             edicionConsorcio.IdProvincia = ProvinciaServicio.BuscarProvincia(IdProvincia);
         }
+
+
+        // ***** PASARLO A GASTOSERVICIO O COMO SE TERMINE LLAMANDO *****
+        public static void EliminarGastos(Consorcio consorcioEliminar)
+        {
+            foreach (Gasto gastoEliminar in Hardcodeo.gasto)
+            {
+                if (gastoEliminar.IdConsorcio == consorcioEliminar)
+                {
+                    Hardcodeo.gasto.RemoveAt(gastoEliminar.IdGasto);
+                }
+            }
+        }
+
+        // ***** PASARLO A UNIDADSERVICIO O COMO SE TERMINE LLAMANDO *****
+        public static void EliminarUnidades(Consorcio consorcioEliminar)
+        {
+            foreach (Unidad unidadEliminar in Hardcodeo.unidad)
+            {
+                if (unidadEliminar.IdConsorcio == consorcioEliminar)
+                {
+                    Hardcodeo.unidad.RemoveAt(unidadEliminar.IdUnidad);
+                }
+            }
+        }
+
+        public static void EliminarConsorcio(Consorcio consorcioEliminar)
+        {
+            int Id = consorcioEliminar.IdConsorcio;
+            Hardcodeo.consorcio.RemoveAt(Id);
+        }
     }
 }
