@@ -33,13 +33,31 @@ namespace WebApp.Controllers
             {
                 case 1:
                     return RedirectToAction("AgregarConsorcio");
-                    break;
                 case 2:
                     return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador") 
-                default:
-                    List<Entidades.Consorcio> listadoConsorcio = ConsorcioServicio.ListarConsorcios();
-                    return RedirectToAction("ListarConsorcio", listadoConsorcio);
+                default:                    
+                    return RedirectToAction("ListarConsorcio");
             }            
+        }
+
+        public ActionResult ModificarConsorcio(int id)
+        {
+            Consorcio busquedaConsorcioId = ConsorcioServicio.BuscarConsorcio(id);
+
+            List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
+            ViewData["listadoProvincias"] = provincias;
+
+            int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+            ViewBag.cantidadUnidades = cantidadUnidades;
+
+            return View(busquedaConsorcioId);
+        }
+                
+        [HttpPost]
+        public ActionResult ModificarConsorcio(Entidades.Consorcio consorcio, int IdProvincia)
+        {
+            ConsorcioServicio.ModificarConsorcio(consorcio, IdProvincia);
+            return RedirectToAction("ListarConsorcio");
         }
     }
 }

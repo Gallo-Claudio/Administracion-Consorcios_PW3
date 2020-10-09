@@ -105,6 +105,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Consorcio\ListarConsorcio.cshtml" />
     <Content Include="Views\Consorcio\AgregarConsorcio.cshtml" />
+    <Content Include="Views\Consorcio\ModificarConsorcio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Img\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
