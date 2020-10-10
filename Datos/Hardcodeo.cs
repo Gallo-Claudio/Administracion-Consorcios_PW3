@@ -78,7 +78,7 @@ namespace Datos
         {
             usu1.IdUsuario = 1;
             usu1.Email = "pnsanchez@unlam.edu.ar";
-            usu1.Password = "Test1234!";
+            usu1.Password = "Test1234!";  // ----------------------------------> encriptado	"VABlAHMAdAAxADIAMwA0ACEA"
             usu1.FechaRegistracion = new DateTime(2020, 09, 29, 22, 45, 36);
             usu1.FechaUltLogin = new DateTime(2020, 09, 29, 22, 05, 36);
 

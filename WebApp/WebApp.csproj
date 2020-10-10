@@ -107,6 +107,9 @@
     <Content Include="Views\Consorcio\AgregarConsorcio.cshtml" />
     <Content Include="Views\Consorcio\ModificarConsorcio.cshtml" />
     <Content Include="Views\Consorcio\EliminarConsorcio.cshtml" />
+    <Content Include="Views\Home\Inicio.cshtml" />
+    <Content Include="Views\Home\Registrarse.cshtml" />
+    <Content Include="Views\Home\Ingresar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -118,7 +121,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Img\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">
