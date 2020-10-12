@@ -17,6 +17,13 @@ namespace Servicios
             return existe;
         }
 
+         public static bool VerificaPassword(string Password)
+        {
+            bool existe;
+            existe = Hardcodeo.usuario.Find(m => m.Password == Password) != null ? true : false;
+            return existe;
+        }
+
         public static string Encriptar(string cadenaAEncriptar)
         {
             string result = string.Empty;

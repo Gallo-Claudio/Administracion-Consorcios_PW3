@@ -13,20 +13,38 @@ namespace WebApp.Controllers
         // GET: Consorcio
         public ActionResult ListarConsorcio()
         {
-            List<Consorcio> listadoConsorcio = ConsorcioServicio.ListarConsorcios();
-            return View(listadoConsorcio);
+            if (Session["IdUsuario"] != null)
+            {
+                List<Consorcio> listadoConsorcio = ConsorcioServicio.ListarConsorcios();
+                return View(listadoConsorcio);
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "ListarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
         }
-        
+
         public ActionResult AgregarConsorcio()
         {
-            List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
-            ViewData["listadoProvincias"] = provincias;
-            return View();
+            if (Session["IdUsuario"] != null)
+            {
+                List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
+                ViewData["listadoProvincias"] = provincias;
+                return View();
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "AgregarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
         }
 
         [HttpPost]
         public ActionResult AgregarConsorcio(Entidades.Consorcio consorcio, int IdProvincia, int? id)
-        {       
+        {
             ConsorcioServicio.AgregarConsorcio(consorcio, IdProvincia);
 
             switch (id)
@@ -34,14 +52,16 @@ namespace WebApp.Controllers
                 case 1:
                     return RedirectToAction("AgregarConsorcio");
                 case 2:
-                    return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador") 
-                default:                    
+                    return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador")
+                default:
                     return RedirectToAction("ListarConsorcio");
-            }            
+            }
         }
 
         public ActionResult ModificarConsorcio(int id)
         {
+            if (Session["IdUsuario"] != null)
+            {
             Consorcio busquedaConsorcioId = ConsorcioServicio.BuscarConsorcio(id);
 
             List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
@@ -51,8 +71,15 @@ namespace WebApp.Controllers
             ViewBag.cantidadUnidades = cantidadUnidades;
 
             return View(busquedaConsorcioId);
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "ModificarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
         }
-                
+
         [HttpPost]
         public ActionResult ModificarConsorcio(Entidades.Consorcio consorcio, int IdProvincia)
         {
@@ -62,10 +89,19 @@ namespace WebApp.Controllers
 
         public ActionResult EliminarConsorcio(int id)
         {
-            Consorcio consorcioAEliminar = ConsorcioServicio.BuscarConsorcio(id);
-            return View(consorcioAEliminar);
+            if (Session["IdUsuario"] != null)
+            {
+                Consorcio consorcioAEliminar = ConsorcioServicio.BuscarConsorcio(id);
+                return View(consorcioAEliminar);
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "EliminarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
         }
-        
+
         [HttpPost]
         public ActionResult EliminarConsorcio(Consorcio consorcioEliminar)
         {

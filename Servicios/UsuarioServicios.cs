@@ -14,5 +14,17 @@ namespace Servicios
             int ultimoId = Hardcodeo.usuario.Last().IdUsuario;
             return ultimoId;
         }
+
+        public static string BuscarNombre(string Email)
+        {
+            string Nombre = Hardcodeo.usuario.Find(n => n.Email == Email).Nombre;
+            return Nombre;
+        }
+        
+        public static int BuscarIdUsuario(string Email)
+        {
+            int IdUsuario = Hardcodeo.usuario.Find(i => i.Email == Email).IdUsuario;
+            return IdUsuario;
+        }
     }
 }

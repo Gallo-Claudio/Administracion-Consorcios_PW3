@@ -14,6 +14,8 @@ namespace Entidades
 
         public string Password { get; set; }
 
+        public string Nombre { get; set; }
+
         public DateTime FechaRegistracion { get; set; }
 
         public DateTime FechaUltLogin { get; set; }
