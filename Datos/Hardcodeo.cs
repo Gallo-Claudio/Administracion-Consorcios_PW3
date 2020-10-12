@@ -78,19 +78,22 @@ namespace Datos
         {
             usu1.IdUsuario = 1;
             usu1.Email = "pnsanchez@unlam.edu.ar";
-            usu1.Password = "Test1234!";  // ----------------------------------> encriptado	"VABlAHMAdAAxADIAMwA0ACEA"
+            usu1.Password = "VABlAHMAdAAxADIAMwA0ACEA";  // ---------------------------------->    desencriptado	"Test1234!"
+            usu1.Nombre = "Pablo";
             usu1.FechaRegistracion = new DateTime(2020, 09, 29, 22, 45, 36);
             usu1.FechaUltLogin = new DateTime(2020, 09, 29, 22, 05, 36);
 
             usu2.IdUsuario = 2;
             usu2.Email = "mpaz@unlam.edu.ar";
-            usu2.Password = "Test1234!";
+            usu2.Password = "VABlAHMAdAAxADIAMwA0ACEA";
+            usu2.Nombre = "Mariano";
             usu2.FechaRegistracion = new DateTime(2020, 09, 29, 22, 45, 36);
             usu2.FechaUltLogin = new DateTime(2020, 09, 29, 22, 55, 36);
 
             usu3.IdUsuario = 3;
             usu3.Email = "mjuiz@unlam.edu.ar";
-            usu3.Password = "Test1234!";
+            usu3.Password = "VABlAHMAdAAxADIAMwA0ACEA";
+            usu3.Nombre = "Miguel";
             usu3.FechaRegistracion = new DateTime(2020, 09, 29, 22, 45, 36);
             usu3.FechaUltLogin = new DateTime();  //null
 
@@ -208,7 +211,7 @@ namespace Datos
             con1.Altura = 2369;
             con1.DiaVencimientoExpensas = 6;
             con1.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 00);
-            con1.IdUsuarioCreador = null;
+            con1.IdUsuarioCreador = usu1;
 
             con2.IdConsorcio = 2;
             con2.Nombre = "Edificio Arieta";
@@ -218,7 +221,7 @@ namespace Datos
             con2.Altura = 2748;
             con2.DiaVencimientoExpensas = 12;
             con2.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 48);
-            con2.IdUsuarioCreador = null;
+            con2.IdUsuarioCreador = usu1;
 
             con3.IdConsorcio = 3;
             con3.Nombre = "Edificio Alberdi";
@@ -228,7 +231,7 @@ namespace Datos
             con3.Altura = 2387;
             con3.DiaVencimientoExpensas = 1;
             con3.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 37);
-            con3.IdUsuarioCreador = null;
+            con3.IdUsuarioCreador = usu1;
 
             con4.IdConsorcio = 4;
             con4.Nombre = "Torres Florenci";
@@ -238,7 +241,7 @@ namespace Datos
             con4.Altura = 364;
             con4.DiaVencimientoExpensas = 5;
             con4.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 56);
-            con4.IdUsuarioCreador = null;
+            con4.IdUsuarioCreador = usu2;
 
             con5.IdConsorcio = 5;
             con5.Nombre = "Vilanova";
@@ -248,7 +251,7 @@ namespace Datos
             con5.Altura = 620;
             con5.DiaVencimientoExpensas = 21;
             con5.FechaCreacion = new DateTime(2020, 09, 29, 22, 53, 31);
-            con5.IdUsuarioCreador = null;
+            con5.IdUsuarioCreador = usu2;
 
             con6.IdConsorcio = 6;
             con6.Nombre = "Altos de Gandara";
@@ -258,7 +261,7 @@ namespace Datos
             con6.Altura = 851;
             con6.DiaVencimientoExpensas = 2;
             con6.FechaCreacion = new DateTime(2020, 09, 29, 22, 58, 32);
-            con6.IdUsuarioCreador = null;
+            con6.IdUsuarioCreador = usu3;
 
             consorcio.Add(con1);
             consorcio.Add(con2);
