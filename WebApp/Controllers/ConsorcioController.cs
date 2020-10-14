@@ -43,9 +43,19 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarConsorcio(Entidades.Consorcio consorcio, int IdProvincia, int? id)
+        public ActionResult AgregarConsorcio(Entidades.Consorcio consorcio, int? id)
         {
-            ConsorcioServicio.AgregarConsorcio(consorcio, IdProvincia);
+            if (ModelState.IsValid)
+            {
+                ConsorcioServicio.AgregarConsorcio(consorcio);
+            }
+            else
+            {
+                List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
+                ViewData["listadoProvincias"] = provincias;
+                return View(consorcio);
+            }
+
 
             switch (id)
             {
@@ -62,15 +72,15 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-            Consorcio busquedaConsorcioId = ConsorcioServicio.BuscarConsorcio(id);
+                Consorcio busquedaConsorcioId = ConsorcioServicio.BuscarConsorcio(id);
 
-            List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
-            ViewData["listadoProvincias"] = provincias;
+                List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
+                ViewData["listadoProvincias"] = provincias;
 
-            int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-            ViewBag.cantidadUnidades = cantidadUnidades;
+                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                ViewBag.cantidadUnidades = cantidadUnidades;
 
-            return View(busquedaConsorcioId);
+                return View(busquedaConsorcioId);
             }
             else
             {
@@ -81,10 +91,18 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarConsorcio(Entidades.Consorcio consorcio, int IdProvincia)
+        public ActionResult ModificarConsorcio(Entidades.Consorcio consorcio)
         {
-            ConsorcioServicio.ModificarConsorcio(consorcio, IdProvincia);
-            return RedirectToAction("ListarConsorcio");
+            if (ModelState.IsValid)
+            {
+                ConsorcioServicio.ModificarConsorcio(consorcio);
+                return RedirectToAction("ListarConsorcio");
+            }
+            else
+            {
+                int id = ConsorcioServicio.BuscarIdConsorcio(consorcio);
+                return RedirectToAction("ModificarConsorcio", id);
+            }
         }
 
         public ActionResult EliminarConsorcio(int id)
