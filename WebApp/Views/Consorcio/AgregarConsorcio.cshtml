@@ -1,4 +1,5 @@
 ﻿@using Entidades
+@model Consorcio
 @{
     Layout = null;
 }
@@ -13,30 +14,30 @@
 <body>
     <div>
         <form action="/consorcio/agregarConsorcio" method="post">
-            <label>Nombre *</label><br />
-            <input name="Nombre" value="" /><br /><br />
 
-            @*<label>Provincia *</label><br />
-        <select name="IdProvincia" size="1">
-            @foreach (Entidades.Provincia provincia in ViewData["listadoProvincias"] as List<Provincia>)
-            {
-                <option value="@provincia.IdProvincia">@provincia.Nombre</option>
-            }
-        </select><br /><br />*@
+            @Html.LabelFor(Model => Model.Nombre)*<br />
+            @Html.EditorFor(Model => Model.Nombre)
+            @Html.ValidationMessageFor(Model => Model.Nombre)<br /><br />
 
-            @Html.DropDownList("IdProvincia", new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+            @Html.LabelFor(Model => Model.IdProvincia)*<br />
+            @Html.DropDownListFor(Model => Model.IdProvincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br /><br />
 
-            <label>Ciudad *</label><br />
-            <input name="Ciudad" value="" /><br /><br />
+            @Html.LabelFor(Model => Model.Ciudad)*<br />
+            @Html.EditorFor(Model => Model.Ciudad)
+            @Html.ValidationMessageFor(Model => Model.Ciudad)<br /><br />
 
-            <label>Calle *</label><br />
-            <input name="Calle" value="" /><br /><br />
+            @Html.LabelFor(Model => Model.Calle)*<br />
+            @Html.EditorFor(Model => Model.Calle)
+            @Html.ValidationMessageFor(Model => Model.Calle)<br /><br />
 
-            <label>Altura *</label><br />
-            <input name="Altura" value="" /><br /><br />
+            @Html.LabelFor(Model => Model.Altura)*<br />
+            @Html.EditorFor(Model => Model.Altura)
+            @Html.ValidationMessageFor(Model => Model.Altura)<br /><br />
 
-            <label>Dia Venc. Expensas *</label><br />
-            <input name="DiaVencimientoExpensas" value="" /><br /><br />
+            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*<br />
+            @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
+            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br /><br />
 
 
             <button type="submit">Guardar</button><br />
