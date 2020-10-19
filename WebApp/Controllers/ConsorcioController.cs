@@ -101,7 +101,13 @@ namespace WebApp.Controllers
             else
             {
                 int id = ConsorcioServicio.BuscarIdConsorcio(consorcio);
-                return RedirectToAction("ModificarConsorcio", id);
+                List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
+                ViewData["listadoProvincias"] = provincias;
+
+                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                ViewBag.cantidadUnidades = cantidadUnidades;
+
+                return View("ModificarConsorcio", consorcio);
             }
         }
 

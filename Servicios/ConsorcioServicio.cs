@@ -32,7 +32,7 @@ namespace Servicios
 
         public static int BuscarIdConsorcio(Consorcio consorcio)
         {
-            int idConsorcio = consorcio.IdProvincia.IdProvincia;
+            int idConsorcio = consorcio.IdConsorcio;
             return idConsorcio;
         }
 
