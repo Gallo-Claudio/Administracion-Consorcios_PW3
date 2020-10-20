@@ -32,14 +32,18 @@ namespace Servicios
             return result;
         }
 
-        public static void NuevoUsuario(Usuario nuevoUsuario)
+        public static void NuevoUsuario(Usuario_VM nuevoUsuario)
         {
             string password = nuevoUsuario.Password;
             string encriptado = Encriptar(password);
-            nuevoUsuario.Password = encriptado;
-            nuevoUsuario.FechaRegistracion = DateTime.Now;
-            nuevoUsuario.IdUsuario = UsuarioServicios.UltimoIdRegistro() + 1;
-            Hardcodeo.usuario.Add(nuevoUsuario);
+
+            Usuario usuario = new Usuario();
+            usuario.Nombre = nuevoUsuario.Nombre;
+            usuario.Email = nuevoUsuario.Email;
+            usuario.Password = encriptado;
+            usuario.FechaRegistracion = DateTime.Now;
+            usuario.IdUsuario = UsuarioServicios.UltimoIdRegistro() + 1;
+            Hardcodeo.usuario.Add(usuario);
         }
     }
 }
