@@ -23,6 +23,7 @@ namespace Entidades
 
         [Required]
         [Compare("Password")]
+        [Display(Name = "Reingresar Password")]
         public string ReingresoPassword { get; set; }
     }
 }
