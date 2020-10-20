@@ -1,5 +1,5 @@
 ﻿@using Entidades
-@model Usuario
+@model Usuario_VM
 @{
     Layout = null;
 }
@@ -16,10 +16,10 @@
         @ViewBag.error
         <form action="/home/registrarse" method="post">
 
-            @Html.TextBoxFor(n => n.Nombre, new { placeholder = "Nombre" })<br />
-            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br />
-            @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" })<br />
-            @Html.PasswordFor(p2 => p2.Password, new { placeholder = "Reingrese la contraseña" })
+            @Html.TextBoxFor(n => n.Nombre, new { placeholder = "Nombre" }) @Html.ValidationMessageFor(Model => Model.Nombre)<br />
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" }) @Html.ValidationMessageFor(Model => Model.Email)<br />
+            @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" }) @Html.ValidationMessageFor(Model => Model.Password)<br />
+            @Html.PasswordFor(p2 => p2.ReingresoPassword, new { placeholder = "Reingrese la contraseña" }) @Html.ValidationMessageFor(Model => Model.ReingresoPassword)<br />
 
             <button type="submit">Registrarse</button>
         </form>

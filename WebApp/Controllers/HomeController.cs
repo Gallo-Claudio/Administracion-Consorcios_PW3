@@ -62,19 +62,26 @@ namespace WebApp.Controllers
 
 
         [HttpPost]
-        public ActionResult Registrarse(Usuario nuevoUsuario)
+        public ActionResult Registrarse(Usuario_VM nuevoUsuario)
         {
-            bool existe = HomeServicios.VerificaEmail(nuevoUsuario.Email);
-
-            if (existe)
+            if (ModelState.IsValid)
             {
-                ViewBag.error = "El mail ingresado ya existe";
-                return View(nuevoUsuario);
+                bool existe = HomeServicios.VerificaEmail(nuevoUsuario.Email);
+
+                if (existe)
+                {
+                    ViewBag.error = "El mail ingresado ya existe";
+                    return View(nuevoUsuario);
+                }
+                else
+                {
+                    HomeServicios.NuevoUsuario(nuevoUsuario);
+                    return RedirectToAction("Ingresar");
+                }
             }
             else
             {
-                HomeServicios.NuevoUsuario(nuevoUsuario);
-                return RedirectToAction("Ingresar");
+                return View(nuevoUsuario);
             }
         }
     }
