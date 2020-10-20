@@ -1,16 +1,10 @@
 ﻿@using Entidades
 @model Consorcio
 @{
-    Layout = null;
+    ViewBag.Titulo = "Eliminación de Consorcios";
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>EliminarConsorcio</title>
-</head>
 <body>
     <div> 
         <p>Esta seguro que desea eliminar el consorcio @Model.Nombre ?</p>
@@ -23,4 +17,3 @@
         </form>
     </div>
 </body>
-</html>

@@ -1,16 +1,10 @@
 ﻿@using Entidades
 @model List<Entidades.Consorcio>
 @{
-    Layout = null;
+    ViewBag.Titulo = "Listado de Consorcios";
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ListarConsorcio</title>
-</head>
 <body>
     <div>
         <h1>Listado de consorcios</h1>
@@ -42,4 +36,3 @@
         </table>
     </div>
 </body>
-</html>

@@ -1,16 +1,10 @@
 ﻿@using Entidades
 @model Usuario_VM
 @{
-    Layout = null;
+    ViewBag.Titulo = "Registración";
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Registrarse</title>
-</head>
 <body>
     <div>
         @ViewBag.error
@@ -25,4 +19,3 @@
         </form>
     </div>
 </body>
-</html>
