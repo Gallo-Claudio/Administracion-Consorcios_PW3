@@ -1,16 +1,10 @@
 ﻿@using Entidades
 @model Consorcio
 @{
-    Layout = null;
+    ViewBag.Titulo = "Ingreso de Consorcios";
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AgregarConsorcio</title>
-</head>
 <body>
     <div>
         <form action="/consorcio/agregarConsorcio" method="post">
@@ -48,4 +42,3 @@
         </form>
     </div>
 </body>
-</html>

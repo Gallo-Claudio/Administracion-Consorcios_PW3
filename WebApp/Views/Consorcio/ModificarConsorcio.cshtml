@@ -1,24 +1,20 @@
 ﻿@using Entidades
 @model Consorcio
 @{
-    Layout = null;
+    ViewBag.Titulo = "Modificación de Consorcios";
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ModificarConsorcio</title>
-
-
+@section HeadScripts{
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript">
             $(document).ready(function () {
                 $('#IdProvincia > option[value="@Model.IdProvincia.IdProvincia"]').attr('selected', 'selected');
             });
     </script>
-</head>
+}
+
+
 <body>
     <div>
         <form action="/consorcio/modificarConsorcio" method="post">
@@ -65,4 +61,3 @@
 
     </div>
 </body>
-</html>
