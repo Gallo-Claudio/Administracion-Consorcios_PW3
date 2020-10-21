@@ -16,44 +16,44 @@
 
 
 <body>
-    <div>
+    <div class="container">
         <form action="/consorcio/modificarConsorcio" method="post">
             <input hidden name="IdConsorcio" value="@Model.IdConsorcio" />
             <input hidden name="IdUsuarioCreador" value="@Model.IdUsuarioCreador" />
             <input hidden name="FechaCreacion" value="@Model.FechaCreacion" />
 
-            @Html.LabelFor(Model => Model.Nombre)*<br />
+            @Html.LabelFor(Model => Model.Nombre)*
             @Html.EditorFor(Model => Model.Nombre)
-            @Html.ValidationMessageFor(Model => Model.Nombre)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-            @Html.LabelFor(Model => Model.IdProvincia)*<br />
+            @Html.LabelFor(Model => Model.IdProvincia)*
             @Html.DropDownListFor(Model => Model.IdProvincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br />
 
-            @Html.LabelFor(Model => Model.Ciudad)*<br />
+            @Html.LabelFor(Model => Model.Ciudad)*
             @Html.EditorFor(Model => Model.Ciudad)
-            @Html.ValidationMessageFor(Model => Model.Ciudad)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Ciudad)<br />
 
-            @Html.LabelFor(Model => Model.Calle)*<br />
+            @Html.LabelFor(Model => Model.Calle)*
             @Html.EditorFor(Model => Model.Calle)
-            @Html.ValidationMessageFor(Model => Model.Calle)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Calle)<br />
 
-            @Html.LabelFor(Model => Model.Altura)*<br />
+            @Html.LabelFor(Model => Model.Altura)*
             @Html.EditorFor(Model => Model.Altura)
-            @Html.ValidationMessageFor(Model => Model.Altura)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Altura)<br />
 
-            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*<br />
+            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
             @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br /><br />
+            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
 
 
-            <button type="submit">Guardar</button><br />
-            <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button><br /><br /><br /><br />
+            <button type="submit">Guardar</button>
+            <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button><br /><br />
         </form>
 
 
 
-        @ViewBag.cantidadUnidades Unidades<br /><br />
+        @ViewBag.cantidadUnidades Unidades<br />
         <a href="/unidad/listarUnidad/@Model.IdConsorcio">Ver Unidades</a><br />
         <a href="/expensa/listarExpensa/@Model.IdConsorcio">Ver Expensas</a><br />
         <a href="/gasto/listarGasto/@Model.IdConsorcio">Ver Gastos</a><br />
