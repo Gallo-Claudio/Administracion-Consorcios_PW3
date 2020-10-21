@@ -6,32 +6,32 @@
 }
 
 <body>
-    <div>
+    <div class="container">
         <form action="/consorcio/agregarConsorcio" method="post">
 
-            @Html.LabelFor(Model => Model.Nombre)*<br />
+            @Html.LabelFor(Model => Model.Nombre)*
             @Html.EditorFor(Model => Model.Nombre)
-            @Html.ValidationMessageFor(Model => Model.Nombre)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-            @Html.LabelFor(Model => Model.IdProvincia)*<br />
+            @Html.LabelFor(Model => Model.IdProvincia)*
             @Html.DropDownListFor(Model => Model.IdProvincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br />
 
-            @Html.LabelFor(Model => Model.Ciudad)*<br />
+            @Html.LabelFor(Model => Model.Ciudad)*
             @Html.EditorFor(Model => Model.Ciudad)
-            @Html.ValidationMessageFor(Model => Model.Ciudad)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Ciudad)<br />
 
-            @Html.LabelFor(Model => Model.Calle)*<br />
+            @Html.LabelFor(Model => Model.Calle)*
             @Html.EditorFor(Model => Model.Calle)
-            @Html.ValidationMessageFor(Model => Model.Calle)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Calle)<br />
 
-            @Html.LabelFor(Model => Model.Altura)*<br />
+            @Html.LabelFor(Model => Model.Altura)*
             @Html.EditorFor(Model => Model.Altura)
-            @Html.ValidationMessageFor(Model => Model.Altura)<br /><br />
+            @Html.ValidationMessageFor(Model => Model.Altura)<br />
 
-            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*<br />
+            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
             @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br /><br />
+            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
 
 
             <button type="submit">Guardar</button><br />
@@ -40,5 +40,5 @@
             <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button>
 
         </form>
-    </div>
+        </>
 </body>
