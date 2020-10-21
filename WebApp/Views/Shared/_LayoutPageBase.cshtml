@@ -12,20 +12,13 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <container class="fixed-top border border-top-0 border-left-0 border-right-0 border-dark bg-secondary text-white" ">
-        <div>
-            <a href="/home/inicio">Inicio</a>
-            <a href="/consorcio/listarconsorcio">Mis consorcios</a>
-            <a href="/home/salir">Salir</a>
-            Bienvenido @Session["Nombre"] !
-        </div>
-    </container>
+    @RenderSection("Encabezado", false)
 
-    <div style="margin-top:50px">
+    <div style="margin-top:150px">
         @RenderBody()
     </div>
 
-    <container class="fixed-bottom border border-bottom-0 border-left-0 border-right-0 border-dark bg-secondary text-white" ">
+    <container class="fixed-bottom border border-bottom-0 border-left-0 border-right-0 border-dark bg-secondary text-white">
         <div class="mx-auto p-2" style="width: fit-content">PW3 - 2020 - 2º Cuatrimestre</div>
         <div class="mx-auto p-2" style="width: fit-content">Grupo FVZ:  Fortunato Juan Pablo - Vazquez Claudio - Zota Alejo</div>
     </container>

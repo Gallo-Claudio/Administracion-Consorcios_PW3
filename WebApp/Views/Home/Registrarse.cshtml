@@ -6,7 +6,7 @@
 }
 
 <body>
-    <div>
+    <div class="container text-center">
         @ViewBag.error
         <form action="/home/registrarse" method="post">
 
@@ -16,6 +16,8 @@
             @Html.PasswordFor(p2 => p2.ReingresoPassword, new { placeholder = "Reingrese la contraseña" }) @Html.ValidationMessageFor(Model => Model.ReingresoPassword)<br />
 
             <button type="submit">Registrarse</button>
-        </form>
+
+        </form><br /><br /><br /><br /><br />
+        <img src="~/Img/logo-ppal.png" />
     </div>
 </body>
