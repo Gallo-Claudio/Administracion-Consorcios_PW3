@@ -84,5 +84,12 @@ namespace WebApp.Controllers
                 return View(nuevoUsuario);
             }
         }
+
+        public ActionResult Salir()
+        {
+            Session.Abandon();
+            return RedirectToAction("Inicio");
+        }
+
     }
 }

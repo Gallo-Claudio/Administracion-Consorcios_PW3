@@ -5,20 +5,29 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Titulo</title>
     @RenderSection("HeadScripts", false)
-    
+
     <link href="../../Content/bootstrap.min.css" rel="stylesheet" type="text/css">
     <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
-    <div>
+    <container class="fixed-top border border-top-0 border-left-0 border-right-0 border-dark bg-secondary text-white" ">
+        <div>
+            <a href="/home/inicio">Inicio</a>
+            <a href="/consorcio/listarconsorcio">Mis consorcios</a>
+            <a href="/home/salir">Salir</a>
+            Bienvenido @Session["Nombre"] !
+        </div>
+    </container>
+
+    <div style="margin-top:50px">
         @RenderBody()
     </div>
 
-    <container class="fixed-bottom border border-bottom-0 border-left-0 border-right-0 border-dark bg-secondary text-white"">
+    <container class="fixed-bottom border border-bottom-0 border-left-0 border-right-0 border-dark bg-secondary text-white" ">
         <div class="mx-auto p-2" style="width: fit-content">PW3 - 2020 - 2º Cuatrimestre</div>
-        <div class="mx-auto p-2"  style="width: fit-content">Grupo FVZ:  Fortunato Juan Pablo - Vazquez Claudio - Zota Alejo</div>
+        <div class="mx-auto p-2" style="width: fit-content">Grupo FVZ:  Fortunato Juan Pablo - Vazquez Claudio - Zota Alejo</div>
     </container>
 </body>
 </html>
