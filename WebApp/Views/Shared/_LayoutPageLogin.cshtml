@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPageBase.cshtml";
+}
+@section Encabezado{
+    <container class="fixed-top border border-top-0 border-left-0 border-right-0 border-dark">
+        <div class="row align-middle">
+            <div class="col-sm-2 text-center"><img src="~/Img/logo.png" /></div>
+            <h3 class="col-sm-8 text-center">Administración de Consorcios</h3>
+            <div class="col-sm-2 text-center align-middle">Bienvenido @Session["Nombre"] !</div>
+        </div>
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-flex flex-row-reverse collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/consorcio/listarconsorcio">Mis consorcios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home/salir">Salir</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </container>
+}
+
+@RenderBody()
