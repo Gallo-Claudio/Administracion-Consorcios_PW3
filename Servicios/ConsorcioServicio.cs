@@ -33,34 +33,32 @@ namespace Servicios
             repositorio.Alta(nuevoConsorcio);
         }
 
+        public Consorcio BuscarConsorcio(int id)
+        {
+            Consorcio busquedaConsorcio = repositorio.ObtenerPorId(id);
+            return busquedaConsorcio;
+        }
 
-        //public static Consorcio BuscarConsorcio(int id)
-        //{
-        //    Consorcio busquedaConsorcio = Hardcodeo.consorcio.Find(c => c.IdConsorcio == id);
-        //    return busquedaConsorcio;
-        //}
+        public int BuscarIdConsorcio(Consorcio consorcio)
+        {
+            int idConsorcio = consorcio.IdConsorcio;
+            return idConsorcio;
+        }
 
-        //public static int BuscarIdConsorcio(Consorcio consorcio)
-        //{
-        //    int idConsorcio = consorcio.IdConsorcio;
-        //    return idConsorcio;
-        //}
+        public void ModificarConsorcio(Consorcio consorcioModificacion)
+        {
+            int id = consorcioModificacion.IdConsorcio;
+            Consorcio edicionConsorcio = repositorio.ObtenerPorId(id);
 
-        //public static void ModificarConsorcio(Consorcio consorcioModificacion)
-        //{
-        //    int id = consorcioModificacion.IdConsorcio;
-        //    Consorcio edicionConsorcio = Hardcodeo.consorcio.Find(c => c.IdConsorcio == id);
-
-        //    edicionConsorcio.Altura = consorcioModificacion.Altura;
-        //    edicionConsorcio.Calle = consorcioModificacion.Calle;
-        //    edicionConsorcio.Ciudad = consorcioModificacion.Ciudad;
-        //    edicionConsorcio.DiaVencimientoExpensas = consorcioModificacion.DiaVencimientoExpensas;
-        //    //edicionConsorcio.FechaCreacion = consorcioModificacion.FechaCreacion;
-        //    edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
-        //    edicionConsorcio.Nombre = consorcioModificacion.Nombre;
-        //    //edicionConsorcio.IdUsuarioCreador = consorcioModificacion.IdUsuarioCreador;
-        //    edicionConsorcio.IdProvincia = ProvinciaServicio.BuscarProvincia(consorcioModificacion.IdProvincia.IdProvincia);
-        //}
+            edicionConsorcio.Altura = consorcioModificacion.Altura;
+            edicionConsorcio.Calle = consorcioModificacion.Calle;
+            edicionConsorcio.Ciudad = consorcioModificacion.Ciudad;
+            edicionConsorcio.DiaVencimientoExpensas = consorcioModificacion.DiaVencimientoExpensas;
+            edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
+            edicionConsorcio.Nombre = consorcioModificacion.Nombre;
+            edicionConsorcio.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.Provincia.IdProvincia);
+            repositorio.Modificar(edicionConsorcio);
+        }
 
 
         //// ***** PASARLO A GASTOSERVICIO O COMO SE TERMINE LLAMANDO *****
