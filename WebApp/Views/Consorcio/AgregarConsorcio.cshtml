@@ -1,5 +1,5 @@
-﻿@using Entidades
-@model Consorcio
+﻿@using DataAccessLayer
+@model DataAccessLayer.Modelos.Consorcio
 @{
     ViewBag.Titulo = "Ingreso de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
@@ -13,9 +13,9 @@
             @Html.EditorFor(Model => Model.Nombre)
             @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-            @Html.LabelFor(Model => Model.IdProvincia)*
-            @Html.DropDownListFor(Model => Model.IdProvincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br />
+            @Html.LabelFor(Model => Model.Provincia)*
+            @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+            @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
 
             @Html.LabelFor(Model => Model.Ciudad)*
             @Html.EditorFor(Model => Model.Ciudad)

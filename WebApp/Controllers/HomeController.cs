@@ -90,6 +90,5 @@ namespace WebApp.Controllers
             Session.Abandon();
             return RedirectToAction("Inicio");
         }
-
     }
 }
