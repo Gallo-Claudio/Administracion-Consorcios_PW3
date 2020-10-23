@@ -85,6 +85,7 @@
       <DependentUpon>ConsorciosDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositorio\ConsorcioRepositorio.cs" />
+    <Compile Include="Repositorio\ProvinciaRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelos\ConsorciosDB.edmx">

@@ -1,5 +1,5 @@
-﻿using Datos;
-using Entidades;
+﻿using DataAccessLayer.Modelos;
+using DataAccessLayer.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +8,24 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public static class ProvinciaServicio
+    public class ProvinciaServicio
     {
-        public static List<Provincia> ListarProvincias()
+        public ProvinciaRepositorio repositorio;
+
+        public ProvinciaServicio(ContextoEntities contexto)
         {
-            return Hardcodeo.provincia;
+            ContextoEntities ctx = contexto;
+            repositorio = new ProvinciaRepositorio(ctx);
         }
 
-        public static Provincia BuscarProvincia (int id)
+        public List<Provincia> ListarProvincias()
         {
-            Provincia provinciaBuscada = Hardcodeo.provincia.Find(p => p.IdProvincia == id);
+            return repositorio.ObtenerTodos();
+        }
+
+        public Provincia SeleccionarProvincia(int id)
+        {
+            Provincia provinciaBuscada = repositorio.ObtenerPorId(id);
             return provinciaBuscada;
         }
     }

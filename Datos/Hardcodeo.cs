@@ -66,10 +66,10 @@ namespace Datos
 
         public static void HardcodeoDatos()
         {
-            HardcodeoConsorcio();
+            //HardcodeoConsorcio();
             HardcodeoUnidad();
             HardcodeoGasto();
-            HardcodeoProvincia();
+            //HardcodeoProvincia();
             HardcodeoUsuario();
             HardcodeoTipoGasto();
         }
@@ -101,175 +101,175 @@ namespace Datos
             usuario.Add(usu2);
             usuario.Add(usu3);
         }
-        private static void HardcodeoProvincia()
-        {
-            prov1.IdProvincia = 1;
-            prov1.Nombre = "Buenos Aires";
+        //private static void HardcodeoProvincia()
+        //{
+        //    //    prov1.IdProvincia = 1;
+        //    //    prov1.Nombre = "Buenos Aires";
 
-            prov2.IdProvincia = 2;
-            prov2.Nombre = "CABA";
+        //    //    prov2.IdProvincia = 2;
+        //    //    prov2.Nombre = "CABA";
 
-            prov3.IdProvincia = 3;
-            prov3.Nombre = "Catamarca";
+        //    //    prov3.IdProvincia = 3;
+        //    //    prov3.Nombre = "Catamarca";
 
-            prov4.IdProvincia = 4;
-            prov4.Nombre = "Chaco";
+        //    //    prov4.IdProvincia = 4;
+        //    //    prov4.Nombre = "Chaco";
 
-            prov5.IdProvincia = 5;
-            prov5.Nombre = "Chubut";
+        //    //    prov5.IdProvincia = 5;
+        //    //    prov5.Nombre = "Chubut";
 
-            prov6.IdProvincia = 6;
-            prov6.Nombre = "Córdoba";
+        //    //    prov6.IdProvincia = 6;
+        //    //    prov6.Nombre = "Córdoba";
 
-            prov7.IdProvincia = 7;
-            prov7.Nombre = "Corrientes";
+        //    //    prov7.IdProvincia = 7;
+        //    //    prov7.Nombre = "Corrientes";
 
-            prov8.IdProvincia = 8;
-            prov8.Nombre = "Entre Ríos";
+        //    //    prov8.IdProvincia = 8;
+        //    //    prov8.Nombre = "Entre Ríos";
 
-            prov9.IdProvincia = 9;
-            prov9.Nombre = "Formosa";
+        //    //    prov9.IdProvincia = 9;
+        //    //    prov9.Nombre = "Formosa";
 
-            prov10.IdProvincia = 10;
-            prov10.Nombre = "Jujuy";
+        //    //    prov10.IdProvincia = 10;
+        //    //    prov10.Nombre = "Jujuy";
 
-            prov11.IdProvincia = 11;
-            prov11.Nombre = "La Pampa";
+        //    //    prov11.IdProvincia = 11;
+        //    //    prov11.Nombre = "La Pampa";
 
-            prov12.IdProvincia = 12;
-            prov12.Nombre = "La Rioja";
+        //    //    prov12.IdProvincia = 12;
+        //    //    prov12.Nombre = "La Rioja";
 
-            prov13.IdProvincia = 13;
-            prov13.Nombre = "Mendoza";
+        //    //    prov13.IdProvincia = 13;
+        //    //    prov13.Nombre = "Mendoza";
 
-            prov14.IdProvincia = 14;
-            prov14.Nombre = "Misiones";
+        //    //    prov14.IdProvincia = 14;
+        //    //    prov14.Nombre = "Misiones";
 
-            prov15.IdProvincia = 15;
-            prov15.Nombre = "Neuquén";
+        //    //    prov15.IdProvincia = 15;
+        //    //    prov15.Nombre = "Neuquén";
 
-            prov16.IdProvincia = 16;
-            prov16.Nombre = "Río Negro";
+        //    //    prov16.IdProvincia = 16;
+        //    //    prov16.Nombre = "Río Negro";
 
-            prov17.IdProvincia = 17;
-            prov17.Nombre = "Salta";
+        //    //    prov17.IdProvincia = 17;
+        //    //    prov17.Nombre = "Salta";
 
-            prov18.IdProvincia = 18;
-            prov18.Nombre = "San Juan";
+        //    //    prov18.IdProvincia = 18;
+        //    //    prov18.Nombre = "San Juan";
 
-            prov19.IdProvincia = 19;
-            prov19.Nombre = "San Luis";
+        //    //    prov19.IdProvincia = 19;
+        //    //    prov19.Nombre = "San Luis";
 
-            prov20.IdProvincia = 20;
-            prov20.Nombre = "Santa Cruz";
+        //    //    prov20.IdProvincia = 20;
+        //    //    prov20.Nombre = "Santa Cruz";
 
-            prov21.IdProvincia = 21;
-            prov21.Nombre = "Santa Fe";
+        //    //    prov21.IdProvincia = 21;
+        //    //    prov21.Nombre = "Santa Fe";
 
-            prov22.IdProvincia = 22;
-            prov22.Nombre = "Santiago del Estero";
+        //    //    prov22.IdProvincia = 22;
+        //    //    prov22.Nombre = "Santiago del Estero";
 
-            prov23.IdProvincia = 23;
-            prov23.Nombre = "Tierra del Fuego";
+        //    //    prov23.IdProvincia = 23;
+        //    //    prov23.Nombre = "Tierra del Fuego";
 
-            prov24.IdProvincia = 24;
-            prov24.Nombre = "Tucumán";
+        //    //    prov24.IdProvincia = 24;
+        //    //    prov24.Nombre = "Tucumán";
 
 
-            provincia.Add(prov1);
-            provincia.Add(prov2);
-            provincia.Add(prov3);
-            provincia.Add(prov4);
-            provincia.Add(prov5);
-            provincia.Add(prov6);
-            provincia.Add(prov7);
-            provincia.Add(prov8);
-            provincia.Add(prov9);
-            provincia.Add(prov10);
-            provincia.Add(prov11);
-            provincia.Add(prov12);
-            provincia.Add(prov13);
-            provincia.Add(prov14);
-            provincia.Add(prov15);
-            provincia.Add(prov16);
-            provincia.Add(prov17);
-            provincia.Add(prov18);
-            provincia.Add(prov19);
-            provincia.Add(prov20);
-            provincia.Add(prov21);
-            provincia.Add(prov22);
-            provincia.Add(prov23);
-            provincia.Add(prov24);
-        }
-        private static void HardcodeoConsorcio()
-        {
-            con1.IdConsorcio = 1;
-            con1.Nombre = "Edificio Godoy Cruz";
-            con1.IdProvincia = prov2;
-            con1.Ciudad = "CABA";
-            con1.Calle = "Godoy Cruz";
-            con1.Altura = 2369;
-            con1.DiaVencimientoExpensas = 6;
-            //con1.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 00);
-            //con1.IdUsuarioCreador = usu1;
+        //    //provincia.Add(prov1);
+        //    //provincia.Add(prov2);
+        //    //provincia.Add(prov3);
+        //    //provincia.Add(prov4);
+        //    //provincia.Add(prov5);
+        //    //provincia.Add(prov6);
+        //    //provincia.Add(prov7);
+        //    //provincia.Add(prov8);
+        //    //provincia.Add(prov9);
+        //    //provincia.Add(prov10);
+        //    //provincia.Add(prov11);
+        //    //provincia.Add(prov12);
+        //    //provincia.Add(prov13);
+        //    //provincia.Add(prov14);
+        //    //provincia.Add(prov15);
+        //    //provincia.Add(prov16);
+        //    //provincia.Add(prov17);
+        //    //provincia.Add(prov18);
+        //    //provincia.Add(prov19);
+        //    //provincia.Add(prov20);
+        //    //provincia.Add(prov21);
+        //    //provincia.Add(prov22);
+        //    //provincia.Add(prov23);
+        //    //provincia.Add(prov24);
+        //}
+        //private static void HardcodeoConsorcio()
+        //{
+        //    con1.IdConsorcio = 1;
+        //    con1.Nombre = "Edificio Godoy Cruz";
+        //    con1.IdProvincia = prov2;
+        //    con1.Ciudad = "CABA";
+        //    con1.Calle = "Godoy Cruz";
+        //    con1.Altura = 2369;
+        //    con1.DiaVencimientoExpensas = 6;
+        //    //con1.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 00);
+        //    //con1.IdUsuarioCreador = usu1;
 
-            con2.IdConsorcio = 2;
-            con2.Nombre = "Edificio Arieta";
-            con2.IdProvincia = prov1;
-            con2.Ciudad = "San Justo";
-            con2.Calle = "Arieta";
-            con2.Altura = 2748;
-            con2.DiaVencimientoExpensas = 12;
-            //con2.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 48);
-            //con2.IdUsuarioCreador = usu1;
+        //    con2.IdConsorcio = 2;
+        //    con2.Nombre = "Edificio Arieta";
+        //    con2.IdProvincia = prov1;
+        //    con2.Ciudad = "San Justo";
+        //    con2.Calle = "Arieta";
+        //    con2.Altura = 2748;
+        //    con2.DiaVencimientoExpensas = 12;
+        //    //con2.FechaCreacion = new DateTime(2020, 09, 29, 22, 50, 48);
+        //    //con2.IdUsuarioCreador = usu1;
 
-            con3.IdConsorcio = 3;
-            con3.Nombre = "Edificio Alberdi";
-            con3.IdProvincia = prov2;
-            con3.Ciudad = "CABA";
-            con3.Calle = "Alberdi";
-            con3.Altura = 2387;
-            con3.DiaVencimientoExpensas = 1;
-            //con3.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 37);
-            //con3.IdUsuarioCreador = usu1;
+        //    con3.IdConsorcio = 3;
+        //    con3.Nombre = "Edificio Alberdi";
+        //    con3.IdProvincia = prov2;
+        //    con3.Ciudad = "CABA";
+        //    con3.Calle = "Alberdi";
+        //    con3.Altura = 2387;
+        //    con3.DiaVencimientoExpensas = 1;
+        //    //con3.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 37);
+        //    //con3.IdUsuarioCreador = usu1;
 
-            con4.IdConsorcio = 4;
-            con4.Nombre = "Torres Florenci";
-            con4.IdProvincia = prov1;
-            con4.Ciudad = "Ramos Mejia";
-            con4.Calle = "Dr.Gabriel Ardoino";
-            con4.Altura = 364;
-            con4.DiaVencimientoExpensas = 5;
-            //con4.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 56);
-            //con4.IdUsuarioCreador = usu2;
+        //    con4.IdConsorcio = 4;
+        //    con4.Nombre = "Torres Florenci";
+        //    con4.IdProvincia = prov1;
+        //    con4.Ciudad = "Ramos Mejia";
+        //    con4.Calle = "Dr.Gabriel Ardoino";
+        //    con4.Altura = 364;
+        //    con4.DiaVencimientoExpensas = 5;
+        //    //con4.FechaCreacion = new DateTime(2020, 09, 29, 22, 51, 56);
+        //    //con4.IdUsuarioCreador = usu2;
 
-            con5.IdConsorcio = 5;
-            con5.Nombre = "Vilanova";
-            con5.IdProvincia = prov1;
-            con5.Ciudad = "Ramos Mejia";
-            con5.Calle = "Tacuari";
-            con5.Altura = 620;
-            con5.DiaVencimientoExpensas = 21;
-            //con5.FechaCreacion = new DateTime(2020, 09, 29, 22, 53, 31);
-            //con5.IdUsuarioCreador = usu2;
+        //    con5.IdConsorcio = 5;
+        //    con5.Nombre = "Vilanova";
+        //    con5.IdProvincia = prov1;
+        //    con5.Ciudad = "Ramos Mejia";
+        //    con5.Calle = "Tacuari";
+        //    con5.Altura = 620;
+        //    con5.DiaVencimientoExpensas = 21;
+        //    //con5.FechaCreacion = new DateTime(2020, 09, 29, 22, 53, 31);
+        //    //con5.IdUsuarioCreador = usu2;
 
-            con6.IdConsorcio = 6;
-            con6.Nombre = "Altos de Gandara";
-            con6.IdProvincia = prov1;
-            con6.Ciudad = "Haedo";
-            con6.Calle = "Juez de la Gandara";
-            con6.Altura = 851;
-            con6.DiaVencimientoExpensas = 2;
-            //con6.FechaCreacion = new DateTime(2020, 09, 29, 22, 58, 32);
-            //con6.IdUsuarioCreador = usu3;
+        //    con6.IdConsorcio = 6;
+        //    con6.Nombre = "Altos de Gandara";
+        //    con6.IdProvincia = prov1;
+        //    con6.Ciudad = "Haedo";
+        //    con6.Calle = "Juez de la Gandara";
+        //    con6.Altura = 851;
+        //    con6.DiaVencimientoExpensas = 2;
+        //    //con6.FechaCreacion = new DateTime(2020, 09, 29, 22, 58, 32);
+        //    //con6.IdUsuarioCreador = usu3;
 
-            consorcio.Add(con1);
-            consorcio.Add(con2);
-            consorcio.Add(con3);
-            consorcio.Add(con4);
-            consorcio.Add(con5);
-            consorcio.Add(con6);
-        }
+        //    consorcio.Add(con1);
+        //    consorcio.Add(con2);
+        //    consorcio.Add(con3);
+        //    consorcio.Add(con4);
+        //    consorcio.Add(con5);
+        //    consorcio.Add(con6);
+        //}
         private static void HardcodeoUnidad()
         {
             Unidad unid1 = new Unidad();

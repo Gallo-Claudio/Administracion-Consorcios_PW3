@@ -9,24 +9,30 @@ namespace DataAccessLayer.Repositorio
 {
     public class ConsorcioRepositorio
     {
-        ContextoEntities contexto = new ContextoEntities();
+        ContextoEntities ctxConsorcio;
+
+        public ConsorcioRepositorio(ContextoEntities contexto)
+        {
+            ctxConsorcio = contexto;
+        }
+
 
         public void Alta(Consorcio consorcio)
         {
-            contexto.Consorcio.Add(consorcio);
-            contexto.SaveChanges();
+            ctxConsorcio.Consorcio.Add(consorcio);
+            ctxConsorcio.SaveChanges();
         }
 
         public List<Consorcio> ObtenerTodos()
         {
-            List<Consorcio> todosLosConsorcios = contexto.Consorcio.ToList();
+            List<Consorcio> todosLosConsorcios = ctxConsorcio.Consorcio.ToList();
             return todosLosConsorcios;
         }
 
         public Consorcio ObtenerPorId(int idConsorcio)
         {
             Consorcio consorcio;
-            consorcio = contexto.Consorcio.Find(idConsorcio);
+            consorcio = ctxConsorcio.Consorcio.Find(idConsorcio);
             return consorcio;
         }
 
@@ -35,7 +41,7 @@ namespace DataAccessLayer.Repositorio
             Consorcio consorcio = ObtenerPorId(idConsorcio);
             if (consorcio != null)
             {
-                contexto.SaveChanges();
+                ctxConsorcio.SaveChanges();
             }
         }
 
@@ -52,7 +58,7 @@ namespace DataAccessLayer.Repositorio
             consorcioActual.Unidad = consorcio.Unidad;
             consorcioActual.Provincia = consorcio.Provincia;
 
-            contexto.SaveChanges();
+            ctxConsorcio.SaveChanges();
         }
     }
 }

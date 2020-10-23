@@ -1,6 +1,5 @@
 ﻿using DataAccessLayer.Modelos;
 using DataAccessLayer.Repositorio;
-using Datos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,49 +10,29 @@ namespace Servicios
 {
     public class ConsorcioServicio
     {
-        ConsorcioRepositorio repositorio = new ConsorcioRepositorio();
+        ConsorcioRepositorio repositorio;
+        ProvinciaRepositorio repoProvincia;
+
+        public ConsorcioServicio(ContextoEntities contexto)
+        {
+            ContextoEntities ctx = contexto;
+            repositorio = new ConsorcioRepositorio(ctx);
+            repoProvincia = new ProvinciaRepositorio(ctx);
+        }
 
         public List<Consorcio> ListarConsorcios()
         {
             return repositorio.ObtenerTodos();
         }
 
+        public void AgregarConsorcio(Consorcio nuevoConsorcio, object Session)
+        {
+            nuevoConsorcio.Provincia = repoProvincia.ObtenerPorId(nuevoConsorcio.Provincia.IdProvincia);
+            nuevoConsorcio.FechaCreacion = DateTime.Now;
+            nuevoConsorcio.IdUsuarioCreador = (int)Session; 
+            repositorio.Alta(nuevoConsorcio);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public static List<Consorcio> ListarConsorcios()
-        //{
-        //    return Hardcodeo.consorcio;
-        //}
-
-        //public static void AgregarConsorcio(Consorcio nuevoConsorcio)
-        //{
-        //    nuevoConsorcio.IdProvincia = ProvinciaServicio.BuscarProvincia(nuevoConsorcio.IdProvincia.IdProvincia);
-        //    //nuevoConsorcio.FechaCreacion = DateTime.Now;
-        //    //nuevoConsorcio.IdUsuarioCreador = Hardcodeo.usu1; // HARDCODEADO - Este valor se debe obtener de la sesion
-        //    nuevoConsorcio.IdConsorcio = Hardcodeo.consorcio.Last().IdConsorcio + 1;   // Este valor es un autoincremental generado en la BD
-        //    Hardcodeo.consorcio.Add(nuevoConsorcio);
-        //}
 
         //public static Consorcio BuscarConsorcio(int id)
         //{
