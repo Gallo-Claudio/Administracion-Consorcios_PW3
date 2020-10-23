@@ -78,48 +78,48 @@ namespace WebApp.Controllers
             }
         }
 
-        //public ActionResult ModificarConsorcio(int id)
-        //{
-        //    if (Session["IdUsuario"] != null)
-        //    {
-        //        Consorcio busquedaConsorcioId = ConsorcioServicio.BuscarConsorcio(id);
+        public ActionResult ModificarConsorcio(int id)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Consorcio busquedaConsorcioId = consorcio.BuscarConsorcio(id);
 
-        //        List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
-        //        ViewData["listadoProvincias"] = provincias;
+                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                ViewData["listadoProvincias"] = listadoProvincias;
 
-        //        int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-        //        ViewBag.cantidadUnidades = cantidadUnidades;
+                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                ViewBag.cantidadUnidades = cantidadUnidades;
 
-        //        return View(busquedaConsorcioId);
-        //    }
-        //    else
-        //    {
-        //        TempData["Controlador"] = "Consorcio";
-        //        TempData["Accion"] = "ModificarConsorcio";
-        //        return RedirectToAction("Ingresar", "Home");
-        //    }
-        //}
+                return View(busquedaConsorcioId);
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "ModificarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
+        }
 
-        //[HttpPost]
-        //public ActionResult ModificarConsorcio(Entidades.Consorcio consorcio)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ConsorcioServicio.ModificarConsorcio(consorcio);
-        //        return RedirectToAction("ListarConsorcio");
-        //    }
-        //    else
-        //    {
-        //        int id = ConsorcioServicio.BuscarIdConsorcio(consorcio);
-        //        List<Provincia> provincias = ProvinciaServicio.ListarProvincias();
-        //        ViewData["listadoProvincias"] = provincias;
+        [HttpPost]
+        public ActionResult ModificarConsorcio(Consorcio consorcioModificado)
+        {
+            if (ModelState.IsValid)
+            {
+                consorcio.ModificarConsorcio(consorcioModificado);
+                return RedirectToAction("ListarConsorcio");
+            }
+            else
+            {
+                int id = consorcio.BuscarIdConsorcio(consorcioModificado);
+                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                ViewData["listadoProvincias"] = listadoProvincias;
 
-        //        int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-        //        ViewBag.cantidadUnidades = cantidadUnidades;
+                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                ViewBag.cantidadUnidades = cantidadUnidades;
 
-        //        return View("ModificarConsorcio", consorcio);
-        //    }
-        //}
+                return View("ModificarConsorcio", consorcioModificado);
+            }
+        }
 
         //public ActionResult EliminarConsorcio(int id)
         //{

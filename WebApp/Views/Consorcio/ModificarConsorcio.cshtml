@@ -1,5 +1,5 @@
-﻿@using Entidades
-@model Consorcio
+﻿@using DataAccessLayer
+@model DataAccessLayer.Modelos.Consorcio
 @{
     ViewBag.Titulo = "Modificación de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script type="text/javascript">
             $(document).ready(function () {
-                $('#IdProvincia > option[value="@Model.IdProvincia.IdProvincia"]').attr('selected', 'selected');
+                $('#IdProvincia > option[value="@Model.Provincia.IdProvincia"]').attr('selected', 'selected');
             });
     </script>
 }
@@ -27,8 +27,8 @@
             @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
             @Html.LabelFor(Model => Model.IdProvincia)*
-            @Html.DropDownListFor(Model => Model.IdProvincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-            @Html.ValidationMessageFor(Model => Model.IdProvincia.IdProvincia)<br />
+            @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+            @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
 
             @Html.LabelFor(Model => Model.Ciudad)*
             @Html.EditorFor(Model => Model.Ciudad)
