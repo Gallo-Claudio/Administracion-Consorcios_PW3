@@ -84,6 +84,7 @@
     <Compile Include="Modelos\Usuario.cs">
       <DependentUpon>ConsorciosDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\ConsorcioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelos\ConsorciosDB.edmx">
@@ -113,5 +114,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

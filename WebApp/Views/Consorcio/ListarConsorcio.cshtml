@@ -1,5 +1,5 @@
-﻿@using Entidades
-@model List<Entidades.Consorcio>
+﻿@using DataAccessLayer
+@model List<DataAccessLayer.Modelos.Consorcio>
 @{
     ViewBag.Titulo = "Listado de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
@@ -23,11 +23,11 @@
                     <th>Eliminar</th>
                 </tr>
             </thead>
-            @foreach (Entidades.Consorcio consorcio in Model)
+            @foreach (DataAccessLayer.Modelos.Consorcio consorcio in Model)
             {
                 <tr>
                     <td>@consorcio.Nombre</td>
-                    <td>@consorcio.IdProvincia.Nombre</td>
+                    <td>@consorcio.Provincia.Nombre</td>
                     <td>@consorcio.Ciudad</td>
                     <td><a href="/unidad/listarUnidad/@consorcio.IdConsorcio">Ver Unidades</a></td>
                     <td><a href="/expensa/listarExpensa/@consorcio.IdConsorcio">Ver Expensas</a></td>
