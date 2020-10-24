@@ -16,7 +16,7 @@ namespace DataAccessLayer.Repositorio
             ctxUsuario = contexto;
         }
 
-        public void Registro(Usuario nuevoUsuario)
+        public void Alta(Usuario nuevoUsuario)
         {
             ctxUsuario.Usuario.Add(nuevoUsuario);
             ctxUsuario.SaveChanges();

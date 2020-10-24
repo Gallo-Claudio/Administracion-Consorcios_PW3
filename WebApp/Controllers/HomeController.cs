@@ -69,29 +69,29 @@ namespace WebApp.Controllers //Test1234!
         }
 
 
-        //[HttpPost]
-        //public ActionResult Registrarse(Usuario_VM nuevoUsuario)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        bool existe = usuario.VerificaEmail(nuevoUsuario.Email);
+        [HttpPost]
+        public ActionResult Registrarse(Usuario_VM nuevoUsuario)
+        {
+            if (ModelState.IsValid)
+            {
+                bool existe = usuario.VerificaEmail(nuevoUsuario.Email);
 
-        //        if (existe)
-        //        {
-        //            ViewBag.error = "El mail ingresado ya existe";
-        //            return View(nuevoUsuario);
-        //        }
-        //        else
-        //        {
-        //            usuario.NuevoUsuario(nuevoUsuario);
-        //            return RedirectToAction("Ingresar");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(nuevoUsuario);
-        //    }
-        //}
+                if (existe)
+                {
+                    ViewBag.error = "El mail ingresado ya existe";
+                    return View(nuevoUsuario);
+                }
+                else
+                {
+                    usuario.NuevoUsuario(nuevoUsuario);
+                    return RedirectToAction("Ingresar");
+                }
+            }
+            else
+            {
+                return View(nuevoUsuario);
+            }
+        }
 
         public ActionResult Salir()
         {
