@@ -87,6 +87,8 @@
     <Compile Include="Repositorio\ConsorcioRepositorio.cs" />
     <Compile Include="Repositorio\ProvinciaRepositorio.cs" />
     <Compile Include="Repositorio\UsuarioRepositorio.cs" />
+    <Compile Include="Validaciones\Consorcio.cs" />
+    <Compile Include="Validaciones\ConsorcioMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelos\ConsorciosDB.edmx">

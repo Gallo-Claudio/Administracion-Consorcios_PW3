@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.Modelos;
 using DataAccessLayer.Repositorio;
-using Entidades;
+using Entidades_VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;

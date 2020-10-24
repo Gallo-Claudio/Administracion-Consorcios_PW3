@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace Entidades_VM
 {
     public class RedireccionUsuario_VM
     {

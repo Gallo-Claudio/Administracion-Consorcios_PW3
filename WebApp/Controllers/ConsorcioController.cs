@@ -87,8 +87,8 @@ namespace WebApp.Controllers
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
-                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-                ViewBag.cantidadUnidades = cantidadUnidades;
+                //int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                //ViewBag.cantidadUnidades = cantidadUnidades;
 
                 return View(busquedaConsorcioId);
             }
@@ -114,8 +114,8 @@ namespace WebApp.Controllers
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
-                int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-                ViewBag.cantidadUnidades = cantidadUnidades;
+                //int cantidadUnidades = UnidadServicio.ContarUnidades(id);
+                //ViewBag.cantidadUnidades = cantidadUnidades;
 
                 return View("ModificarConsorcio", consorcioModificado);
             }
