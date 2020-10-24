@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Repositorio\ConsorcioRepositorio.cs" />
     <Compile Include="Repositorio\ProvinciaRepositorio.cs" />
+    <Compile Include="Repositorio\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelos\ConsorciosDB.edmx">
