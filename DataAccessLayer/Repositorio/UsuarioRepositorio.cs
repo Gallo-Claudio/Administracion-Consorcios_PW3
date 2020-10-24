@@ -29,5 +29,11 @@ namespace DataAccessLayer.Repositorio
                                select usuariobd).FirstOrDefault();
             return usuario;
         }
+
+        public void UltimoLogin(Usuario usuarioActualiza)
+        {
+            usuarioActualiza.FechaUltLogin = DateTime.Now;
+            ctxUsuario.SaveChanges();
+        }
     }
 }

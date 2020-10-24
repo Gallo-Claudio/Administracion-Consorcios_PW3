@@ -49,6 +49,7 @@ namespace WebApp.Controllers //Test1234!
                     {
                         Session["Nombre"] = usuario.BuscarNombre(ingreso.Email);
                         Session["IdUsuario"] = usuario.BuscarIdUsuario(ingreso.Email);
+                        usuario.UltimoAcceso(ingreso.Email);
                         return RedirectToAction(ingreso.Accion, ingreso.Controlador);
                     }
                     ViewBag.error = "Email y/o Contraseña inválidos";
