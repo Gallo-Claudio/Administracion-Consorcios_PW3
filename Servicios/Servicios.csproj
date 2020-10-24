@@ -58,9 +58,9 @@
       <Project>{3d998d85-cac4-4018-ae0b-8c2f928a1313}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entidades\Entidades.csproj">
+    <ProjectReference Include="..\Entidades\Entidades_VM.csproj">
       <Project>{b92cda3e-f92b-43f3-b499-130c93073a38}</Project>
-      <Name>Entidades</Name>
+      <Name>Entidades_VM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

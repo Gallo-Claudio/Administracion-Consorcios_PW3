@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Modelos;
-using Entidades;
+using Entidades_VM;
 using Servicios;
 
 namespace WebApp.Controllers //Test1234!
