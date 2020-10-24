@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Modelos;
-using Datos;
 using Entidades;
 using Servicios;
 
@@ -25,7 +24,6 @@ namespace WebApp.Controllers //Test1234!
         {
             TempData["Controlador"] = "Consorcio";
             TempData["Accion"] = "ListarConsorcio";
-            Hardcodeo.HardcodeoDatos();
             return View();
         }
 
