@@ -70,5 +70,11 @@ namespace Servicios
             usuario.FechaRegistracion = DateTime.Now;
             repoUsuario.Alta(usuario);
         }
+
+        public void UltimoAcceso(string Email)
+        {
+            Usuario usuarioActualizar = repoUsuario.BuscaPorMail(Email);
+            repoUsuario.UltimoLogin(usuarioActualizar);
+        }
     }
 }
