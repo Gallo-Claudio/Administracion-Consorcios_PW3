@@ -20,13 +20,13 @@ namespace Servicios
             repoUsuario = new UsuarioRepositorio(ctx);
         }
 
-        /// ////////////////////////////////////////
+
         public bool VerificaEmail(string Email)
         {
             bool existe = repoUsuario.BuscaPorMail(Email) != null ? true : false;
             return existe;
         }
-        /// ////////////////////////////////////////
+
         public string Encriptar(string cadenaAEncriptar)
         {
             string result = string.Empty;
@@ -34,7 +34,7 @@ namespace Servicios
             result = Convert.ToBase64String(encryted);
             return result;
         }
-        /// /////////////////////////////////////
+
         public bool VerificaPassword(string Password, string Email)
         {
             Usuario usuarioParaBuscar = repoUsuario.BuscaPorMail(Email);
@@ -43,14 +43,14 @@ namespace Servicios
             bool existe = passwordUsuario == Password ? true : false;
             return existe;
         }
-        /// //////////////////////////
+
         public string BuscarNombre(string Email)
         {
             Usuario usuarioParaBuscar = repoUsuario.BuscaPorMail(Email);
             string nombreUsuario = usuarioParaBuscar.Nombre;
             return nombreUsuario;
         }
-        /// ///////////////////////////////
+
         public int BuscarIdUsuario(string Email)
         {
             Usuario usuarioParaBuscar = repoUsuario.BuscaPorMail(Email);
@@ -58,20 +58,17 @@ namespace Servicios
             return IdUsuario;
         }
 
+        public void NuevoUsuario(Usuario_VM nuevoUsuario)
+        {
+            string password = nuevoUsuario.Password;
+            string encriptado = Encriptar(password);
 
-
-        //public void NuevoUsuario(Usuario_VM nuevoUsuario)
-        //{
-        //    string password = nuevoUsuario.Password;
-        //    string encriptado = Encriptar(password);
-
-        //    Usuario usuario = new Usuario();
-        //    usuario.Nombre = nuevoUsuario.Nombre;
-        //    usuario.Email = nuevoUsuario.Email;
-        //    usuario.Password = encriptado;
-        //    usuario.FechaRegistracion = DateTime.Now;
-        //    //usuario.IdUsuario = UsuarioServicios.UltimoIdRegistro() + 1;
-        //    Hardcodeo.usuario.Add(usuario);
-        //}
+            Usuario usuario = new Usuario();
+            usuario.Nombre = nuevoUsuario.Nombre;
+            usuario.Email = nuevoUsuario.Email;
+            usuario.Password = encriptado;
+            usuario.FechaRegistracion = DateTime.Now;
+            repoUsuario.Alta(usuario);
+        }
     }
 }
