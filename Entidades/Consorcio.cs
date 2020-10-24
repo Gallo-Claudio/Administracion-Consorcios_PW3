@@ -37,6 +37,6 @@ namespace Entidades
         public DateTime FechaCreacion { get; set; }
 
         // many to one
-        public Usuario IdUsuarioCreador { get; set; }
+        //public Usuario IdUsuarioCreador { get; set; }
     }
 }
