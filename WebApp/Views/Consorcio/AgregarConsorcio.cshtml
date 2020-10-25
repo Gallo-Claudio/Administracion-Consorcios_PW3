@@ -5,7 +5,24 @@
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
 }
 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+
 <body>
+    @if (TempData["nombreConsorcio"] as string != null)
+    {
+    <script>
+        Swal.fire({
+            text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+    </script>
+    }
+
+
     <div class="container">
         <form action="/consorcio/agregarConsorcio" method="post">
 

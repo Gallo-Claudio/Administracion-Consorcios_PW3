@@ -69,7 +69,8 @@ namespace WebApp.Controllers
 
             switch (id)
             {
-                case 1:
+                case 1:                    
+                    TempData["nombreConsorcio"] = nuevoConsorcio.Nombre;
                     return RedirectToAction("AgregarConsorcio");
                 case 2:
                     return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador")
