@@ -26,7 +26,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                List<Consorcio> listadoConsorcio = consorcio.ListarConsorcios();
+                List<Consorcio> listadoConsorcio = consorcio.ListarConsorcios(Session["IdUsuario"]);
                 return View(listadoConsorcio);
             }
             else
