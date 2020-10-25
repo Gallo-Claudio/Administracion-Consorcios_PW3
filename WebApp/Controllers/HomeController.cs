@@ -77,7 +77,7 @@ namespace WebApp.Controllers //Test1234!
 
                 if (existe)
                 {
-                    ViewBag.error = "El mail ingresado ya existe";
+                    ViewBag.error = "El mail ya se encuentra en uso, pruebe utilizando otro";
                     return View(nuevoUsuario);
                 }
                 else
