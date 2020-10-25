@@ -25,9 +25,10 @@ namespace DataAccessLayer.Repositorio
 
         public List<Consorcio> ObtenerTodos(int id)
         {
-            List<Consorcio> todosLosConsorcios = (from usuariobd in ctxConsorcio.Consorcio
-                               where usuariobd.Usuario.IdUsuario == id
-                               select usuariobd).ToList();
+            List<Consorcio> todosLosConsorcios = (from consorciobd in ctxConsorcio.Consorcio
+                               where consorciobd.Usuario.IdUsuario == id
+                               orderby consorciobd.Nombre
+                               select consorciobd).ToList();
             return todosLosConsorcios;
         }
 
