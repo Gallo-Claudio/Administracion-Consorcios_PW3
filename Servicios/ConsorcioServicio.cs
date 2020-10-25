@@ -20,9 +20,10 @@ namespace Servicios
             repoProvincia = new ProvinciaRepositorio(ctx);
         }
 
-        public List<Consorcio> ListarConsorcios()
+        public List<Consorcio> ListarConsorcios(object Session)
         {
-            return repositorio.ObtenerTodos();
+            int id = (int)Session;
+            return repositorio.ObtenerTodos(id);
         }
 
         public void AgregarConsorcio(Consorcio nuevoConsorcio, object Session)
