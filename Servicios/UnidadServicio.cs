@@ -19,19 +19,17 @@ namespace Servicios
             repoUnidad = new UnidadRepositorio(ctx);
         }
 
-        public List<Unidad> ListarUnidades(object session)
+        public List<Unidad> ListarUnidades(int id)
         {
-            int id = (int)session;
             return repoUnidad.MostrarTodas(id);
         }
 
-        /*public void AgregarUnidades(Unidad unidad, object session)
+        public void AgregarUnidades(Unidad unidad)
         {
-
-        }*/
-        public void EliminarUnidad(object session)
+            repoUnidad.Alta(unidad);
+        }
+        public void EliminarUnidad(int id)
         {
-            int id = (int)session;
             repoUnidad.Eliminar(id);
         }
 
@@ -51,17 +49,7 @@ namespace Servicios
 
         public void ModificarUnidad(Unidad unidad)
         {
-            int id = unidad.IdUnidad;
-
-            Unidad unidadModificada = repoUnidad.BuscarPorId(id);
-
-            unidadModificada.Nombre = unidad.Nombre;
-            unidadModificada.NombrePropietario = unidad.NombrePropietario;
-            unidadModificada.ApellidoPropietario = unidad.ApellidoPropietario;
-            unidadModificada.EmailPropietario = unidad.EmailPropietario;
-            unidadModificada.Superficie = unidad.Superficie;
-
-            repoUnidad.Modificar(unidadModificada);
+            repoUnidad.Modificar(unidad);
 
         }
     }
