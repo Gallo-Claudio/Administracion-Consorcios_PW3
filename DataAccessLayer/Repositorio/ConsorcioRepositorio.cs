@@ -26,9 +26,9 @@ namespace DataAccessLayer.Repositorio
         public List<Consorcio> ObtenerTodos(int id)
         {
             List<Consorcio> todosLosConsorcios = (from consorciobd in ctxConsorcio.Consorcio
-                               where consorciobd.Usuario.IdUsuario == id
-                               orderby consorciobd.Nombre
-                               select consorciobd).ToList();
+                                                  where consorciobd.Usuario.IdUsuario == id
+                                                  orderby consorciobd.Nombre
+                                                  select consorciobd).ToList();
             return todosLosConsorcios;
         }
 
@@ -60,7 +60,7 @@ namespace DataAccessLayer.Repositorio
             consorcioActual.Nombre = consorcio.Nombre;
             consorcioActual.Unidad = consorcio.Unidad;
             consorcioActual.Provincia = consorcio.Provincia;
-
+            //consorcioActual.FechaCreacion = new DateTime(1700, 01, 01, 22, 45, 36);  //Activar para probar la execpcion
             ctxConsorcio.SaveChanges();
         }
     }
