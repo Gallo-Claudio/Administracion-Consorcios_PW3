@@ -38,13 +38,17 @@
                 })
             </script>
         }
-        <script>
+        else
+        {
+            <script>
             Swal.fire({
                 text: 'Consorcio "@TempData["nombreConsorcio"]" no pudo ser creado',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
-        </script>
+            </script>
+        }
+
     }
 
 
