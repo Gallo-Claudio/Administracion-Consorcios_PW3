@@ -1,44 +1,19 @@
-﻿@using DataAccessLayer
+﻿@using System.Web.Optimization
+@using DataAccessLayer
 @model List<DataAccessLayer.Modelos.Consorcio>
 @{
     ViewBag.Titulo = "Listado de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
 }
 
-@*@section HeadScripts{
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#example').DataTable();
-            });
-        </script>
-    }*@
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="~/Scripts/DTables/datatables.min.js"></script>
-
-
-
-@*Para error de grabacion de la informacion*@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+@Scripts.Render("~/bundles/dataTables")
+@Scripts.Render("~/bundles/sweetAlert")
 
 
 <body>
     @if (TempData["nombreConsorcio"] as string != null)
     {
         if (TempData["error"] as string != null)
-        {
-            <script>
-                Swal.fire({
-                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-            </script>
-        }
-        else
         {
             <script>
             Swal.fire({
@@ -48,57 +23,25 @@
             })
             </script>
         }
+        else
+        {
+            <script>
+                Swal.fire({
+                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            </script>
+        }
 
     }
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#Consorcios').DataTable({
-                "language": {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    },
-                    "buttons": {
-                        "copy": "Copiar",
-                        "colvis": "Visibilidad"
-                    }
-                }
-            });
-        });
-
-    </script>
-
-
-
-
-
 
     <div class="container mb-5">
         <div class="pb-5">
             <h1>Listado de consorcios</h1>
             <a href="/consorcio/agregarConsorcio">Nuevo Consorcio</a>
 
-            <table class="table table-striped table-hover" id="Consorcios">
+            <table class="table table-striped table-hover" id="ListadoGeneral">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nombre</th>
