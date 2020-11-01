@@ -20,12 +20,32 @@
 
 
 
-
-
+@*Para error de grabacion de la informacion*@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
 
 <body>
-
+    @if (TempData["nombreConsorcio"] as string != null)
+    {
+        if (TempData["error"] as string != null)
+        {
+            <script>
+                Swal.fire({
+                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            </script>
+        }
+        <script>
+            Swal.fire({
+                text: 'Consorcio "@TempData["nombreConsorcio"]" no pudo ser creado',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        </script>
+    }
 
 
     <script type="text/javascript">

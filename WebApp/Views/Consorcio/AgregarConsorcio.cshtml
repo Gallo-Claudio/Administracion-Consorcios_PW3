@@ -11,15 +11,26 @@
 
 
 <body>
+    @*El primer ingreso a la vista lo hace con el TempData vacio.*@
     @if (TempData["nombreConsorcio"] as string != null)
     {
-    <script>
-        Swal.fire({
-            text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-        })
-    </script>
+        if (TempData["error"] as string != null)
+        {
+            <script>
+                Swal.fire({
+                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            </script>
+        }
+        <script>
+            Swal.fire({
+                text: 'Consorcio "@TempData["nombreConsorcio"]" no pudo ser creado',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        </script>
     }
 
 

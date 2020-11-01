@@ -58,7 +58,15 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                consorcio.AgregarConsorcio(nuevoConsorcio, Session["IdUsuario"]);
+                try
+                {
+                    consorcio.AgregarConsorcio(nuevoConsorcio, Session["IdUsuario"]);
+                }
+                catch
+                {
+                    TempData["error"] = "No se pudo guardar el registro";
+                }
+
             }
             else
             {
@@ -67,13 +75,20 @@ namespace WebApp.Controllers
                 return View(nuevoConsorcio);
             }
 
+            TempData["nombreConsorcio"] = nuevoConsorcio.Nombre;
             switch (id)
             {
-                case 1:                    
-                    TempData["nombreConsorcio"] = nuevoConsorcio.Nombre;
+                case 1:
                     return RedirectToAction("AgregarConsorcio");
                 case 2:
-                    return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador")
+                    if (TempData["error"] == null)
+                    {
+                        return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador")
+                    }
+                    else
+                    {
+                        return RedirectToAction("AgregarConsorcio");
+                    }
                 default:
                     return RedirectToAction("ListarConsorcio");
             }
@@ -104,10 +119,22 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult ModificarConsorcio(Consorcio consorcioModificado)
         {
-            if (ModelState.IsValid)
+            if (true)//ModelState.IsValid)
             {
-                consorcio.ModificarConsorcio(consorcioModificado);
-                return RedirectToAction("ListarConsorcio");
+                try
+                {
+                    consorcio.ModificarConsorcio(consorcioModificado);                    
+                }
+                catch
+                {
+                    TempData["error"] = "No se pudo modificar el registro";
+                    int id = consorcio.BuscarIdConsorcio(consorcioModificado);
+                    List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                    ViewData["listadoProvincias"] = listadoProvincias;
+
+                    return View("ModificarConsorcio", consorcioModificado);
+                }             
+             
             }
             else
             {
@@ -120,6 +147,8 @@ namespace WebApp.Controllers
 
                 return View("ModificarConsorcio", consorcioModificado);
             }
+            
+            return RedirectToAction("ListarConsorcio");
         }
 
         //public ActionResult EliminarConsorcio(int id)
