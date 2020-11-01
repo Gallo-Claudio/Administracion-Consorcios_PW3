@@ -1,13 +1,13 @@
-﻿@using DataAccessLayer
+﻿@using System.Web.Optimization
+@using DataAccessLayer
 @model DataAccessLayer.Modelos.Consorcio
 @{
     ViewBag.Titulo = "Ingreso de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
 }
 
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+@Scripts.Render("~/bundles/dataTables")
+@Scripts.Render("~/bundles/sweetAlert")
 
 
 <body>
@@ -17,21 +17,21 @@
         if (TempData["error"] as string != null)
         {
             <script>
-                Swal.fire({
-                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-            </script>
-        }
-        else
-        {
-            <script>
             Swal.fire({
                 text: 'Consorcio "@TempData["nombreConsorcio"]" no pudo ser creado',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
+            </script>
+        }
+        else
+        {
+            <script>
+                Swal.fire({
+                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
             </script>
         }
 
@@ -71,5 +71,5 @@
             <button type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button><br />
             <a href="/consorcio/listarConsorcio">Cancelar</a>
         </form>
-        </>
+    </div>
 </body>

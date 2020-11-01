@@ -1,34 +1,26 @@
-﻿@using DataAccessLayer
+﻿@using System.Web.Optimization
+@using DataAccessLayer
 @model DataAccessLayer.Modelos.Consorcio
 @{
     ViewBag.Titulo = "Modificación de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
 }
 
-@*@section HeadScripts{
-        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-        <script type="text/javascript">
-                $(document).ready(function () {
-                    $('#IdProvincia > option[value="@Model.Provincia.IdProvincia"]').attr('selected', 'selected');
-                });
-        </script>
-    }*@
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+@Scripts.Render("~/bundles/dataTables")
+@Scripts.Render("~/bundles/sweetAlert")
 
 
 <body>
     @*El primer ingreso a la vista lo hace con el TempData vacio.*@
     @if (TempData["error"] as string != null)
-        {
-    <script>
+    {
+        <script>
                 Swal.fire({
                     text: '"@TempData["error"]"',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 })
-    </script>
+        </script>
     }
 
 
