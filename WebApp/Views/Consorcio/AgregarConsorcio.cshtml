@@ -38,38 +38,50 @@
     }
 
 
-    <div class="container">
-        <form action="/consorcio/agregarConsorcio" method="post">
+    <div class="container mb-5">
+        <div class="pb-5">
+            <h1 class="mb-5">Agregar un consorcio</h1>
 
-            @Html.LabelFor(Model => Model.Nombre)*
-            @Html.EditorFor(Model => Model.Nombre)
-            @Html.ValidationMessageFor(Model => Model.Nombre)<br />
+            <form class="row" action="/consorcio/agregarConsorcio" method="post">
 
-            @Html.LabelFor(Model => Model.Provincia)*
-            @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-            @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
+                <div class="col-9">
 
-            @Html.LabelFor(Model => Model.Ciudad)*
-            @Html.EditorFor(Model => Model.Ciudad)
-            @Html.ValidationMessageFor(Model => Model.Ciudad)<br />
+                    @Html.LabelFor(Model => Model.Nombre)*
+                    @Html.EditorFor(Model => Model.Nombre)
+                    @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-            @Html.LabelFor(Model => Model.Calle)*
-            @Html.EditorFor(Model => Model.Calle)
-            @Html.ValidationMessageFor(Model => Model.Calle)<br />
+                    @Html.LabelFor(Model => Model.Provincia)*
+                    @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+                    @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
 
-            @Html.LabelFor(Model => Model.Altura)*
-            @Html.EditorFor(Model => Model.Altura)
-            @Html.ValidationMessageFor(Model => Model.Altura)<br />
+                    @Html.LabelFor(Model => Model.Ciudad)*
+                    @Html.EditorFor(Model => Model.Ciudad)
+                    @Html.ValidationMessageFor(Model => Model.Ciudad)<br />
 
-            @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
-            @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-            @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
+                    @Html.LabelFor(Model => Model.Calle)*
+                    @Html.EditorFor(Model => Model.Calle)
+                    @Html.ValidationMessageFor(Model => Model.Calle)<br />
+
+                    @Html.LabelFor(Model => Model.Altura)*
+                    @Html.EditorFor(Model => Model.Altura)
+                    @Html.ValidationMessageFor(Model => Model.Altura)<br />
+
+                    @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
+                    @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
+                    @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
+
+                    * Son campos obligatorios
+                </div>
 
 
-            <button type="submit">Guardar</button><br />
-            <button type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button><br />
-            <button type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button><br />
-            <a href="/consorcio/listarConsorcio">Cancelar</a>
-        </form>
+                <div class="col-3">
+                    <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
+                    <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button>
+                    <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button>
+                    <a href="/consorcio/listarConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
     </div>
 </body>

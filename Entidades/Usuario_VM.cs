@@ -9,21 +9,20 @@ namespace Entidades_VM
 {
     public class Usuario_VM
     {
-        [Required]
+        [Required(ErrorMessage = "Debe ingresar un nombre")]
         [StringLength(50)]
         public string Nombre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe ingresar un Email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe ingresar un password")]
         [StringLength(20, MinimumLength = 7)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe re-ingresar el password")]
         [Compare("Password")]
-        [Display(Name = "Reingresar Password")]
         public string ReingresoPassword { get; set; }
     }
 }

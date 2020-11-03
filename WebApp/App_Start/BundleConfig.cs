@@ -18,7 +18,7 @@ namespace WebApp.App_Start
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
                         "~/Scripts/DTables/datatables.min.js",
                         "~/Scripts/DTables/ListadoTabla.js"));
-            
+
             bundles.Add(new ScriptBundle("~/bundles/sweetAlert").Include(
                         "~/Scripts/sweetAlert/sweetalert2@10.js",
                         "~/Scripts/sweetAlert/promise-polyfill.js"));
@@ -27,7 +27,12 @@ namespace WebApp.App_Start
 
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css"));
-            
+
+            bundles.Add(new StyleBundle("~/Content/dataTables").Include("~/Content/DTables/datatables.min.css"));
+
+
+
+
             BundleTable.EnableOptimizations = true;
         }
     }

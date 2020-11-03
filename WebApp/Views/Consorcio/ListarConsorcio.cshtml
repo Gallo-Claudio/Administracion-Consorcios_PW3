@@ -8,6 +8,7 @@
 
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
+@Styles.Render("~/Content/dataTables")
 
 
 <body>
@@ -38,8 +39,8 @@
 
     <div class="container mb-5">
         <div class="pb-5">
-            <h1>Listado de consorcios</h1>
-            <a href="/consorcio/agregarConsorcio">Nuevo Consorcio</a>
+            <h1 class="mb-5">Listado de consorcios</h1>
+            <a class="btn btn-primary btn-default nuevoconsorcio" href="/consorcio/agregarConsorcio">Nuevo Consorcio</a>
 
             <table class="table table-striped table-hover" id="ListadoGeneral">
                 <thead class="thead-dark">
@@ -63,8 +64,8 @@
                         <td><a href="/unidad/listarUnidad/@consorcio.IdConsorcio">Ver Unidades</a></td>
                         <td><a href="/expensa/listarExpensa/@consorcio.IdConsorcio">Ver Expensas</a></td>
                         <td><a href="/gasto/listarGasto/@consorcio.IdConsorcio">Ver Gastos</a></td>
-                        <td><a href="/consorcio/modificarConsorcio/@consorcio.IdConsorcio"><img src="~/Img/editar.png" /></a></td>
-                        <td><a href="/consorcio/eliminarConsorcio/@consorcio.IdConsorcio"><img src="~/Img/borrar.png" /></a></td>
+                        <td class="text-center"><a href="/consorcio/modificarConsorcio/@consorcio.IdConsorcio"><img src="~/Img/editar.png" /></a></td>
+                        <td class="text-center"><a href="/consorcio/eliminarConsorcio/@consorcio.IdConsorcio"><img src="~/Img/borrar.png" /></a></td>
                     </tr>
                 }
             </table>
