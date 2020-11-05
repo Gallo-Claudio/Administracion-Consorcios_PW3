@@ -52,5 +52,10 @@ namespace Servicios
             repoUnidad.Modificar(unidad);
 
         }
+
+        public void EliminarUnidadesDeConsorcio(int id)
+        {
+            repoUnidad.EliminarUnidadesConsorcio(id);
+        }
     }
 }
