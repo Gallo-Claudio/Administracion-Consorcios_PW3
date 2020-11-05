@@ -63,5 +63,12 @@ namespace DataAccessLayer.Repositorio
             //consorcioActual.FechaCreacion = new DateTime(1700, 01, 01, 22, 45, 36);  //Activar para probar la execpcion
             ctxConsorcio.SaveChanges();
         }
+
+        public void EliminarConsorcio(int idConsorcio)
+        {
+            Consorcio consorcio = ctxConsorcio.Consorcio.Find(idConsorcio);
+            ctxConsorcio.Consorcio.Remove(consorcio);
+            ctxConsorcio.SaveChanges();
+        }
     }
 }

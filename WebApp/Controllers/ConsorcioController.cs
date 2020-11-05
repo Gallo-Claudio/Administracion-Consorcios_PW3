@@ -13,12 +13,16 @@ namespace WebApp.Controllers
 
         ConsorcioServicio consorcio;
         ProvinciaServicio provincia;
+        UnidadServicio unidad;
+        GastoServicio gasto;
 
         public ConsorcioController()
         {
             ContextoEntities contexto = new ContextoEntities();
             consorcio = new ConsorcioServicio(contexto);
             provincia = new ProvinciaServicio(contexto);
+            unidad = new UnidadServicio(contexto);
+            gasto = new GastoServicio(contexto);
         }
 
         // GET: Consorcio
@@ -119,7 +123,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult ModificarConsorcio(Consorcio consorcioModificado)
         {
-            if (true)//ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -151,28 +155,40 @@ namespace WebApp.Controllers
             return RedirectToAction("ListarConsorcio");
         }
 
-        //public ActionResult EliminarConsorcio(int id)
-        //{
-        //    if (Session["IdUsuario"] != null)
-        //    {
-        //        Consorcio consorcioAEliminar = ConsorcioServicio.BuscarConsorcio(id);
-        //        return View(consorcioAEliminar);
-        //    }
-        //    else
-        //    {
-        //        TempData["Controlador"] = "Consorcio";
-        //        TempData["Accion"] = "EliminarConsorcio";
-        //        return RedirectToAction("Ingresar", "Home");
-        //    }
-        //}
 
-        //[HttpPost]
-        //public ActionResult EliminarConsorcio(Consorcio consorcioEliminar)
-        //{
-        //    ConsorcioServicio.EliminarGastos(consorcioEliminar);
-        //    ConsorcioServicio.EliminarUnidades(consorcioEliminar);
-        //    ConsorcioServicio.EliminarConsorcio(consorcioEliminar);
-        //    return RedirectToAction("ListarConsorcio");
-        //}
+
+
+
+
+
+
+
+
+
+
+
+        public ActionResult EliminarConsorcio(int id)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Consorcio consorcioAEliminar = consorcio.BuscarConsorcio(id);
+                return View(consorcioAEliminar);
+            }
+            else
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "EliminarConsorcio";
+                return RedirectToAction("Ingresar", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DarDeBajaConsorcio(int id)
+        {
+            gasto.EliminarGastosDeConsorcio(id);
+            unidad.EliminarUnidadesDeConsorcio(id);
+            consorcio.EliminarConsorcio(id);
+            return RedirectToAction("ListarConsorcio");
+        }
     }
 }

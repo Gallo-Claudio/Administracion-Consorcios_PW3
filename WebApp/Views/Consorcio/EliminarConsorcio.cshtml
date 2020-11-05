@@ -1,5 +1,6 @@
-﻿@using Entidades
-@model Consorcio
+﻿@using System.Web.Optimization
+@using DataAccessLayer
+@model DataAccessLayer.Modelos.Consorcio
 @{
     ViewBag.Titulo = "Eliminación de Consorcios";
     Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
@@ -8,12 +9,11 @@
 <body>
     <div class="container text-center">
         <p>Esta seguro que desea eliminar el consorcio @Model.Nombre ?</p>
-        <form action="/consorcio/eliminarConsorcio" method="post">
+        <form action="/consorcio/darDeBajaConsorcio" method="post">
 
-            <input hidden value="@Model.IdConsorcio" />
+            <input hidden name="id" value="@Model.IdConsorcio" />
             <button type="submit">Eliminar</button><br />
             <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get">Cancelar</button>
-
         </form>
     </div>
 </body>

@@ -28,7 +28,7 @@ namespace DataAccessLayer.Repositorio
                                           where unidadbd.IdUnidad == id
                                           orderby unidadbd.Nombre
                                           select unidadbd).ToList();
-            return todasUnidades;                                   
+            return todasUnidades;
         }
 
         public Unidad BuscarPorId(int idUnidad)
@@ -44,7 +44,7 @@ namespace DataAccessLayer.Repositorio
             Unidad unidad;
             unidad = BuscarPorId(idUnidad);
 
-            if(unidad != null)
+            if (unidad != null)
             {
                 ctxUnidad.Unidad.Remove(unidad);
                 ctxUnidad.SaveChanges();
@@ -64,6 +64,21 @@ namespace DataAccessLayer.Repositorio
 
             ctxUnidad.SaveChanges();
 
-         }
+        }
+
+        public void EliminarUnidadesConsorcio(int id)
+        {
+            List<Unidad> UnidadesConsorcio = (from unidadbd in ctxUnidad.Unidad
+                                              where unidadbd.IdConsorcio == id
+                                              select unidadbd).ToList();
+
+            foreach (Unidad unidad in UnidadesConsorcio)
+            {
+                ctxUnidad.Unidad.Remove(unidad);
+            }
+
+            ctxUnidad.SaveChanges();
+        }
     }
 }
+
