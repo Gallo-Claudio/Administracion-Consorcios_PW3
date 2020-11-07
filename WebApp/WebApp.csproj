@@ -246,7 +246,7 @@
     <Content Include="Views\Home\Inicio.cshtml" />
     <Content Include="Views\Home\Registrarse.cshtml" />
     <Content Include="Views\Home\Ingresar.cshtml" />
-    <Content Include="Views\Shared\_LayoutPageBase.cshtml" />
+    <Content Include="Views\Shared\BaseLayout.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -257,8 +257,10 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_LayoutPageLogin.cshtml" />
+    <Content Include="Views\Shared\LogueadoLayout.cshtml" />
     <Content Include="Views\Error\PaginaError.cshtml" />
+    <Content Include="Views\Shared\pv_Footer.cshtml" />
+    <Content Include="Views\Shared\AnonimoLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
