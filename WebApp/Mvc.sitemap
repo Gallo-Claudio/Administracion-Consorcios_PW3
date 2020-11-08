@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+	<mvcSiteMapNode title="Mis Consorcios" controller="Consorcio" action="ListarConsorcio">
+
+		<mvcSiteMapNode title="Nuevo Consorcio" action="AgregarConsorcio"/>
+		<mvcSiteMapNode title="Editando Consorcio" controller="Consorcio" action="ModificarConsorcio" preservedRouteParameters="id">
+			
+			<mvcSiteMapNode title="Eliminar" controller="Consorcio" action="EliminarConsorcio" preservedRouteParameters="id"/>
+
+			<mvcSiteMapNode title="Unidades" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id">
+				<mvcSiteMapNode title="Editando Unidad" action="ModificarUnidad" preservedRouteParameters="id, id2"/>
+				<mvcSiteMapNode title="Nueva Unidad" action="AgregarUnidad"/>
+			</mvcSiteMapNode>
+
+			<mvcSiteMapNode title="Gastos" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id">
+				<mvcSiteMapNode title="Editando Gasto" action="ModificarUnidad" preservedRouteParameters="id, id2"/>
+				<mvcSiteMapNode title="Cargar nuevo gasto" action="AgregarUnidad"/>
+			</mvcSiteMapNode>
+
+			<mvcSiteMapNode title="Expensas" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id"/>
+			
+
+		</mvcSiteMapNode>
+	</mvcSiteMapNode>
+
+</mvcSiteMap>

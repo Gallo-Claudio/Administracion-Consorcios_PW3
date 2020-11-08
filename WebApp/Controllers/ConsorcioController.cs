@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Modelos;
+using MvcSiteMapProvider;
 using Servicios;
 
 namespace WebApp.Controllers
@@ -103,6 +104,7 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Consorcio busquedaConsorcioId = consorcio.BuscarConsorcio(id);
+                SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + busquedaConsorcioId.Nombre + "\" > Editando Consorcio";
 
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
@@ -155,23 +157,18 @@ namespace WebApp.Controllers
             return RedirectToAction("ListarConsorcio");
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         public ActionResult EliminarConsorcio(int id)
         {
             if (Session["IdUsuario"] != null)
             {
                 Consorcio consorcioAEliminar = consorcio.BuscarConsorcio(id);
+
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.Title = "Consorcio \"" + consorcioAEliminar.Nombre + "\"";
+                }
+
                 return View(consorcioAEliminar);
             }
             else

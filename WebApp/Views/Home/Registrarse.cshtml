@@ -5,20 +5,19 @@
     Layout = "~/Views/Shared/AnonimoLayout.cshtml";
 }
 
-<body>
-    <div class="container text-center">
-        @ViewBag.error
-        <form class="inicio" action="/home/registrarse" method="post">
-            <div class="recuadro">
-                @Html.TextBoxFor(n => n.Nombre, new { placeholder = "Nombre" })<br /> @Html.ValidationMessageFor(Model => Model.Nombre)<br />
-                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br /> @Html.ValidationMessageFor(Model => Model.Email)<br />
-                @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" })<br /> @Html.ValidationMessageFor(Model => Model.Password)<br />
-                @Html.PasswordFor(p2 => p2.ReingresoPassword, new { placeholder = "Reingrese la contraseña" })<br /> @Html.ValidationMessageFor(Model => Model.ReingresoPassword)<br /><br />
 
-                <button class="btn btn-primary btn-primary mr-4" type="submit">Registrarse</button>
-                <a href="/home/inicio" class="btn btn-primary btn-secondary ml-4">Cancelar</a>
-            </div>
-        </form><br /><br />
-        <img src="~/Img/logo-ppal-b.png" />
-    </div>
-</body>
+<div class="container text-center">
+    @ViewBag.error
+    <form class="inicio" action="/home/registrarse" method="post">
+        <div class="recuadro">
+            @Html.TextBoxFor(n => n.Nombre, new { placeholder = "Nombre" })<br /> @Html.ValidationMessageFor(Model => Model.Nombre)<br />
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br /> @Html.ValidationMessageFor(Model => Model.Email)<br />
+            @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" })<br /> @Html.ValidationMessageFor(Model => Model.Password)<br />
+            @Html.PasswordFor(p2 => p2.ReingresoPassword, new { placeholder = "Reingrese la contraseña" })<br /> @Html.ValidationMessageFor(Model => Model.ReingresoPassword)<br /><br />
+
+            <button class="btn btn-primary btn-primary mr-4" type="submit">Registrarse</button>
+            <a href="/home/inicio" class="btn btn-primary btn-secondary ml-4">Cancelar</a>
+        </div>
+    </form><br /><br />
+    <img src="~/Img/logo-ppal-b.png" />
+</div>

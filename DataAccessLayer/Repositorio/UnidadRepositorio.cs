@@ -25,7 +25,7 @@ namespace DataAccessLayer.Repositorio
         public List<Unidad> MostrarTodas(int id)
         {
             List<Unidad> todasUnidades = (from unidadbd in ctxUnidad.Unidad
-                                          where unidadbd.IdUnidad == id
+                                          where unidadbd.Consorcio.IdConsorcio == id
                                           orderby unidadbd.Nombre
                                           select unidadbd).ToList();
             return todasUnidades;
