@@ -6,17 +6,16 @@
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
 }
 
-<body>
-    <div class="container text-center">
-        <div class="recuadro">
-            <p>Esta seguro que desea eliminar el consorcio "@Model.Nombre" ?</p>
-            <form action="/consorcio/darDeBajaConsorcio" method="post">
-                <input hidden name="id" value="@Model.IdConsorcio" />
 
-                <button type="submit" class="btn btn-primary btn-danger mr-4">Eliminar</button>
-                <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get" class="btn btn-primary btn-primary ml-4">Cancelar</button>
+<div class="container text-center">
+    <div class="recuadro recuadro-elimnar">
+        <p>Esta seguro que desea eliminar el consorcio "@Model.Nombre" ?</p>
+        <form action="/consorcio/darDeBajaConsorcio" method="post">
+            <input hidden name="id" value="@Model.IdConsorcio" />
 
-            </form>
-        </div>
+            <button type="submit" class="btn btn-primary btn-danger mr-4">Eliminar</button>
+            <button type="submit" formaction="/consorcio/listarConsorcio" formmethod="get" class="btn btn-primary btn-primary ml-4">Cancelar</button>
+
+        </form>
     </div>
-</body>
+</div>

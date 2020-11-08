@@ -5,22 +5,21 @@
     Layout = "~/Views/Shared/AnonimoLayout.cshtml";
 }
 
-<body>
-    <div class="container text-center">
 
-        <form class="inicio" action="/Home/Ingresar" method="post">
-            <input hidden name="Controlador" value="@Model.Controlador" />
-            <input hidden name="Accion" value="@Model.Accion" />
-            <div class="recuadro">
-                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br />
-                @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" })<br />
+<div class="container text-center">
 
-                @ViewBag.error<br />
+    <form class="inicio" action="/Home/Ingresar" method="post">
+        <input hidden name="Controlador" value="@Model.Controlador" />
+        <input hidden name="Accion" value="@Model.Accion" />
+        <div class="recuadro">
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br />
+            @Html.PasswordFor(p => p.Password, new { placeholder = "Contraseña" })<br />
 
-                <button class="btn btn-primary btn-primary ingresar" type="submit">Ingresar</button>
-            </div>
-        </form><br /><br /><br /><br /><br />
+            @ViewBag.error<br />
 
-        <img src="~/Img/logo-ppal-b.png" />
-    </div>
-</body>
+            <button class="btn btn-primary btn-primary ingresar" type="submit">Ingresar</button>
+        </div>
+    </form><br /><br /><br /><br /><br />
+
+    <img src="~/Img/logo-ppal-b.png" />
+</div>

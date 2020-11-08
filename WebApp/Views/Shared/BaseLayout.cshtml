@@ -14,9 +14,8 @@
 <body>
     @RenderSection("Encabezado", false)
 
-    <div style="margin-top:150px">
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @{Html.RenderPartial("~/Views/Shared/pv_Footer.cshtml");}
+</body>
 </html>

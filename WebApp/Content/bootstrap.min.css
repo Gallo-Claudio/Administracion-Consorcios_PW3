@@ -14,7 +14,9 @@ form.inicio input {
     margin-top: 12px;
     width: 350px;
 }
-
+form.inicio {
+    margin-top: -60px;
+}
 input {
     width: 206px;
 }
@@ -44,4 +46,21 @@ label {
     width: fit-content;
     padding: 20px 20px 35px 20px;
     display: inline-block;
+}
+body div.colorbody {
+    background-color: #222 !important;
+    max-width: 1140px;
+    padding-top: 15px;
+    height: 50px;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.anonimo {
+    height: 180px;
+    display: block;
+}
+.recuadro-elimnar {
+    margin-top: 150px;
+    background-color: rgb(231 76 60 / 22%);
 }
