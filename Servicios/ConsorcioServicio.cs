@@ -40,11 +40,11 @@ namespace Servicios
             return busquedaConsorcio;
         }
 
-        public int BuscarIdConsorcio(Consorcio consorcio)
-        {
-            int idConsorcio = consorcio.IdConsorcio;
-            return idConsorcio;
-        }
+        //public int BuscarIdConsorcio(Consorcio consorcio)
+        //{
+        //    int idConsorcio = consorcio.IdConsorcio;
+        //    return idConsorcio;
+        //}
 
         public void ModificarConsorcio(Consorcio consorcioModificacion)
         {
@@ -55,7 +55,7 @@ namespace Servicios
             edicionConsorcio.Calle = consorcioModificacion.Calle;
             edicionConsorcio.Ciudad = consorcioModificacion.Ciudad;
             edicionConsorcio.DiaVencimientoExpensas = consorcioModificacion.DiaVencimientoExpensas;
-            edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
+            //edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
             edicionConsorcio.Nombre = consorcioModificacion.Nombre;
             edicionConsorcio.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.Provincia.IdProvincia);
             repoConsorcio.Modificar(edicionConsorcio);

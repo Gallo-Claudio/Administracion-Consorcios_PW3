@@ -134,7 +134,7 @@ namespace WebApp.Controllers
                 catch
                 {
                     TempData["error"] = "No se pudo modificar el registro";
-                    int id = consorcio.BuscarIdConsorcio(consorcioModificado);
+                    //int id = consorcio.BuscarIdConsorcio(consorcioModificado);
                     List<Provincia> listadoProvincias = provincia.ListarProvincias();
                     ViewData["listadoProvincias"] = listadoProvincias;
 
@@ -144,7 +144,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                int id = consorcio.BuscarIdConsorcio(consorcioModificado);
+                //int id = consorcio.BuscarIdConsorcioooooooooooo(consorcioModificado);
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
