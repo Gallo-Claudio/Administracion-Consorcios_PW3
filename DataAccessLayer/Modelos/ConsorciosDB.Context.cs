@@ -12,6 +12,8 @@ namespace DataAccessLayer.Modelos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class ContextoEntities : DbContext
     {
@@ -31,5 +33,14 @@ namespace DataAccessLayer.Modelos
         public virtual DbSet<TipoGasto> TipoGasto { get; set; }
         public virtual DbSet<Unidad> Unidad { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual ObjectResult<sp_Expensas_Result> sp_Expensas(Nullable<int> idConsorcio)
+        {
+            var idConsorcioParameter = idConsorcio.HasValue ?
+                new ObjectParameter("idConsorcio", idConsorcio) :
+                new ObjectParameter("idConsorcio", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Expensas_Result>("sp_Expensas", idConsorcioParameter);
+        }
     }
 }
