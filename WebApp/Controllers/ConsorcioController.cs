@@ -109,8 +109,8 @@ namespace WebApp.Controllers
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
-                //int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-                //ViewBag.cantidadUnidades = cantidadUnidades;
+
+                ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
 
                 return View(busquedaConsorcioId);
             }
@@ -129,31 +129,33 @@ namespace WebApp.Controllers
             {
                 try
                 {
-                    consorcio.ModificarConsorcio(consorcioModificado);                    
+                    consorcio.ModificarConsorcio(consorcioModificado);
                 }
                 catch
                 {
                     TempData["error"] = "No se pudo modificar el registro";
-                    //int id = consorcio.BuscarIdConsorcio(consorcioModificado);
+
                     List<Provincia> listadoProvincias = provincia.ListarProvincias();
                     ViewData["listadoProvincias"] = listadoProvincias;
 
+                    int id = consorcioModificado.IdConsorcio;
+                    ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
+
                     return View("ModificarConsorcio", consorcioModificado);
-                }             
-             
+                }
+
             }
             else
             {
-                //int id = consorcio.BuscarIdConsorcioooooooooooo(consorcioModificado);
                 List<Provincia> listadoProvincias = provincia.ListarProvincias();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
-                //int cantidadUnidades = UnidadServicio.ContarUnidades(id);
-                //ViewBag.cantidadUnidades = cantidadUnidades;
+                int id = consorcioModificado.IdConsorcio;
+                ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
 
                 return View("ModificarConsorcio", consorcioModificado);
             }
-            
+
             return RedirectToAction("ListarConsorcio");
         }
 

@@ -20,7 +20,7 @@
 				<mvcSiteMapNode title="Cargar nuevo gasto" action="AgregarUnidad"/>
 			</mvcSiteMapNode>
 
-			<mvcSiteMapNode title="Expensas" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id"/>
+			<mvcSiteMapNode title="Expensas" controller="expensa" action="ListarExpensa" preservedRouteParameters="id"/>
 			
 
 		</mvcSiteMapNode>
