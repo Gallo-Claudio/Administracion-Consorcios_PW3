@@ -12,11 +12,15 @@ namespace WebApp.Controllers
     public class GastoController : Controller
     {
         GastoServicio gasto;
+        ConsorcioServicio consorcio;
+        TipoGastoServicio tipoGasto;
 
         public GastoController()
         {
             ContextoEntities contexto = new ContextoEntities();
+            consorcio = new ConsorcioServicio(contexto);
             gasto = new GastoServicio(contexto);
+            tipoGasto = new TipoGastoServicio(contexto);
         }
 
         // GET: Gasto
@@ -24,27 +28,32 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
+                ViewData["consorcio"] = consorcio.BuscarConsorcio(id);
                 List<Gasto> listadoGasto = gasto.ListarGastos(id);
                 return View(listadoGasto);
             }
             else
             {
                 TempData["Controlador"] = "Gasto";
-                TempData["Accion"] = "ListarGastos";
+                TempData["Accion"] = "ListarGastos/" + id;
                 return RedirectToAction("Ingresar", "Home");
             }
         }
 
-        public ActionResult AgregarGasto()
+        public ActionResult AgregarGasto(int id)
         {
             if (Session["IdUsuario"] != null)
             {
+                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
+                List<TipoGasto> listaTipoGasto = tipoGasto.ListarTipoGastos();
+                ViewData["consorcio"] = consorcioResultado;
+                ViewData["listadoTipoGasto"] = listaTipoGasto;
                 return View();
             }
             else
             {
                 TempData["Controlador"] = "Gasto";
-                TempData["Accion"] = "AgregarGasto";
+                TempData["Accion"] = "AgregarGasto/" + id;
                 return RedirectToAction("Ingresar", "Home");
             }
         }
