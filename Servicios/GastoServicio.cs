@@ -19,9 +19,36 @@ namespace Servicios
             repoGasto = new GastoRepositorio(ctx);
         }
 
+        public List<Gasto> ListarGastos(int id)
+        {
+            return repoGasto.ObtenerTodos(id);
+        }
+
+        public void AgregarGasto(Gasto nuevoGasto, object Session)
+        {
+            //TODO Fijarse que onda el consorcio
+            nuevoGasto.IdUsuarioCreador = (int)Session;
+            repoGasto.Alta(nuevoGasto);
+        }
+        public Gasto BuscarGasto(int id)
+        {
+            Gasto busquedaGasto = repoGasto.ObtenerPorId(id);
+            return busquedaGasto;
+        }
+
         public void EliminarGastosDeConsorcio(int id)
         {
             repoGasto.EliminarGastosConsorcio(id);
+        }
+        
+        public void ModificarGasto(Gasto gastoModificacion)
+        {
+            repoGasto.Modificar(gastoModificacion);
+        }
+
+        public void EliminarGasto(int id)
+        {
+            repoGasto.EliminarGasto(id);
         }
     }
 }
