@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace WebApp.Controllers
         GastoServicio gasto;
         ConsorcioServicio consorcio;
         TipoGastoServicio tipoGasto;
+        UsuarioServicios usuario;
 
         public GastoController()
         {
@@ -23,6 +24,7 @@ namespace WebApp.Controllers
             gasto = new GastoServicio(contexto);
             consorcio = new ConsorcioServicio(contexto);
             tipoGasto = new TipoGastoServicio(contexto);
+            usuario = new UsuarioServicios(contexto);
         }
 
         // GET: Gasto
@@ -30,7 +32,9 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                ViewData["consorcio"] = consorcio.BuscarConsorcio(id);
+                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
+                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
+                ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
                 List<Gasto> listadoGasto = gasto.ListarGastos(id);
                 return View(listadoGasto);
             }
@@ -63,7 +67,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante,int? id)
+        public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante, int? id)
         {
             var consorcioId = Request["consorcioId"];
             Consorcio consorcioResultado = consorcio.BuscarConsorcio(Int32.Parse(consorcioId));
@@ -77,15 +81,15 @@ namespace WebApp.Controllers
                 TempData["nombreGasto"] = nuevoGasto.Nombre;
                 try
                 {
-                    gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);        
+                    gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);
                     if (ArchivoComprobante.ContentLength > 0)
                     {
                         var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
                         ArchivoComprobante.SaveAs(path);
                     }
-                    
+
                     TempData["exito"] = "Se guardo el registro";
-                    if (id == 1 )
+                    if (id == 1)
                     {
                         return RedirectToAction("AgregarGasto/" + consorcioId);
                     }
@@ -93,7 +97,7 @@ namespace WebApp.Controllers
                     {
                         return RedirectToAction("verGastos/" + consorcioId);
                     }
-                    
+
                 }
                 catch
                 {
@@ -113,7 +117,11 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Gasto busqueadaGastoId = gasto.BuscarGasto(id);
-                return View();
+                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
+                List<TipoGasto> listaTipoGasto = tipoGasto.ListarTipoGastos();
+                TempData["listadoTipoGasto"] = listaTipoGasto;
+                TempData["consorcio"] = consorcioResultado;
+                return View(busqueadaGastoId);
             }
             else
             {
@@ -121,32 +129,48 @@ namespace WebApp.Controllers
                 TempData["Accion"] = "ModificarGasto";
                 return RedirectToAction("Ingresar", "Home");
             }
+
         }
 
         [HttpPost]
-        public ActionResult ModificarGasto(Gasto gastoModificado)
+        public ActionResult ModificarGasto(Gasto gastoModificado, HttpPostedFileBase archivo)
         {
             if (ModelState.IsValid)
             {
+                var fileName = "";
+                if (archivo != null)
+                {
+                    fileName = Path.GetFileName(archivo.FileName);
+                    gastoModificado.ArchivoComprobante = fileName;
+                }
                 try
                 {
                     gasto.ModificarGasto(gastoModificado);
+                    if (archivo != null && archivo.ContentLength > 0)
+                    {
+                        var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
+                        archivo.SaveAs(path);
+                    }
+                    TempData["modificado"] = "Se modifico el registro";
+                    TempData["nombreGasto"] = gastoModificado.Nombre;
+                    int idConsorcio = gasto.BuscarGasto(gastoModificado.IdGasto).IdConsorcio;
+                    return RedirectToAction("VerGastos/" + idConsorcio);
                 }
                 catch
                 {
                     TempData["error"] = "No se pudo modificar el registro";
-                    int id = gastoModificado.IdGasto;
-                    return View("ModificarGasto", gastoModificado);
+                    TempData["nombreGasto"] = gastoModificado.Nombre;
+                    return RedirectToAction("ModificarGasto/" + gastoModificado.IdGasto);
                 }
-
             }
             else
             {
-                int id = gastoModificado.IdGasto;
-                return View("ModificarGasto", gastoModificado);
+                TempData["error"] = "La modificacion del registro no es valida";
+                TempData["nombreGasto"] = gastoModificado.Nombre;
+                return RedirectToAction("ModificarGasto/" + gastoModificado.IdGasto);
             }
 
-            return RedirectToAction("ListarGasto");
+
         }
 
         public ActionResult EliminarGasto(int id)
@@ -154,13 +178,6 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Gasto busqueadaGastoId = gasto.BuscarGasto(id);
-
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.Title = "Gasto \"" + busqueadaGastoId.Nombre + "\"";
-                }
-
                 return View(busqueadaGastoId);
             }
             else

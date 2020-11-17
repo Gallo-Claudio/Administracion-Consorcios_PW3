@@ -57,7 +57,6 @@ namespace DataAccessLayer.Repositorio
             Gasto gastoActual = ObtenerPorId(gasto.IdGasto);
             gastoActual.Nombre = gasto.Nombre;
             gastoActual.Descripcion = gasto.Descripcion;
-            gastoActual.Consorcio = gasto.Consorcio;
             gastoActual.TipoGasto = gasto.TipoGasto;
             gastoActual.FechaGasto = gasto.FechaGasto;
             gastoActual.AnioExpensa = gasto.AnioExpensa;

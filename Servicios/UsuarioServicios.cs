@@ -75,5 +75,10 @@ namespace Servicios
             Usuario usuarioActualizar = repoUsuario.BuscaPorMail(Email);
             repoUsuario.UltimoLogin(usuarioActualizar);
         }
+
+        public Usuario BuscarPorId(int idUsuarioCreador)
+        {
+            return repoUsuario.BuscaPorId(idUsuarioCreador);
+        }
     }
 }

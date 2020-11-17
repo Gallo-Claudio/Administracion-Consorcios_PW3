@@ -13,6 +13,7 @@ namespace Servicios
         GastoRepositorio repoGasto;
         ConsorcioRepositorio repoConsorcio;
         TipoGastoRepositorio repoTipoGasto;
+        UsuarioRepositorio repoUsuario;
 
         public GastoServicio(ContextoEntities contexto)
         {
@@ -20,6 +21,7 @@ namespace Servicios
             repoGasto = new GastoRepositorio(ctx);
             repoConsorcio = new ConsorcioRepositorio(ctx);
             repoTipoGasto = new TipoGastoRepositorio(ctx);
+            repoUsuario = new UsuarioRepositorio(ctx);
         }
 
         public List<Gasto> ListarGastos(int id)
@@ -49,6 +51,7 @@ namespace Servicios
         
         public void ModificarGasto(Gasto gastoModificacion)
         {
+            gastoModificacion.TipoGasto = repoTipoGasto.ObtenerPorId(gastoModificacion.IdTipoGasto);
             repoGasto.Modificar(gastoModificacion);
         }
 

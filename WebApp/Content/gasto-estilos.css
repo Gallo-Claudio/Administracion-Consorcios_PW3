@@ -7,3 +7,6 @@
 .field-validation-error {
     color: red;
 }
+.botones-modificar {
+    display: inline-block;
+}

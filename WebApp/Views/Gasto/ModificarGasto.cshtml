@@ -2,48 +2,33 @@
 @using DataAccessLayer
 @model DataAccessLayer.Modelos.Gasto
 @{
-    ViewBag.Titulo = "Ingreso Gasto";
+    ViewBag.Titulo = "Modificar Gasto";
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
 }
 
 @Styles.Render("~/Content/gasto-estilos.css")
-
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
 
-@if (TempData["exito"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" fue creado con exito',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
-    </script>
-
-}
 
 @if (TempData["error"] as string != null)
 {
     <script>
             Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" no pudo ser creado',
+                text: 'Gasto "@TempData["nombreGasto"]" no pudo ser modificado',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
     </script>
 
 }
-@{
-    string nombreConsorcio = ViewData["consorcioNombre"].ToString();
-}
 
 <div class="container mb-5">
     <div class="pb-5">
         <h1 class="mb-5">Agregar un gasto</h1>
-        <form class="row" action="/gasto/agregarGasto" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="consorcioid" value="@ViewData["consorcioId"]" />
-
+        <form class="row" action="/gasto/ModificarGasto" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(Model => Model.IdGasto)
+            <input type="hidden" name="consorcioid" value="@Model.IdConsorcio" />
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col">
@@ -52,7 +37,7 @@
                     <div class="col col-lg-2">
                     </div>
                     <div class="col-md-auto">
-                        *@Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled", @Value = nombreConsorcio } })
+                        *@Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled" } })
                     </div>
                 </div>
                 <div class="mb-2">
@@ -65,7 +50,7 @@
                     <div class="col col-lg-2">
                     </div>
                     <div class="col-md-auto">
-                        *@Html.DropDownListFor(Model => Model.TipoGasto.IdTipoGasto, new SelectList((System.Collections.IEnumerable)ViewData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
+                        *@Html.DropDownListFor(Model => Model.TipoGasto.IdTipoGasto, new SelectList((System.Collections.IEnumerable)TempData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
                     </div>
                 </div>
                 <div class="mb-2">
@@ -80,12 +65,16 @@
 
                     </div>
                     <div class="col-md-auto">
-                        *@Html.EditorFor(Model => Model.Nombre)
+                        @{
+                            string nombre = @Model.Nombre;
+                        }
+                        *@Html.EditorFor(Model => Model.Nombre, new { htmlAttributes = new { @Value = nombre } })
                     </div>
                 </div>
                 <div class="mb-2">
                     @Html.ValidationMessageFor(Model => Model.Nombre)
                 </div>
+
                 <div class="row">
                     <div class="col">
                         @Html.LabelFor(Model => Model.Descripcion)
@@ -96,6 +85,7 @@
                         @Html.EditorFor(Model => Model.Descripcion)
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col">
                         @Html.LabelFor(Model => Model.FechaGasto, "Fecha")
@@ -109,8 +99,8 @@
                 <div class="mb-2">
                     @Html.ValidationMessageFor(Model => Model.FechaGasto)
                 </div>
-                <div class="row">
 
+                <div class="row">
                     <div class="col">
                         @Html.Label("Expensa(*):")
                     </div>
@@ -136,11 +126,26 @@
                     <div class="col col-lg-2">
                     </div>
                     <div class="col-md-auto">
-                        *@Html.EditorFor(model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file" } })
+                        *<input type="file" name="archivo" value="@Model.ArchivoComprobante" />
                     </div>
                 </div>
                 <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.ArchivoComprobante)
+                    @{
+                        if (Model.ArchivoComprobante == null)
+                        {
+                            @Html.ValidationMessageFor(Model => Model.ArchivoComprobante)
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(Model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file", @Value = Model.ArchivoComprobante } })
+                        }
+                    }
+                    <br />
+                    @{
+                        string filename = Model.ArchivoComprobante.Replace("/Gastos/", "");
+                    }
+                    @Html.ActionLink("Descargar Comprobante", "Download", new { file = filename })
+
                 </div>
                 <div class="row">
                     <div class="col">
@@ -149,7 +154,7 @@
                     <div class="col col-lg-2">
                     </div>
                     <div class="col-md-auto">
-                        *@Html.EditorFor(Model => Model.Monto)
+                        *<input type="text" name="Monto" value="@Model.Monto" />
                     </div>
                 </div>
                 <div class="mb-2">
@@ -161,13 +166,12 @@
             </div>
 
             <div class="col-md-auto">
-                <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
-                <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/gasto/agregarGasto/1">Guardar y Crear otro Gasto</button>
-                <a href="/gasto/verGastos" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
+                <a href="/gasto/eliminarGasto/@Model.IdGasto" class="btn btn-block btn-sm btn-danger botones-modificar">Eliminar</a>
+                <button class="btn btn-block btn-sm btn-primary botones-modificar" type="submit">Modificar</button>
+                <a href="/gasto/verGastos/@Model.IdConsorcio" class="btn btn-block btn-sm btn-secondary botones-modificar">Cancelar</a>
             </div>
 
         </form>
     </div>
 </div>
-
 
