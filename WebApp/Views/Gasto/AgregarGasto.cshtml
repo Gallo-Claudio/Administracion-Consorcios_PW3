@@ -1,0 +1,173 @@
+﻿@using System.Web.Optimization
+@using DataAccessLayer
+@model DataAccessLayer.Modelos.Gasto
+@{
+    ViewBag.Titulo = "Ingreso Gasto";
+    Layout = "~/Views/Shared/LogueadoLayout.cshtml";
+}
+
+@Styles.Render("~/Content/gasto-estilos.css")
+
+@Scripts.Render("~/bundles/dataTables")
+@Scripts.Render("~/bundles/sweetAlert")
+
+@if (TempData["exito"] as string != null)
+{
+    <script>
+            Swal.fire({
+                text: 'Gasto "@TempData["nombreGasto"]" fue creado con exito',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            })
+    </script>
+
+}
+
+@if (TempData["error"] as string != null)
+{
+    <script>
+            Swal.fire({
+                text: 'Gasto "@TempData["nombreGasto"]" no pudo ser creado',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+    </script>
+
+}
+@{
+    string nombreConsorcio = ViewData["consorcioNombre"].ToString();
+}
+
+<div class="container mb-5">
+    <div class="pb-5">
+        <h1 class="mb-5">Agregar un gasto</h1>
+        <form class="row" action="/gasto/agregarGasto" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="consorcioid" value="@ViewData["consorcioId"]" />
+
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.Consorcio)
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled", @Value = nombreConsorcio } })
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.Consorcio.IdConsorcio)
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.TipoGasto.IdTipoGasto, "Tipo de Gasto")
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.DropDownListFor(Model => Model.TipoGasto.IdTipoGasto, new SelectList((System.Collections.IEnumerable)ViewData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.TipoGasto.IdTipoGasto)
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.Nombre)
+                    </div>
+                    <div class="col col-lg-2">
+
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.EditorFor(Model => Model.Nombre)
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.Nombre)
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.Descripcion)
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        @Html.EditorFor(Model => Model.Descripcion)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.FechaGasto, "Fecha")
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.EditorFor(Model => Model.FechaGasto, new { htmlAttributes = new { @type = "date" } })
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.FechaGasto)
+                </div>
+                <div class="row">
+
+                    <div class="col">
+                        @Html.Label("Expensa(*):")
+                    </div>
+                    <div class="col-xs-3 mr-5">
+                        @Html.LabelFor(Model => Model.AnioExpensa, "Año", new { @class = "label-expensa" })
+                        @Html.EditorFor(Model => Model.AnioExpensa, new { htmlAttributes = new { @class = "input-expensa" } })
+                    </div>
+                    <div class="col-xs-3">
+                        @Html.LabelFor(Model => Model.MesExpensa, "Mes", new { @class = "label-expensa" })
+                        @Html.EditorFor(Model => Model.MesExpensa, new { htmlAttributes = new { @class = "input-expensa" } })
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.AnioExpensa)
+                    <br />
+                    @Html.ValidationMessageFor(Model => Model.MesExpensa)
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        @Html.Label("Comprobante(*):")
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.EditorFor(model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file" } })
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.ArchivoComprobante)
+                </div>
+                <div class="row">
+                    <div class="col">
+                        @Html.LabelFor(Model => Model.Monto)
+                    </div>
+                    <div class="col col-lg-2">
+                    </div>
+                    <div class="col-md-auto">
+                        *@Html.EditorFor(Model => Model.Monto)
+                    </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.Monto)
+                </div>
+            </div>
+
+            <div class="col-2">
+            </div>
+
+            <div class="col-md-auto">
+                <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/gasto/agregarGasto/1">Guardar y Crear otro Gasto</button>
+                <a href="/gasto/verGastos" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

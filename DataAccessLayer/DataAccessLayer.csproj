@@ -87,13 +87,16 @@
     <Compile Include="Modelos\Usuario.cs">
       <DependentUpon>ConsorciosDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositorio\TipoGastoRepositorio.cs" />
     <Compile Include="Repositorio\ConsorcioRepositorio.cs" />
     <Compile Include="Repositorio\GastoRepositorio.cs" />
     <Compile Include="Repositorio\ProvinciaRepositorio.cs" />
     <Compile Include="Repositorio\UnidadRepositorio.cs" />
     <Compile Include="Repositorio\UsuarioRepositorio.cs" />
+    <Compile Include="Validaciones\Gasto.cs" />
     <Compile Include="Validaciones\Consorcio.cs" />
     <Compile Include="Validaciones\ConsorcioMetadata.cs" />
+    <Compile Include="Validaciones\GastoMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Modelos\ConsorciosDB.edmx">

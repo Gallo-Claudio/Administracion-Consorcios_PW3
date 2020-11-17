@@ -29,6 +29,13 @@ namespace DataAccessLayer.Repositorio
                                select usuariobd).FirstOrDefault();
             return usuario;
         }
+        public Usuario BuscaPorId(int id)
+        {
+            Usuario usuario = (from usuariobd in ctxUsuario.Usuario
+                               where usuariobd.IdUsuario == id
+                               select usuariobd).FirstOrDefault();
+            return usuario;
+        }
 
         public void UltimoLogin(Usuario usuarioActualiza)
         {
