@@ -19,7 +19,7 @@ namespace Servicios
             return repoTipoGasto.ObtenerTodos();
         }
 
-        public TipoGasto BuscarUnidad(int id)
+        public TipoGasto BuscarTipoGasto(int id)
         {
             TipoGasto tipoGasto = repoTipoGasto.ObtenerPorId(id);
             return tipoGasto;

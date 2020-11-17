@@ -11,12 +11,15 @@ namespace Servicios
     public class GastoServicio
     {
         GastoRepositorio repoGasto;
+        ConsorcioRepositorio repoConsorcio;
+        TipoGastoRepositorio repoTipoGasto;
 
         public GastoServicio(ContextoEntities contexto)
         {
             ContextoEntities ctx = contexto;
-
             repoGasto = new GastoRepositorio(ctx);
+            repoConsorcio = new ConsorcioRepositorio(ctx);
+            repoTipoGasto = new TipoGastoRepositorio(ctx);
         }
 
         public List<Gasto> ListarGastos(int id)
@@ -26,8 +29,11 @@ namespace Servicios
 
         public void AgregarGasto(Gasto nuevoGasto, object Session)
         {
-            //TODO Fijarse que onda el consorcio
+            nuevoGasto.IdConsorcio = repoConsorcio.ObtenerPorId(nuevoGasto.Consorcio.IdConsorcio).IdConsorcio;
+            nuevoGasto.IdTipoGasto = repoTipoGasto.ObtenerPorId(nuevoGasto.TipoGasto.IdTipoGasto).IdTipoGasto;
             nuevoGasto.IdUsuarioCreador = (int)Session;
+            nuevoGasto.FechaCreacion = DateTime.Now;
+            nuevoGasto.ArchivoComprobante = "/Gastos/" + nuevoGasto.ArchivoComprobante;
             repoGasto.Alta(nuevoGasto);
         }
         public Gasto BuscarGasto(int id)

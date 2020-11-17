@@ -136,6 +136,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DTables\datatables.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\agregar-Gasto.css" />
     <Content Include="Global.asax" />
     <Content Include="Img\borrar.png" />
     <Content Include="Img\editar.png" />
@@ -298,8 +299,9 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Gasto\ListarGasto.cshtml" />
+    <Content Include="Views\Gasto\VerGastos.cshtml" />
     <Content Include="Views\Gasto\AgregarGasto.cshtml" />
+    <Content Include="Views\Gasto\EliminarGasto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
