@@ -44,6 +44,7 @@
             </thead>
             @foreach (DataAccessLayer.Modelos.Gasto gasto in Model)
             {
+                string filename = gasto.ArchivoComprobante.Replace("/Gastos/","");
                 <tr>
                     <td>@gasto.AnioExpensa</td>
                     <td>@gasto.MesExpensa</td>
@@ -51,7 +52,7 @@
                     <td>@gasto.TipoGasto.Nombre</td>
                     <td>@gasto.FechaGasto</td>
                     <td>@gasto.Monto</td>
-                    <td class="text-center"><a href="">Descargar Comprobante</a></td>
+                    <td class="text-center">@Html.ActionLink("Descargar", "Download", new { file = filename })</td>
                     <td class="text-center"><a href="/gasto/modificarGasto/@gasto.IdGasto"><img src="~/Img/editar.png" /></a></td>
                     <td class="text-center"><a href="/gasto/eliminarGasto/@gasto.IdGasto"><img src="~/Img/borrar.png" /></a></td>
                 </tr>

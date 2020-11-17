@@ -71,6 +71,8 @@ namespace WebApp.Controllers
             nuevoGasto.Consorcio = consorcioResultado;
             nuevoGasto.TipoGasto = tipoGastoResultado;
             TempData["nombreGasto"] = nuevoGasto.Nombre;
+            var fileName = Path.GetFileName(ArchivoComprobante.FileName);
+            nuevoGasto.ArchivoComprobante = fileName;
             if (ModelState.IsValid)
             {
                 try
@@ -79,7 +81,6 @@ namespace WebApp.Controllers
                     TempData["exito"] = "Se guardo el registro";
                     if (ArchivoComprobante.ContentLength > 0)
                     {
-                        var fileName = Path.GetFileName(ArchivoComprobante.FileName);
                         var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
                         ArchivoComprobante.SaveAs(path);
                     }
@@ -171,5 +172,11 @@ namespace WebApp.Controllers
         }
 
 
+        public FileResult Download()
+        {
+            string filename = Request["file"];
+            var FileVirtualPath = "~/Gastos/" + filename;
+            return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
+        }
     }
 }
