@@ -63,33 +63,42 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante)
+        public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante,int? id)
         {
             var consorcioId = Request["consorcioId"];
             Consorcio consorcioResultado = consorcio.BuscarConsorcio(Int32.Parse(consorcioId));
             TipoGasto tipoGastoResultado = tipoGasto.BuscarTipoGasto(nuevoGasto.TipoGasto.IdTipoGasto);
+            var fileName = Path.GetFileName(ArchivoComprobante.FileName);
             nuevoGasto.Consorcio = consorcioResultado;
             nuevoGasto.TipoGasto = tipoGastoResultado;
-            TempData["nombreGasto"] = nuevoGasto.Nombre;
-            var fileName = Path.GetFileName(ArchivoComprobante.FileName);
             nuevoGasto.ArchivoComprobante = fileName;
             if (ModelState.IsValid)
             {
+                TempData["nombreGasto"] = nuevoGasto.Nombre;
                 try
                 {
-                    gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);
-                    TempData["exito"] = "Se guardo el registro";
+                    gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);        
                     if (ArchivoComprobante.ContentLength > 0)
                     {
                         var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
                         ArchivoComprobante.SaveAs(path);
                     }
-                    return RedirectToAction("verGastos/"+ consorcioId);
+                    
+                    TempData["exito"] = "Se guardo el registro";
+                    if (id == 1 )
+                    {
+                        return RedirectToAction("AgregarGasto/" + consorcioId);
+                    }
+                    else
+                    {
+                        return RedirectToAction("verGastos/" + consorcioId);
+                    }
+                    
                 }
                 catch
                 {
                     TempData["error"] = "No se pudo guardar el registro";
-                    return RedirectToAction("agregargasto/" + consorcioId);
+                    return RedirectToAction("AgregarGasto/" + consorcioId);
                 }
 
             }
@@ -167,10 +176,8 @@ namespace WebApp.Controllers
         {
             Gasto gastoResultado = gasto.BuscarGasto(id);
             gasto.EliminarGasto(id);
-            //TODO eliminar archivo
             return RedirectToAction("VerGastos/" + gastoResultado.IdConsorcio);
         }
-
 
         public FileResult Download()
         {
