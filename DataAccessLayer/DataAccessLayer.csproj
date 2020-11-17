@@ -71,6 +71,9 @@
     <Compile Include="Modelos\Gasto.cs">
       <DependentUpon>ConsorciosDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\sp_Expensas_Result.cs">
+      <DependentUpon>ConsorciosDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modelos\Provincia.cs">
       <DependentUpon>ConsorciosDB.tt</DependentUpon>

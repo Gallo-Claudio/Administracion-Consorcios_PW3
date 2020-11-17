@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ContextoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ContextoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Consorcio">
           <Key>
             <PropertyRef Name="IdConsorcio" />
@@ -159,6 +159,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_Expensas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idConsorcio" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ContextoModelStoreContainer">
           <EntitySet Name="Consorcio" EntityType="Self.Consorcio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gasto" EntityType="Self.Gasto" Schema="dbo" store:Type="Tables" />
@@ -195,8 +198,7 @@
             <End Role="Unidad" EntitySet="Unidad" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ContextoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -403,7 +405,15 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Unidad" EntitySet="Unidad" />
           </AssociationSet>
+          <FunctionImport Name="sp_Expensas" ReturnType="Collection(ContextoModel.sp_Expensas_Result)">
+            <Parameter Name="idConsorcio" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_Expensas_Result">
+          <Property Type="Int32" Name="Año" Nullable="false" />
+          <Property Type="Int32" Name="Mes" Nullable="false" />
+          <Property Type="Decimal" Name="Gasto_Total" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -486,6 +496,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Expensas" FunctionName="ContextoModel.Store.sp_Expensas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ContextoModel.sp_Expensas_Result">
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Gasto_Total" ColumnName="Gasto_Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

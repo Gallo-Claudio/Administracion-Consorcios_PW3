@@ -258,6 +258,7 @@
     <Compile Include="Controllers\ConsorcioController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GastoController.cs" />
+    <Compile Include="Controllers\ExpensaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -297,12 +298,6 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Gasto\VerGastos.cshtml" />
-    <Content Include="Views\Gasto\AgregarGasto.cshtml" />
-    <Content Include="Views\Gasto\EliminarGasto.cshtml" />
-    <Content Include="Views\Gasto\ModificarGasto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -317,6 +312,10 @@
     <Folder Include="Views\Unidad\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApiWebRest\ApiWebRest.csproj">
+      <Project>{5a85aa66-85b0-4d6c-96fe-f114bc0f232c}</Project>
+      <Name>ApiWebRest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{3d998d85-cac4-4018-ae0b-8c2f928a1313}</Project>
       <Name>DataAccessLayer</Name>
