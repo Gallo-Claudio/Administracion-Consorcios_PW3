@@ -1,11 +1,12 @@
 ﻿@using System.Globalization;
 @using System.Web.Optimization
-@using DataAccessLayer
-@model List<DataAccessLayer.Modelos.sp_Expensas_Result>
+@using DataAccessLayer.Modelos
+@model List<sp_Expensas_Result>
 @{
     ViewBag.Titulo = "Listado de Expensas";
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
     int unidades = (int)ViewData["CantidadUnidades"];
+    Consorcio consorcio = (Consorcio)ViewData["Consorcio"];
 }
 
 @Scripts.Render("~/bundles/dataTables")
@@ -15,39 +16,54 @@
 <div class="container mb-5">
     <div class="pb-5">
 
-        <h1 class="mb-5">Consorcio "@ViewData["nombreConsorcio"]" - Expensas</h1>
+        <h1 class="mb-5">Consorcio "@consorcio.Nombre" - Expensas</h1>
 
-        <div class="card border-success mb-5">
-            <div class="card-header">Consorcio @ViewData["nombreConsorcio"]</div>
-            <div class="card-body text-success">
-                <h4 class="card-title">
-                    Gasto total mes actual <b>@DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("es-ES"))</b> (hasta el momento): $@Model[0].Gasto_Total
-                </h4>
-                <p>Unidades: @unidades</p>
-                <p>Monto x Unidad: $@(Math.Round(((decimal)Model[0].Gasto_Total/unidades), 2))</p>
+        @if (unidades == 0)
+        {
+            <div class="card border-danger mb-5">
+                <div class="card-header">Consorcio @consorcio.Nombre</div>
+                <div class="card-body text-danger">
+                    <h4 class="card-title">
+                        Este consorcio no tiene ingresada aun ninguna unidad funcional
+                    </h4>
+                    <a href="/unidad/AgregarUnidad/@consorcio.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ingresar Unidad</a>
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="card border-success mb-5">
+                <div class="card-header">Consorcio @consorcio.Nombre</div>
+                <div class="card-body text-success">
+                    <h4 class="card-title">
+                        Gasto total mes actual <b>@DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("es-ES"))</b> (hasta el momento): $@Model[0].Gasto_Total
+                    </h4>
+                    <p>Unidades: @unidades</p>
+                    <p>Monto x Unidad: $@(Math.Round(((decimal)Model[0].Gasto_Total/unidades), 2))</p>
+                </div>
+            </div>
 
-        <table class="table table-striped table-hover" id="ListadoGeneral">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Año</th>
-                    <th>Mes</th>
-                    <th>Gasto Total ($)</th>
-                    <th>Expensas por Unidad ($)</th>
-                </tr>
-            </thead>
+            <table class="table table-striped table-hover" id="ListadoGeneral">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Año</th>
+                        <th>Mes</th>
+                        <th>Gasto Total ($)</th>
+                        <th>Expensas por Unidad ($)</th>
+                    </tr>
+                </thead>
 
-            @for (int i = 1; i < Model.Count; i++)
-            {
-                <tr>
-                    <td>@Model[i].Año</td>
-                    <td>@Model[i].Mes</td>
-                    <td>$@Model[i].Gasto_Total</td>
-                    <td>$@(Math.Round(((decimal)Model[i].Gasto_Total/unidades), 2))</td>
-                </tr>
-            }
+                @for (int i = 1; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Model[i].Año</td>
+                        <td>@Model[i].Mes</td>
+                        <td>$@Model[i].Gasto_Total</td>
+                        <td>$@(Math.Round(((decimal)Model[i].Gasto_Total/unidades), 2))</td>
+                    </tr>
+                }
 
-        </table>
+            </table>
+        }
     </div>
 </div>
