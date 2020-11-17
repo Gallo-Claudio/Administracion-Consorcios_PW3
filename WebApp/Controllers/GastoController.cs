@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Modelos;
 using MvcSiteMapProvider;
@@ -18,13 +20,13 @@ namespace WebApp.Controllers
         public GastoController()
         {
             ContextoEntities contexto = new ContextoEntities();
-            consorcio = new ConsorcioServicio(contexto);
             gasto = new GastoServicio(contexto);
+            consorcio = new ConsorcioServicio(contexto);
             tipoGasto = new TipoGastoServicio(contexto);
         }
 
         // GET: Gasto
-        public ActionResult ListarGasto(int id)
+        public ActionResult VerGastos(int id)
         {
             if (Session["IdUsuario"] != null)
             {
@@ -35,7 +37,7 @@ namespace WebApp.Controllers
             else
             {
                 TempData["Controlador"] = "Gasto";
-                TempData["Accion"] = "ListarGastos/" + id;
+                TempData["Accion"] = "VerGastos/" + id;
                 return RedirectToAction("Ingresar", "Home");
             }
         }
@@ -47,6 +49,8 @@ namespace WebApp.Controllers
                 Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
                 List<TipoGasto> listaTipoGasto = tipoGasto.ListarTipoGastos();
                 ViewData["consorcio"] = consorcioResultado;
+                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
+                ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
                 ViewData["listadoTipoGasto"] = listaTipoGasto;
                 return View();
             }
@@ -59,20 +63,32 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AgregarGasto(Gasto nuevoGasto)
+        public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante)
         {
+            var consorcioId = Request["consorcioId"];
+            Consorcio consorcioResultado = consorcio.BuscarConsorcio(Int32.Parse(consorcioId));
+            TipoGasto tipoGastoResultado = tipoGasto.BuscarTipoGasto(nuevoGasto.TipoGasto.IdTipoGasto);
+            nuevoGasto.Consorcio = consorcioResultado;
+            nuevoGasto.TipoGasto = tipoGastoResultado;
+            TempData["nombreGasto"] = nuevoGasto.Nombre;
             if (ModelState.IsValid)
             {
                 try
                 {
                     gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);
                     TempData["exito"] = "Se guardo el registro";
-                    return RedirectToAction("ListarGasto");
+                    if (ArchivoComprobante.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(ArchivoComprobante.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
+                        ArchivoComprobante.SaveAs(path);
+                    }
+                    return RedirectToAction("verGastos/"+ consorcioId);
                 }
                 catch
                 {
                     TempData["error"] = "No se pudo guardar el registro";
-                    return RedirectToAction("AgregarGasto");
+                    return RedirectToAction("agregargasto/" + consorcioId);
                 }
 
             }
@@ -122,5 +138,38 @@ namespace WebApp.Controllers
 
             return RedirectToAction("ListarGasto");
         }
+
+        public ActionResult EliminarGasto(int id)
+        {
+            if (Session["IdUsuario"] != null)
+            {
+                Gasto busqueadaGastoId = gasto.BuscarGasto(id);
+
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.Title = "Gasto \"" + busqueadaGastoId.Nombre + "\"";
+                }
+
+                return View(busqueadaGastoId);
+            }
+            else
+            {
+                TempData["Controlador"] = "Gasto";
+                TempData["Accion"] = "EliminarGasto/" + id;
+                return RedirectToAction("Ingresar", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DarDeBajaGasto(int id)
+        {
+            Gasto gastoResultado = gasto.BuscarGasto(id);
+            gasto.EliminarGasto(id);
+            //TODO eliminar archivo
+            return RedirectToAction("VerGastos/" + gastoResultado.IdConsorcio);
+        }
+
+
     }
 }

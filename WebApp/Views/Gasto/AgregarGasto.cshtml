@@ -30,7 +30,7 @@
 <div class="container mb-5">
     <div class="pb-5">
         <h1 class="mb-5">Agregar un gasto</h1>
-        <form class="row" action="/gasto/agregarGasto" method="post">
+        <form class="row" action="/gasto/agregarGasto" method="post" enctype="multipart/form-data">
             <input type="hidden" name="consorcioid" value="@ViewData["consorcioId"]" />
 
             <div class="col-sm-6">
@@ -127,6 +127,9 @@
                     <div class="col-md-auto">
                         *@Html.EditorFor(model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file" } })
                     </div>
+                </div>
+                <div class="mb-2">
+                    @Html.ValidationMessageFor(Model => Model.ArchivoComprobante)
                 </div>
                 <div class="row">
                     <div class="col">
