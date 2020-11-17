@@ -26,11 +26,11 @@ namespace WebApp.Controllers
         // GET: E
         public ActionResult ListarExpensa(int id)
         {
-            string nombreConsorcio = consorcio.BuscarConsorcio(id).Nombre;
+            Consorcio Consorcio = consorcio.BuscarConsorcio(id);
             var node = SiteMaps.Current.CurrentNode;
             if (node != null && node.ParentNode != null)
             {
-                node.ParentNode.Title = "Consorcio \"" + nombreConsorcio + "\"";
+                node.ParentNode.Title = "Consorcio \"" + Consorcio.Nombre + "\"";
             }
 
             List<sp_Expensas_Result> expensas = expensa.GetExpensas(id);
@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             List<sp_Expensas_Result> expensaListado = expensa.DeterminaMesActual(expensas);
 
             ViewData["CantidadUnidades"] = unidad.ListarUnidades(id).Count;
-            ViewData["nombreConsorcio"] = nombreConsorcio;
+            ViewData["Consorcio"] = Consorcio;
             return View(expensas);
         }
     }

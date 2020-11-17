@@ -46,15 +46,11 @@ namespace Servicios
         /// </summary>
         /// <param name="expensas"></param>
         /// <returns>
-        /// Chequea si hay un registro con el año y mes actual. Si no hay lo agrega
+        /// Chequea si hay un registro con el año y mes actual. Si no hay lo agrega.
         /// </returns>
         public List<sp_Expensas_Result> DeterminaMesActual(List<sp_Expensas_Result> expensas)
         {
-            if (DateTime.Now.Year == expensas[0].Año && DateTime.Now.Month == expensas[0].Mes)
-            {
-                return expensas;
-            }
-            else
+            if (expensas.Count == 0)
             {
                 sp_Expensas_Result mesActual = new sp_Expensas_Result();
                 mesActual.Gasto_Total = 0;
@@ -62,6 +58,22 @@ namespace Servicios
                 expensas.Insert(0, mesActual);
 
                 return expensas;
+            }
+            else
+            {
+                if (DateTime.Now.Year == expensas[0].Año && DateTime.Now.Month == expensas[0].Mes)
+                {
+                    return expensas;
+                }
+                else
+                {
+                    sp_Expensas_Result mesActual = new sp_Expensas_Result();
+                    mesActual.Gasto_Total = 0;
+
+                    expensas.Insert(0, mesActual);
+
+                    return expensas;
+                }
             }
         }
     }
