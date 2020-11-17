@@ -1,0 +1,9 @@
+﻿.label-expensa{
+    width: auto;
+}
+.input-expensa{
+    width:50px;
+}
+.field-validation-error {
+    color: red;
+}
