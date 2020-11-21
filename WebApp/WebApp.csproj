@@ -298,6 +298,11 @@
     <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Gasto\AgregarGasto.cshtml" />
+    <Content Include="Views\Gasto\EliminarGasto.cshtml" />
+    <Content Include="Views\Gasto\ModificarGasto.cshtml" />
+    <Content Include="Views\Gasto\VerGastos.cshtml" />
+    <Content Include="Views\Expensa\ListarExpensa.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
