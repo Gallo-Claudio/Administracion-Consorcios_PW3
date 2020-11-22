@@ -6,7 +6,6 @@ Entity Framework**
 
 Trabajo Práctico para Programación Web 3 - 2020 2º Cuatrimestre
 ## Integrantes del Grupo:
-  - Fortunato Juan Pablo - @juampifortu
   - Vazquez Claudio - @Gallo-Claudio
   - Zota Alejo - @AlejoZ
 
@@ -14,5 +13,7 @@ Trabajo Práctico para Programación Web 3 - 2020 2º Cuatrimestre
 Scripts utilizados y librerias
 
 > **Para la paginación:** Se implementa el script **"[https://datatables.net/](https://datatables.net/)"**
+
 > **Para la notificación:** Se implementa el script **"[https://sweetalert2.github.io/](https://datatables.net/)"**
+
 > **Para el breadcrumbs:** Se implementa la librería **"[https://github.com/maartenba/MvcSiteMapProvider)"**
