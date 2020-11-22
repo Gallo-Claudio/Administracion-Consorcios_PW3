@@ -14,7 +14,7 @@ namespace Entidades_VM
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "El formato del Email no es correcto")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un password")]
