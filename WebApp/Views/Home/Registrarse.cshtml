@@ -6,9 +6,9 @@
 }
 
 
-<div class="container text-center">
-    @ViewBag.error
-    <form class="inicio" action="/home/registrarse" method="post">
+<div class="container text-center registro">
+    <p class="text-danger">@ViewBag.error</p>
+    <form class="registro_usuario" action="/home/registrarse" method="post">
         <div class="recuadro">
             @Html.TextBoxFor(n => n.Nombre, new { placeholder = "Nombre" })<br /> @Html.ValidationMessageFor(Model => Model.Nombre)<br />
             @Html.TextBoxFor(m => m.Email, new { placeholder = "Email" })<br /> @Html.ValidationMessageFor(Model => Model.Email)<br />

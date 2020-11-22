@@ -57,7 +57,7 @@ namespace Servicios
 
         public void EliminarGasto(int id)
         {
-            repoGasto.EliminarGasto(id);
+            repoGasto.Eliminar(id);
         }
     }
 }

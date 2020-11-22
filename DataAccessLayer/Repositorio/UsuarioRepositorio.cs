@@ -7,40 +7,31 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositorio
 {
-    public class UsuarioRepositorio
+    public class UsuarioRepositorio : BaseRepositorio<Usuario>
     {
-        ContextoEntities ctxUsuario;
-
-        public UsuarioRepositorio(ContextoEntities contexto)
+        public UsuarioRepositorio(ContextoEntities contexto) : base(contexto)
         {
-            ctxUsuario = contexto;
-        }
-
-        public void Alta(Usuario nuevoUsuario)
-        {
-            ctxUsuario.Usuario.Add(nuevoUsuario);
-            ctxUsuario.SaveChanges();
         }
 
         public Usuario BuscaPorMail(string Email)
         {
-            Usuario usuario = (from usuariobd in ctxUsuario.Usuario
+            Usuario usuario = (from usuariobd in dbSet
                                where usuariobd.Email == Email
                                select usuariobd).FirstOrDefault();
             return usuario;
         }
-        public Usuario BuscaPorId(int id)
-        {
-            Usuario usuario = (from usuariobd in ctxUsuario.Usuario
-                               where usuariobd.IdUsuario == id
-                               select usuariobd).FirstOrDefault();
-            return usuario;
-        }
+        //public Usuario BuscaPorId(int id) // <- BaseRepository
+        //{
+        //    Usuario usuario = (from usuariobd in dbSet
+        //                       where usuariobd.IdUsuario == id
+        //                       select usuariobd).FirstOrDefault();
+        //    return usuario;
+        //}
 
         public void UltimoLogin(Usuario usuarioActualiza)
         {
             usuarioActualiza.FechaUltLogin = DateTime.Now;
-            ctxUsuario.SaveChanges();
+            ctx.SaveChanges();
         }
     }
 }

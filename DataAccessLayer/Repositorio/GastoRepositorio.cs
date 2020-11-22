@@ -7,49 +7,34 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositorio
 {
-    public class GastoRepositorio
+    public class GastoRepositorio : BaseRepositorio<Gasto>
     {
-        ContextoEntities ctxGasto;
-
-        public GastoRepositorio(ContextoEntities contexto)
+        public GastoRepositorio(ContextoEntities contexto) : base(contexto)
         {
-            ctxGasto = contexto;
-        }
-
-        public void Alta(Gasto gasto)
-        {
-            ctxGasto.Gasto.Add(gasto);
-            ctxGasto.SaveChanges();
         }
 
         public List<Gasto> ObtenerTodos(int id)
         {
-            List<Gasto> todosLosGastos = (from gastobd in ctxGasto.Gasto
+            List<Gasto> todosLosGastos = (from gastobd in dbSet
                                           where gastobd.Consorcio.IdConsorcio == id
                                           orderby gastobd.FechaGasto descending
                                           select gastobd).ToList();
             return todosLosGastos;
         }
        
-        public Gasto ObtenerPorId(int idGasto)
-        {
-            Gasto gasto;
-            gasto = ctxGasto.Gasto.Find(idGasto);
-            return gasto;
-        } 
-       
+        // Elimina todos los gastos del consorcio pasado por id
         public void EliminarGastosConsorcio(int id)
         {
-            List<Gasto> GastosConsorcio = (from gastobd in ctxGasto.Gasto
-                                              where gastobd.IdConsorcio == id
+            List<Gasto> GastosConsorcio = (from gastobd in dbSet
+                                           where gastobd.IdConsorcio == id
                                               select gastobd).ToList();
 
             foreach (Gasto gasto in GastosConsorcio)
             {
-                ctxGasto.Gasto.Remove(gasto);
+                dbSet.Remove(gasto);
             }
 
-            ctxGasto.SaveChanges();
+            ctx.SaveChanges();
         }
 
         public void Modificar(Gasto gasto)
@@ -64,14 +49,7 @@ namespace DataAccessLayer.Repositorio
             gastoActual.ArchivoComprobante = gasto.ArchivoComprobante;
             gastoActual.Monto = gasto.Monto;
 
-            ctxGasto.SaveChanges();
-        }
-        public void EliminarGasto(int idGasto)
-        {
-            Gasto gasto = ObtenerPorId(idGasto);
-            ctxGasto.Gasto.Remove(gasto);
-            ctxGasto.SaveChanges();
-
+            ctx.SaveChanges();
         }
         
     }
