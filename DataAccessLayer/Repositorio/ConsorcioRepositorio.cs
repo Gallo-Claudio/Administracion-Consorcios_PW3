@@ -39,15 +39,6 @@ namespace DataAccessLayer.Repositorio
             return consorcio;
         }
 
-        public void Eliminar(int idConsorcio)
-        {
-            Consorcio consorcio = ObtenerPorId(idConsorcio);
-            if (consorcio != null)
-            {
-                ctxConsorcio.SaveChanges();
-            }
-        }
-
         public void Modificar(Consorcio consorcio)
         {
             Consorcio consorcioActual = ObtenerPorId(consorcio.IdConsorcio);

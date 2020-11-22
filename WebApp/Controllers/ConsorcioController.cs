@@ -141,7 +141,7 @@ namespace WebApp.Controllers
                     int id = consorcioModificado.IdConsorcio;
                     ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
 
-                    return View("ModificarConsorcio", consorcioModificado);
+                    return View(consorcioModificado);
                 }
 
             }
@@ -153,7 +153,7 @@ namespace WebApp.Controllers
                 int id = consorcioModificado.IdConsorcio;
                 ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
 
-                return View("ModificarConsorcio", consorcioModificado);
+                return View(consorcioModificado);
             }
 
             return RedirectToAction("ListarConsorcio");
