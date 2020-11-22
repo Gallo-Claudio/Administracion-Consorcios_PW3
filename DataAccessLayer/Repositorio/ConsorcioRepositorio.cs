@@ -7,36 +7,19 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositorio
 {
-    public class ConsorcioRepositorio
+    public class ConsorcioRepositorio : BaseRepositorio<Consorcio>
     {
-        ContextoEntities ctxConsorcio;
-
-        public ConsorcioRepositorio(ContextoEntities contexto)
+        public ConsorcioRepositorio(ContextoEntities contexto) : base(contexto)
         {
-            ctxConsorcio = contexto;
-        }
-
-
-        public void Alta(Consorcio consorcio)
-        {
-            ctxConsorcio.Consorcio.Add(consorcio);
-            ctxConsorcio.SaveChanges();
         }
 
         public List<Consorcio> ObtenerTodos(int id)
         {
-            List<Consorcio> todosLosConsorcios = (from consorciobd in ctxConsorcio.Consorcio
+            List<Consorcio> todosLosConsorcios = (from consorciobd in dbSet
                                                   where consorciobd.Usuario.IdUsuario == id
                                                   orderby consorciobd.Nombre
                                                   select consorciobd).ToList();
             return todosLosConsorcios;
-        }
-
-        public Consorcio ObtenerPorId(int idConsorcio)
-        {
-            Consorcio consorcio;
-            consorcio = ctxConsorcio.Consorcio.Find(idConsorcio);
-            return consorcio;
         }
 
         public void Modificar(Consorcio consorcio)
@@ -52,14 +35,8 @@ namespace DataAccessLayer.Repositorio
             consorcioActual.Unidad = consorcio.Unidad;
             consorcioActual.Provincia = consorcio.Provincia;
             //consorcioActual.FechaCreacion = new DateTime(1700, 01, 01, 22, 45, 36);  //Activar para probar la execpcion
-            ctxConsorcio.SaveChanges();
+            ctx.SaveChanges();
         }
 
-        public void EliminarConsorcio(int idConsorcio)
-        {
-            Consorcio consorcio = ctxConsorcio.Consorcio.Find(idConsorcio);
-            ctxConsorcio.Consorcio.Remove(consorcio);
-            ctxConsorcio.SaveChanges();
-        }
     }
 }

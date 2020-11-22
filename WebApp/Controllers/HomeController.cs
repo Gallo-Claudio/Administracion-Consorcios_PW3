@@ -7,7 +7,7 @@ using DataAccessLayer.Modelos;
 using Entidades_VM;
 using Servicios;
 
-namespace WebApp.Controllers //Test1234!
+namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {

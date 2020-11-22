@@ -63,7 +63,7 @@ namespace Servicios
 
         public void EliminarConsorcio(int id)
         {
-            repoConsorcio.EliminarConsorcio(id);
+            repoConsorcio.Eliminar(id);
         }
     }
 }

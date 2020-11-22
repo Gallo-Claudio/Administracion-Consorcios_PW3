@@ -7,27 +7,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositorio
 {
-    public class TipoGastoRepositorio
+    public class TipoGastoRepositorio : BaseRepositorio<TipoGasto>
     {
-        ContextoEntities ctxTipoGasto;
 
-        public TipoGastoRepositorio(ContextoEntities contexto)
+        public TipoGastoRepositorio(ContextoEntities contexto) : base(contexto)
         {
-            ctxTipoGasto = contexto;
         }
 
-        public List<TipoGasto> ObtenerTodos()
-        {
-            List<TipoGasto> todosLosTiposGastos = (from tipogastobd in ctxTipoGasto.TipoGasto
-                                                   select tipogastobd).ToList();
-            return todosLosTiposGastos;
-        }
-
-        public TipoGasto ObtenerPorId(int id)
-        {
-            TipoGasto tipoGasto;
-            tipoGasto = ctxTipoGasto.TipoGasto.Find(id);
-            return tipoGasto;
-        }
     }
 }

@@ -35,7 +35,7 @@ namespace Servicios
 
         public Unidad BuscarUnidad(int id)
         {
-            Unidad unidad = repoUnidad.BuscarPorId(id);
+            Unidad unidad = repoUnidad.ObtenerPorId(id);
 
             return unidad;
         }

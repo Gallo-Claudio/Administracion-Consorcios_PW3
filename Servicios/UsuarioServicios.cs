@@ -76,9 +76,9 @@ namespace Servicios
             repoUsuario.UltimoLogin(usuarioActualizar);
         }
 
-        public Usuario BuscarPorId(int idUsuarioCreador)
-        {
-            return repoUsuario.BuscaPorId(idUsuarioCreador);
-        }
+        //public Usuario BuscarPorId(int idUsuarioCreador)
+        //{
+        //    return repoUsuario.BuscaPorId(idUsuarioCreador);
+        //}
     }
 }

@@ -7,26 +7,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositorio
 {
-    public class ProvinciaRepositorio
+    public class ProvinciaRepositorio : BaseRepositorio<Provincia>
     {
-        ContextoEntities provincia;
-
-        public ProvinciaRepositorio (ContextoEntities contexto)
+        public ProvinciaRepositorio (ContextoEntities contexto) : base(contexto)
         {
-            provincia = contexto;
         }
 
-        public List<Provincia> ObtenerTodos()
-        {
-            List<Provincia> todasLasProvincias = provincia.Provincia.ToList();
-            return todasLasProvincias;
-        }
-
-        public Provincia ObtenerPorId(int idProvincia)
-        {
-            Provincia provincia;
-            provincia = this.provincia.Provincia.Find(idProvincia);
-            return provincia;
-        }
     }
 }
