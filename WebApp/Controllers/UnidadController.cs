@@ -25,7 +25,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.BuscarConsorcio(id);
+                Consorcio busquedaConsorcio = consorcio.Buscar(id);
                 var node = SiteMaps.Current.CurrentNode;
                 if (node != null && node.ParentNode != null)
                 {
@@ -49,7 +49,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.BuscarConsorcio(id);
+                Consorcio busquedaConsorcio = consorcio.Buscar(id);
                 var node = SiteMaps.Current.CurrentNode;
                 if (node != null && node.ParentNode != null)
                 {
@@ -84,7 +84,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                ViewData["Consorcio"] = consorcio.BuscarConsorcio(nuevaUnidad.IdConsorcio);
+                ViewData["Consorcio"] = consorcio.Buscar(nuevaUnidad.IdConsorcio);
                 return View(nuevaUnidad);
             }
 
@@ -92,7 +92,7 @@ namespace WebApp.Controllers
             switch (id)
             {
                 case 1:
-                    ViewData["Consorcio"] = consorcio.BuscarConsorcio(nuevaUnidad.IdConsorcio);
+                    ViewData["Consorcio"] = consorcio.Buscar(nuevaUnidad.IdConsorcio);
                     return RedirectToAction("AgregarUnidad");
 
                 default:
@@ -105,9 +105,9 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Unidad unidadFuncional = unidad.BuscarUnidad(id);
+                Unidad unidadFuncional = unidad.Buscar(id);
 
-                Consorcio busquedaConsorcio = consorcio.BuscarConsorcio(unidadFuncional.IdConsorcio);
+                Consorcio busquedaConsorcio = consorcio.Buscar(unidadFuncional.IdConsorcio);
                 var node = SiteMaps.Current.CurrentNode;
                 if (node != null && node.ParentNode != null)
                 {
@@ -140,13 +140,13 @@ namespace WebApp.Controllers
                 {
                     TempData["error"] = "No se pudo modificar el registro";
 
-                    ViewData["Consorcio"] = consorcio.BuscarConsorcio(unidadModificado.IdConsorcio);
+                    ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
                     return View(unidadModificado);
                 }
             }
             else
             {
-                ViewData["Consorcio"] = consorcio.BuscarConsorcio(unidadModificado.IdConsorcio);
+                ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
                 return View(unidadModificado);
             }
 
@@ -158,7 +158,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Unidad unidadAEliminar = unidad.BuscarUnidad(id);
+                Unidad unidadAEliminar = unidad.Buscar(id);
 
                 var node = SiteMaps.Current.CurrentNode;
                 if (node != null && node.ParentNode != null)
@@ -166,7 +166,7 @@ namespace WebApp.Controllers
                     node.ParentNode.Title = "Consorcio \"" + unidadAEliminar.Nombre + "\"";
                 }
 
-                Consorcio consorcioBuscado = consorcio.BuscarConsorcio(unidadAEliminar.IdConsorcio);
+                Consorcio consorcioBuscado = consorcio.Buscar(unidadAEliminar.IdConsorcio);
                 ViewBag.NombreConsorcio = consorcioBuscado.Nombre;
                 return View(unidadAEliminar);
             }
@@ -181,8 +181,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult DarDeBajaUnidad(int id)
         {
-            string url = "/unidad/ListarUnidades/" + unidad.BuscarUnidad(id).IdConsorcio;
-            unidad.EliminarUnidad(id);
+            string url = "/unidad/ListarUnidades/" + unidad.Buscar(id).IdConsorcio;
+            unidad.Eliminar(id);
             return Redirect(url);
         }
     }

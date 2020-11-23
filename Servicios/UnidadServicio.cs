@@ -8,54 +8,39 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class UnidadServicio
+    public class UnidadServicio : BaseServicios<UnidadRepositorio, Unidad>
     {
-        UnidadRepositorio repoUnidad;
-
-        public UnidadServicio(ContextoEntities contexto)
+        public UnidadServicio(ContextoEntities contexto) : base(contexto)
         {
-            ContextoEntities ctx = contexto;
-
-            repoUnidad = new UnidadRepositorio(ctx);
         }
 
         public List<Unidad> ListarUnidades(int id)
         {
-            return repoUnidad.MostrarTodas(id);
+            return repo.MostrarTodas(id);
         }
 
-        public void AgregarUnidades(Unidad unidad)
+        public void AgregarUnidades(Unidad unidad, object Session)
         {
-            repoUnidad.Alta(unidad);
-        }
-        public void EliminarUnidad(int id)
-        {
-            repoUnidad.Eliminar(id);
+            unidad.FechaCreacion = DateTime.Now;
+            unidad.IdUsuarioCreador = (int)Session;
+            repo.Alta(unidad);
         }
 
-        public Unidad BuscarUnidad(int id)
-        {
-            Unidad unidad = repoUnidad.ObtenerPorId(id);
+        //public int BuscarIdDeUnidad(Unidad unidad)
+        //{
+        //    int idUnidad = unidad.IdUnidad;
 
-            return unidad;
-        }
-
-        public int BuscarIdDeUnidad(Unidad unidad)
-        {
-            int idUnidad = unidad.IdUnidad;
-
-            return idUnidad;
-        }
+        //    return idUnidad;
+        //}
 
         public void ModificarUnidad(Unidad unidad)
         {
-            repoUnidad.Modificar(unidad);
-
+            repo.Modificar(unidad);
         }
 
         public void EliminarUnidadesDeConsorcio(int id)
         {
-            repoUnidad.EliminarUnidadesConsorcio(id);
+            repo.EliminarUnidadesConsorcio(id);
         }
     }
 }
