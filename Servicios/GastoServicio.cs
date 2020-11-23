@@ -27,8 +27,8 @@ namespace Servicios
 
         public void AgregarGasto(Gasto nuevoGasto, object Session)
         {
-            nuevoGasto.IdConsorcio = repoConsorcio.ObtenerPorId(nuevoGasto.Consorcio.IdConsorcio).IdConsorcio;
-            nuevoGasto.IdTipoGasto = repoTipoGasto.ObtenerPorId(nuevoGasto.TipoGasto.IdTipoGasto).IdTipoGasto;
+            nuevoGasto.Consorcio= repoConsorcio.ObtenerPorId(nuevoGasto.IdConsorcio);
+            nuevoGasto.TipoGasto = repoTipoGasto.ObtenerPorId(nuevoGasto.TipoGasto.IdTipoGasto);
             nuevoGasto.IdUsuarioCreador = (int)Session;
             nuevoGasto.FechaCreacion = DateTime.Now;
             nuevoGasto.ArchivoComprobante = "/Gastos/" + nuevoGasto.ArchivoComprobante;
@@ -42,7 +42,7 @@ namespace Servicios
 
         public void ModificarGasto(Gasto gastoModificacion)
         {
-            gastoModificacion.TipoGasto = repoTipoGasto.ObtenerPorId(gastoModificacion.IdTipoGasto);
+            gastoModificacion.TipoGasto = repoTipoGasto.ObtenerPorId(gastoModificacion.TipoGasto.IdTipoGasto);
             repo.Modificar(gastoModificacion);
         }
 

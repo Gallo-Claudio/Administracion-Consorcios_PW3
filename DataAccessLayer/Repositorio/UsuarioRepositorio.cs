@@ -20,13 +20,6 @@ namespace DataAccessLayer.Repositorio
                                select usuariobd).FirstOrDefault();
             return usuario;
         }
-        //public Usuario BuscaPorId(int id) // <- BaseRepository
-        //{
-        //    Usuario usuario = (from usuariobd in dbSet
-        //                       where usuariobd.IdUsuario == id
-        //                       select usuariobd).FirstOrDefault();
-        //    return usuario;
-        //}
 
         public void UltimoLogin(Usuario usuarioActualiza)
         {

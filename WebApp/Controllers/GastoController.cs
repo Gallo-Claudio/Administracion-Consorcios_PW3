@@ -16,7 +16,6 @@ namespace WebApp.Controllers
         GastoServicio gasto;
         ConsorcioServicio consorcio;
         TipoGastoServicio tipoGasto;
-        UsuarioServicios usuario;
 
         public GastoController()
         {
@@ -24,7 +23,6 @@ namespace WebApp.Controllers
             gasto = new GastoServicio(contexto);
             consorcio = new ConsorcioServicio(contexto);
             tipoGasto = new TipoGastoServicio(contexto);
-            usuario = new UsuarioServicios(contexto);
         }
 
         public ActionResult VerGastos(int id)
@@ -68,12 +66,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante, int? id)
         {
-            var consorcioId = Request["consorcioId"];
-            Consorcio consorcioResultado = consorcio.Buscar(Int32.Parse(consorcioId));
-            TipoGasto tipoGastoResultado = tipoGasto.BuscarTipoGasto(nuevoGasto.TipoGasto.IdTipoGasto);
             var fileName = Path.GetFileName(ArchivoComprobante.FileName);
-            nuevoGasto.Consorcio = consorcioResultado;
-            nuevoGasto.TipoGasto = tipoGastoResultado;
             nuevoGasto.ArchivoComprobante = fileName;
             if (ModelState.IsValid)
             {
@@ -90,18 +83,18 @@ namespace WebApp.Controllers
                     TempData["exito"] = "Se guardo el registro";
                     if (id == 1)
                     {
-                        return RedirectToAction("AgregarGasto/" + consorcioId);
+                        return RedirectToAction("AgregarGasto/" + nuevoGasto.IdConsorcio);
                     }
                     else
                     {
-                        return RedirectToAction("verGastos/" + consorcioId);
+                        return RedirectToAction("verGastos/" + nuevoGasto.IdConsorcio);
                     }
 
                 }
                 catch
                 {
                     TempData["error"] = "No se pudo guardar el registro";
-                    return RedirectToAction("AgregarGasto/" + consorcioId);
+                    return RedirectToAction("AgregarGasto/" + nuevoGasto.IdConsorcio);
                 }
 
             }
@@ -115,12 +108,12 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Gasto busqueadaGastoId = gasto.Buscar(id);
-                Consorcio consorcioResultado = consorcio.Buscar(id);
+                Gasto busqueadaGasto = gasto.Buscar(id);
+                Consorcio consorcioResultado = busqueadaGasto.Consorcio;
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
                 TempData["consorcio"] = consorcioResultado;
-                return View(busqueadaGastoId);
+                return View(busqueadaGasto);
             }
             else
             {
