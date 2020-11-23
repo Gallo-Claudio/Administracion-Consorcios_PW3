@@ -23,10 +23,9 @@ namespace WebApp.Controllers
             expensa = new ExpensasServicio();
         }
 
-        // GET: E
         public ActionResult ListarExpensa(int id)
         {
-            Consorcio Consorcio = consorcio.BuscarConsorcio(id);
+            Consorcio Consorcio = consorcio.Buscar(id);
             var node = SiteMaps.Current.CurrentNode;
             if (node != null && node.ParentNode != null)
             {

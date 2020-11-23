@@ -51,9 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseServicio.cs" />
     <Compile Include="ConsorcioServicio.cs" />
     <Compile Include="ExpensasServicio.cs" />
     <Compile Include="GastoServicio.cs" />
+    <Compile Include="IServicios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinciaServicio.cs" />
     <Compile Include="TipoGastoServicio.cs" />

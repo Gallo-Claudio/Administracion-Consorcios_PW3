@@ -10,9 +10,9 @@
 			
 			<mvcSiteMapNode title="Eliminar" controller="Consorcio" action="EliminarConsorcio" preservedRouteParameters="id"/>
 
-			<mvcSiteMapNode title="Unidades" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id">
+			<mvcSiteMapNode title="Unidades" controller="Unidad" action="ListarUnidades" preservedRouteParameters="id">
 				<mvcSiteMapNode title="Editando Unidad" action="ModificarUnidad" preservedRouteParameters="id, id2"/>
-				<mvcSiteMapNode title="Nueva Unidad" action="AgregarUnidad"/>
+				<mvcSiteMapNode title="Nueva Unidad" action="AgregarUnidad" preservedRouteParameters="id"/>
 			</mvcSiteMapNode>
 
 			<mvcSiteMapNode title="Gastos" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id">

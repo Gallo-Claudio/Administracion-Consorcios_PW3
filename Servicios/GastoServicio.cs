@@ -8,25 +8,21 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class GastoServicio
+    public class GastoServicio : BaseServicios<GastoRepositorio, Gasto>
     {
-        GastoRepositorio repoGasto;
         ConsorcioRepositorio repoConsorcio;
         TipoGastoRepositorio repoTipoGasto;
-        UsuarioRepositorio repoUsuario;
 
-        public GastoServicio(ContextoEntities contexto)
+        public GastoServicio(ContextoEntities contexto) : base(contexto)
         {
             ContextoEntities ctx = contexto;
-            repoGasto = new GastoRepositorio(ctx);
             repoConsorcio = new ConsorcioRepositorio(ctx);
             repoTipoGasto = new TipoGastoRepositorio(ctx);
-            repoUsuario = new UsuarioRepositorio(ctx);
         }
 
         public List<Gasto> ListarGastos(int id)
         {
-            return repoGasto.ObtenerTodos(id);
+            return repo.ObtenerTodos(id);
         }
 
         public void AgregarGasto(Gasto nuevoGasto, object Session)
@@ -36,28 +32,19 @@ namespace Servicios
             nuevoGasto.IdUsuarioCreador = (int)Session;
             nuevoGasto.FechaCreacion = DateTime.Now;
             nuevoGasto.ArchivoComprobante = "/Gastos/" + nuevoGasto.ArchivoComprobante;
-            repoGasto.Alta(nuevoGasto);
-        }
-        public Gasto BuscarGasto(int id)
-        {
-            Gasto busquedaGasto = repoGasto.ObtenerPorId(id);
-            return busquedaGasto;
+            repo.Alta(nuevoGasto);
         }
 
         public void EliminarGastosDeConsorcio(int id)
         {
-            repoGasto.EliminarGastosConsorcio(id);
+            repo.EliminarGastosConsorcio(id);
         }
-        
+
         public void ModificarGasto(Gasto gastoModificacion)
         {
             gastoModificacion.TipoGasto = repoTipoGasto.ObtenerPorId(gastoModificacion.IdTipoGasto);
-            repoGasto.Modificar(gastoModificacion);
+            repo.Modificar(gastoModificacion);
         }
 
-        public void EliminarGasto(int id)
-        {
-            repoGasto.Eliminar(id);
-        }
     }
 }
