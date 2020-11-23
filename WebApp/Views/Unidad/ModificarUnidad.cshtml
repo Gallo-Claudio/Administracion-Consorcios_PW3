@@ -1,0 +1,87 @@
+﻿@using System.Web.Optimization
+@using DataAccessLayer.Modelos
+@model DataAccessLayer.Modelos.Unidad
+@{
+    ViewBag.Titulo = "Modificando una Unidad";
+    Layout = "~/Views/Shared/LogueadoLayout.cshtml";
+    Consorcio consorcio = (Consorcio)ViewData["Consorcio"];
+}
+
+@Scripts.Render("~/bundles/dataTables")
+@Scripts.Render("~/bundles/sweetAlert")
+
+
+
+@*El primer ingreso a la vista lo hace con el TempData vacio.*@
+@if (TempData["nombreUnidad"] as string != null)
+{
+    if (TempData["error"] as string != null)
+    {
+        <script>
+                Swal.fire({
+                    text: 'La unidad "@TempData["nombreUnidad"]" no pudo ser creada',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+        </script>
+    }
+    else
+    {
+        <script>
+                    Swal.fire({
+                        text: 'La unidad "@TempData["nombreUnidad"]" fue creada con exito',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+        </script>
+    }
+
+}
+
+
+<div class="container mb-5">
+    <div class="pb-5">
+        <h1 class="mb-5">Consorcio @consorcio.Nombre - Editando unidad @Model.Nombre</h1>
+
+        <form class="row" action="/unidad/modificarUnidad" method="post">
+
+            <div class="col-9">
+
+                <input hidden name="IdConsorcio" value="@consorcio.IdConsorcio" />
+                <input hidden name="IdUnidad" value="@Model.IdUnidad" />
+
+
+                <label>Consorcio:</label>&nbsp&nbsp&nbsp<input type="text" value="@consorcio.Nombre" disabled><br>
+
+                @Html.LabelFor(Model => Model.Nombre)*
+                @Html.EditorFor(Model => Model.Nombre)
+                @Html.ValidationMessageFor(Model => Model.Nombre)<br />
+
+                @Html.LabelFor(Model => Model.NombrePropietario)*
+                @Html.EditorFor(Model => Model.NombrePropietario)
+                @Html.ValidationMessageFor(Model => Model.NombrePropietario)<br />
+
+                @Html.LabelFor(Model => Model.ApellidoPropietario)*
+                @Html.EditorFor(Model => Model.ApellidoPropietario)
+                @Html.ValidationMessageFor(Model => Model.ApellidoPropietario)<br />
+
+                @Html.LabelFor(Model => Model.EmailPropietario)*
+                @Html.EditorFor(Model => Model.EmailPropietario)
+                @Html.ValidationMessageFor(Model => Model.EmailPropietario)<br />
+
+                @Html.LabelFor(Model => Model.Superficie)&nbsp&nbsp
+                @Html.EditorFor(Model => Model.Superficie)<br /><br />
+
+                * Son campos obligatorios
+            </div>
+
+
+            <div class="col-3">
+                <a href="/unidad/eliminarUnidad/@Model.IdUnidad" class="btn btn-block btn-sm btn-danger">Eliminar Unidad</a>
+                <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
+                <a href="/unidad/listarUnidades/@consorcio.IdConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
