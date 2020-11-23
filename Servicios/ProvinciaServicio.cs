@@ -8,25 +8,11 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class ProvinciaServicio
+    public class ProvinciaServicio : BaseServicios<ProvinciaRepositorio, Provincia>
     {
-        public ProvinciaRepositorio repositorio;
-
-        public ProvinciaServicio(ContextoEntities contexto)
+        public ProvinciaServicio(ContextoEntities contexto) : base(contexto)
         {
-            ContextoEntities ctx = contexto;
-            repositorio = new ProvinciaRepositorio(ctx);
         }
 
-        public List<Provincia> ListarProvincias()
-        {
-            return repositorio.ObtenerTodos();
-        }
-
-        public Provincia SeleccionarProvincia(int id)
-        {
-            Provincia provinciaBuscada = repositorio.ObtenerPorId(id);
-            return provinciaBuscada;
-        }
     }
 }

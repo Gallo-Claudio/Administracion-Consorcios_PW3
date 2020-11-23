@@ -29,10 +29,7 @@ namespace DataAccessLayer.Repositorio
             consorcioActual.Calle = consorcio.Calle;
             consorcioActual.Ciudad = consorcio.Ciudad;
             consorcioActual.DiaVencimientoExpensas = consorcio.DiaVencimientoExpensas;
-            consorcioActual.Gasto = consorcio.Gasto;
-            consorcioActual.IdProvincia = consorcio.IdProvincia;
             consorcioActual.Nombre = consorcio.Nombre;
-            consorcioActual.Unidad = consorcio.Unidad;
             consorcioActual.Provincia = consorcio.Provincia;
             //consorcioActual.FechaCreacion = new DateTime(1700, 01, 01, 22, 45, 36);  //Activar para probar la execpcion
             ctx.SaveChanges();

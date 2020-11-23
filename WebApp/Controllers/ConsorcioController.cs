@@ -26,7 +26,6 @@ namespace WebApp.Controllers
             gasto = new GastoServicio(contexto);
         }
 
-        // GET: Consorcio
         public ActionResult ListarConsorcio()
         {
             if (Session["IdUsuario"] != null)
@@ -46,7 +45,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                List<Provincia> listadoProvincias = provincia.Listar();
                 ViewData["listadoProvincias"] = listadoProvincias;
                 return View();
             }
@@ -75,7 +74,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                List<Provincia> listadoProvincias = provincia.Listar();
                 ViewData["listadoProvincias"] = listadoProvincias;
                 return View(nuevoConsorcio);
             }
@@ -103,10 +102,10 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcioId = consorcio.BuscarConsorcio(id);
+                Consorcio busquedaConsorcioId = consorcio.Buscar(id);
                 SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + busquedaConsorcioId.Nombre + "\" > Editando Consorcio";
 
-                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                List<Provincia> listadoProvincias = provincia.Listar();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
 
@@ -135,7 +134,7 @@ namespace WebApp.Controllers
                 {
                     TempData["error"] = "No se pudo modificar el registro";
 
-                    List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                    List<Provincia> listadoProvincias = provincia.Listar();
                     ViewData["listadoProvincias"] = listadoProvincias;
 
                     int id = consorcioModificado.IdConsorcio;
@@ -147,7 +146,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                List<Provincia> listadoProvincias = provincia.ListarProvincias();
+                List<Provincia> listadoProvincias = provincia.Listar();
                 ViewData["listadoProvincias"] = listadoProvincias;
 
                 int id = consorcioModificado.IdConsorcio;
@@ -163,7 +162,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio consorcioAEliminar = consorcio.BuscarConsorcio(id);
+                Consorcio consorcioAEliminar = consorcio.Buscar(id);
 
                 var node = SiteMaps.Current.CurrentNode;
                 if (node != null && node.ParentNode != null)
@@ -186,7 +185,7 @@ namespace WebApp.Controllers
         {
             gasto.EliminarGastosDeConsorcio(id);
             unidad.EliminarUnidadesDeConsorcio(id);
-            consorcio.EliminarConsorcio(id);
+            consorcio.Eliminar(id);
             return RedirectToAction("ListarConsorcio");
         }
     }

@@ -8,22 +8,20 @@ using System.Threading.Tasks;
 
 namespace Servicios
 {
-    public class ConsorcioServicio
+    public class ConsorcioServicio : BaseServicios<ConsorcioRepositorio, Consorcio>
     {
-        ConsorcioRepositorio repoConsorcio;
         ProvinciaRepositorio repoProvincia;
 
-        public ConsorcioServicio(ContextoEntities contexto)
+        public ConsorcioServicio(ContextoEntities contexto) : base(contexto)
         {
             ContextoEntities ctx = contexto;
-            repoConsorcio = new ConsorcioRepositorio(ctx);
             repoProvincia = new ProvinciaRepositorio(ctx);
         }
 
         public List<Consorcio> ListarConsorcios(object Session)
         {
             int id = (int)Session;
-            return repoConsorcio.ObtenerTodos(id);
+            return repo.ObtenerTodos(id);
         }
 
         public void AgregarConsorcio(Consorcio nuevoConsorcio, object Session)
@@ -31,13 +29,7 @@ namespace Servicios
             nuevoConsorcio.Provincia = repoProvincia.ObtenerPorId(nuevoConsorcio.Provincia.IdProvincia);
             nuevoConsorcio.FechaCreacion = DateTime.Now;
             nuevoConsorcio.IdUsuarioCreador = (int)Session;
-            repoConsorcio.Alta(nuevoConsorcio);
-        }
-
-        public Consorcio BuscarConsorcio(int id)
-        {
-            Consorcio busquedaConsorcio = repoConsorcio.ObtenerPorId(id);
-            return busquedaConsorcio;
+            repo.Alta(nuevoConsorcio);
         }
 
         //public int BuscarIdConsorcio(Consorcio consorcio)
@@ -48,22 +40,9 @@ namespace Servicios
 
         public void ModificarConsorcio(Consorcio consorcioModificacion)
         {
-            int id = consorcioModificacion.IdConsorcio;
-            Consorcio edicionConsorcio = repoConsorcio.ObtenerPorId(id);
-
-            edicionConsorcio.Altura = consorcioModificacion.Altura;
-            edicionConsorcio.Calle = consorcioModificacion.Calle;
-            edicionConsorcio.Ciudad = consorcioModificacion.Ciudad;
-            edicionConsorcio.DiaVencimientoExpensas = consorcioModificacion.DiaVencimientoExpensas;
-            //edicionConsorcio.IdConsorcio = consorcioModificacion.IdConsorcio;
-            edicionConsorcio.Nombre = consorcioModificacion.Nombre;
-            edicionConsorcio.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.Provincia.IdProvincia);
-            repoConsorcio.Modificar(edicionConsorcio);
+            consorcioModificacion.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.Provincia.IdProvincia);
+            repo.Modificar(consorcioModificacion);
         }
 
-        public void EliminarConsorcio(int id)
-        {
-            repoConsorcio.Eliminar(id);
-        }
     }
 }

@@ -27,12 +27,11 @@ namespace WebApp.Controllers
             usuario = new UsuarioServicios(contexto);
         }
 
-        // GET: Gasto
         public ActionResult VerGastos(int id)
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
+                Consorcio consorcioResultado = consorcio.Buscar(id);
                 ViewData["consorcioNombre"] = consorcioResultado.Nombre;
                 ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
                 List<Gasto> listadoGasto = gasto.ListarGastos(id);
@@ -50,8 +49,8 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
-                List<TipoGasto> listaTipoGasto = tipoGasto.ListarTipoGastos();
+                Consorcio consorcioResultado = consorcio.Buscar(id);
+                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 ViewData["consorcio"] = consorcioResultado;
                 ViewData["consorcioNombre"] = consorcioResultado.Nombre;
                 ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
@@ -70,7 +69,7 @@ namespace WebApp.Controllers
         public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante, int? id)
         {
             var consorcioId = Request["consorcioId"];
-            Consorcio consorcioResultado = consorcio.BuscarConsorcio(Int32.Parse(consorcioId));
+            Consorcio consorcioResultado = consorcio.Buscar(Int32.Parse(consorcioId));
             TipoGasto tipoGastoResultado = tipoGasto.BuscarTipoGasto(nuevoGasto.TipoGasto.IdTipoGasto);
             var fileName = Path.GetFileName(ArchivoComprobante.FileName);
             nuevoGasto.Consorcio = consorcioResultado;
@@ -116,9 +115,9 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Gasto busqueadaGastoId = gasto.BuscarGasto(id);
-                Consorcio consorcioResultado = consorcio.BuscarConsorcio(id);
-                List<TipoGasto> listaTipoGasto = tipoGasto.ListarTipoGastos();
+                Gasto busqueadaGastoId = gasto.Buscar(id);
+                Consorcio consorcioResultado = consorcio.Buscar(id);
+                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
                 TempData["consorcio"] = consorcioResultado;
                 return View(busqueadaGastoId);
@@ -153,7 +152,7 @@ namespace WebApp.Controllers
                     }
                     TempData["modificado"] = "Se modifico el registro";
                     TempData["nombreGasto"] = gastoModificado.Nombre;
-                    int idConsorcio = gasto.BuscarGasto(gastoModificado.IdGasto).IdConsorcio;
+                    int idConsorcio = gasto.Buscar(gastoModificado.IdGasto).IdConsorcio;
                     return RedirectToAction("VerGastos/" + idConsorcio);
                 }
                 catch
@@ -177,7 +176,7 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Gasto busqueadaGastoId = gasto.BuscarGasto(id);
+                Gasto busqueadaGastoId = gasto.Buscar(id);
                 return View(busqueadaGastoId);
             }
             else
@@ -191,8 +190,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult DarDeBajaGasto(int id)
         {
-            Gasto gastoResultado = gasto.BuscarGasto(id);
-            gasto.EliminarGasto(id);
+            Gasto gastoResultado = gasto.Buscar(id);
+            gasto.Eliminar(id);
             return RedirectToAction("VerGastos/" + gastoResultado.IdConsorcio);
         }
 

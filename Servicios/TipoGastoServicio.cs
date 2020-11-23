@@ -4,24 +4,15 @@ using System.Collections.Generic;
 
 namespace Servicios
 {
-    public class TipoGastoServicio
+    public class TipoGastoServicio : BaseServicios<TipoGastoRepositorio, TipoGasto>
     {
-        TipoGastoRepositorio repoTipoGasto;
-
-        public TipoGastoServicio(ContextoEntities contexto)
+        public TipoGastoServicio(ContextoEntities contexto) : base(contexto)
         {
-            ContextoEntities ctx = contexto;
-
-            repoTipoGasto = new TipoGastoRepositorio(ctx);
-        }
-        public List<TipoGasto> ListarTipoGastos()
-        {
-            return repoTipoGasto.ObtenerTodos();
         }
 
         public TipoGasto BuscarTipoGasto(int id)
         {
-            TipoGasto tipoGasto = repoTipoGasto.ObtenerPorId(id);
+            TipoGasto tipoGasto = repo.ObtenerPorId(id);
             return tipoGasto;
         }
 
