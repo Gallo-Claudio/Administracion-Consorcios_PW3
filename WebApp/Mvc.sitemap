@@ -15,9 +15,9 @@
 				<mvcSiteMapNode title="Nueva Unidad" action="AgregarUnidad" preservedRouteParameters="id"/>
 			</mvcSiteMapNode>
 
-			<mvcSiteMapNode title="Gastos" controller="Unidad" action="ListarUnidad" preservedRouteParameters="id">
-				<mvcSiteMapNode title="Editando Gasto" action="ModificarUnidad" preservedRouteParameters="id, id2"/>
-				<mvcSiteMapNode title="Cargar nuevo gasto" action="AgregarUnidad"/>
+			<mvcSiteMapNode title="Gastos" controller="Gasto" action="VerGastos" preservedRouteParameters="id">
+				<mvcSiteMapNode title="Editando Gasto" action="ModificarGasto" preservedRouteParameters="id, id2"/>
+				<mvcSiteMapNode title="Cargar nuevo gasto" action="AgregarGasto" preservedRouteParameters="id"/>
 			</mvcSiteMapNode>
 
 			<mvcSiteMapNode title="Expensas" controller="expensa" action="ListarExpensa" preservedRouteParameters="id"/>

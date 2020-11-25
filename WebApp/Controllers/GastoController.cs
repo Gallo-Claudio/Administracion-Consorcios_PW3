@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using DataAccessLayer.Modelos;
@@ -29,9 +30,15 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio consorcioResultado = consorcio.Buscar(id);
-                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
-                ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
+                Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                }
+
+                ViewData["consorcioNombre"] = busquedaConsorcio.Nombre;
+                ViewData["consorcioId"] = busquedaConsorcio.IdConsorcio;
                 List<Gasto> listadoGasto = gasto.ListarGastos(id);
                 return View(listadoGasto);
             }
@@ -47,11 +54,18 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio consorcioResultado = consorcio.Buscar(id);
+                Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                }
+
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
-                ViewData["consorcio"] = consorcioResultado;
-                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
-                ViewData["consorcioId"] = consorcioResultado.IdConsorcio;
+
+                ViewData["consorcio"] = busquedaConsorcio;
+                ViewData["consorcioNombre"] = busquedaConsorcio.Nombre;
+                ViewData["consorcioId"] = busquedaConsorcio.IdConsorcio;
                 ViewData["listadoTipoGasto"] = listaTipoGasto;
                 return View();
             }
@@ -110,9 +124,19 @@ namespace WebApp.Controllers
             {
                 Gasto busqueadaGasto = gasto.Buscar(id);
                 Consorcio consorcioResultado = busqueadaGasto.Consorcio;
+
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.ParentNode.Title = "Consorcio \"" + consorcioResultado.Nombre + "\"";
+                }
+
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
                 TempData["consorcio"] = consorcioResultado;
+                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
+
+                ViewBag.archivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
                 return View(busqueadaGasto);
             }
             else
@@ -133,7 +157,7 @@ namespace WebApp.Controllers
                 if (archivo != null)
                 {
                     fileName = Path.GetFileName(archivo.FileName);
-                    gastoModificado.ArchivoComprobante = fileName;
+                    gastoModificado.ArchivoComprobante = "/Gastos/" + fileName;
                 }
                 try
                 {

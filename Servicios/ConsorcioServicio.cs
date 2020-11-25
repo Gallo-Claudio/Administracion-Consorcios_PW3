@@ -26,21 +26,15 @@ namespace Servicios
 
         public void AgregarConsorcio(Consorcio nuevoConsorcio, object Session)
         {
-            nuevoConsorcio.Provincia = repoProvincia.ObtenerPorId(nuevoConsorcio.Provincia.IdProvincia);
+            nuevoConsorcio.Provincia = repoProvincia.ObtenerPorId(nuevoConsorcio.IdProvincia);
             nuevoConsorcio.FechaCreacion = DateTime.Now;
             nuevoConsorcio.IdUsuarioCreador = (int)Session;
             repo.Alta(nuevoConsorcio);
         }
 
-        //public int BuscarIdConsorcio(Consorcio consorcio)
-        //{
-        //    int idConsorcio = consorcio.IdConsorcio;
-        //    return idConsorcio;
-        //}
-
         public void ModificarConsorcio(Consorcio consorcioModificacion)
         {
-            consorcioModificacion.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.Provincia.IdProvincia);
+            consorcioModificacion.Provincia = repoProvincia.ObtenerPorId(consorcioModificacion.IdProvincia);
             repo.Modificar(consorcioModificacion);
         }
 

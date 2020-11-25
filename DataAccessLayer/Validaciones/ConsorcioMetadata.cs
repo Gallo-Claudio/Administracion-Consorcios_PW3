@@ -11,7 +11,6 @@ namespace DataAccessLayer.Modelos
         [Display(Name = "Provincia")]
         [Required(ErrorMessage = "Seleccione una provincia")]
         public int IdProvincia { get; set; }
-        //public virtual Provincia Provincia { get; set; }
 
         [Required(ErrorMessage = "Ingrese una ciudad")]
         [StringLength(50, ErrorMessage = "No puede ingresar un nombre tan largo")]
