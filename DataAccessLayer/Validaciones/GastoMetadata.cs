@@ -21,7 +21,7 @@ namespace DataAccessLayer.Modelos
         public string Descripcion { get; set; }
 
         [Display(Name = "Fecha")]
-        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DataType(DataType.Date, ErrorMessage = "Solamente fecha")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaGasto { get; set; }
 
@@ -31,6 +31,7 @@ namespace DataAccessLayer.Modelos
 
         [Display(Name = "Mes")]
         [Required(ErrorMessage = "Ingrese un mes de expensa")]
+        [Range(1, 12, ErrorMessage = "El mes debe estar entre 1 y 12")]
         public int MesExpensa { get; set; }
 
         [Display(Name = "Comprobante")]
