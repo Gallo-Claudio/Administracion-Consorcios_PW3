@@ -1,12 +1,109 @@
-﻿.label-expensa{
+﻿.label-expensa {
     width: auto;
 }
-.input-expensa{
-    width:50px;
+/*.input-expensa { 
+    width: 74px;
+}*/
+.input-expensa-anio {
+    width: 63px;
+    margin-right: 23px;
 }
+
+.input-expensa-mes {
+    width: 50px;
+}
+
 .field-validation-error {
     color: red;
 }
+
 .botones-modificar {
     display: inline-block;
+}
+
+
+
+input[type=”file”]#nuestroinput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for=" nuestroinput"] {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #106BA0;
+    display: inline-block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 15px 40px !important;
+    text-transform: uppercase;
+    width: fit-content;
+    text-align: center;
+}
+
+
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+    .inputfile + label {
+        min-width: 207px !important;
+        width: fit-content !important;
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        display: inline-block;
+        padding: 1px 8px;
+        text-align: center;
+    }
+
+        .inputfile + label svg {
+            width: 1em;
+            height: 1em;
+            vertical-align: middle;
+            fill: currentColor;
+            margin-top: -0.25em;
+            margin-right: 0.25em;
+        }
+
+.iborrainputfile {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.inputfile-2 + label {
+    color: #0084a2;
+    border: 2px solid currentColor;
+}
+
+    .inputfile-2:focus + label,
+    .inputfile-2.has-focus + label,
+    .inputfile-2 + label:hover {
+        color: #0084a2;
+    }
+
+
+.no-modificable {
+    display: inline-block;
+    min-width: 207px;
+    width: fit-content;
+    background-color: #b1b1b1;
+    height: 28px;
+    color: #545454;
+    padding-left: 5px;
+    padding-top: 2px;
+    margin-right: 7px;
 }

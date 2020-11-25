@@ -26,7 +26,7 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Modificar un consorcio</h1>
+        <h2 class="mb-5">Modificar un consorcio</h2>
 
         <form class="row" action="/consorcio/modificarConsorcio" method="post">
             <input hidden name="IdConsorcio" value="@Model.IdConsorcio" />
@@ -40,8 +40,8 @@
                 @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
                 @Html.LabelFor(Model => Model.IdProvincia)*
-                @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-                @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
+                @Html.DropDownListFor(Model => Model.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+                @Html.ValidationMessageFor(Model => Model.IdProvincia)<br />
 
                 @Html.LabelFor(Model => Model.Ciudad)*
                 @Html.EditorFor(Model => Model.Ciudad)

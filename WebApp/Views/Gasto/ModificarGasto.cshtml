@@ -23,155 +23,74 @@
 
 }
 
+@{
+    string nombreConsorcio = ViewData["consorcioNombre"].ToString();
+}
+
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Agregar un gasto</h1>
+        <h2 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Editando gasto "@Model.Nombre"</h2>
+
         <form class="row" action="/gasto/ModificarGasto" method="post" enctype="multipart/form-data">
             @Html.HiddenFor(Model => Model.IdGasto)
             <input type="hidden" name="consorcioid" value="@Model.IdConsorcio" />
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.Consorcio)
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        *@Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled" } })
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.Consorcio.IdConsorcio)
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.TipoGasto.IdTipoGasto, "Tipo de Gasto")
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        *@Html.DropDownListFor(Model => Model.TipoGasto.IdTipoGasto, new SelectList((System.Collections.IEnumerable)TempData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.TipoGasto.IdTipoGasto)
-                </div>
 
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.Nombre)
-                    </div>
-                    <div class="col col-lg-2">
+            <div class="col-9">
 
-                    </div>
-                    <div class="col-md-auto">
-                        @{
-                            string nombre = @Model.Nombre;
-                        }
-                        *@Html.EditorFor(Model => Model.Nombre, new { htmlAttributes = new { @Value = nombre } })
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.Nombre)
-                </div>
+                @Html.LabelFor(Model => Model.Consorcio)&nbsp&nbsp
+                @Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled" } })<br />
 
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.Descripcion)
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        @Html.EditorFor(Model => Model.Descripcion)
-                    </div>
-                </div>
+                @Html.LabelFor(Model => Model.IdTipoGasto)*
+                @Html.DropDownListFor(Model => Model.IdTipoGasto, new SelectList((System.Collections.IEnumerable)TempData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
+                @Html.ValidationMessageFor(Model => Model.IdTipoGasto)<br />
 
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.FechaGasto, "Fecha")
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        *@Html.EditorFor(Model => Model.FechaGasto, new { htmlAttributes = new { @type = "date" } })
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.FechaGasto)
-                </div>
+                @Html.LabelFor(Model => Model.Nombre)*
+                @Html.EditorFor(Model => Model.Nombre)
+                @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-                <div class="row">
-                    <div class="col">
-                        @Html.Label("Expensa(*):")
-                    </div>
-                    <div class="col-xs-3 mr-5">
-                        @Html.LabelFor(Model => Model.AnioExpensa, "Año", new { @class = "label-expensa" })
-                        @Html.EditorFor(Model => Model.AnioExpensa, new { htmlAttributes = new { @class = "input-expensa" } })
-                    </div>
-                    <div class="col-xs-3">
-                        @Html.LabelFor(Model => Model.MesExpensa, "Mes", new { @class = "label-expensa" })
-                        @Html.EditorFor(Model => Model.MesExpensa, new { htmlAttributes = new { @class = "input-expensa" } })
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.AnioExpensa)
-                    <br />
-                    @Html.ValidationMessageFor(Model => Model.MesExpensa)
-                </div>
+                @Html.LabelFor(Model => Model.Descripcion)&nbsp&nbsp
+                @Html.EditorFor(Model => Model.Descripcion)<br />
 
-                <div class="row">
-                    <div class="col">
-                        @Html.Label("Comprobante(*):")
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        *<input type="file" name="archivo" value="@Model.ArchivoComprobante" />
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @{
-                        if (Model.ArchivoComprobante == null)
-                        {
-                            @Html.ValidationMessageFor(Model => Model.ArchivoComprobante)
-                        }
-                        else
-                        {
-                            @Html.HiddenFor(Model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file", @Value = Model.ArchivoComprobante } })
-                        }
-                    }
-                    <br />
-                    @{
-                        string filename = Model.ArchivoComprobante.Replace("/Gastos/", "");
-                    }
-                    @Html.ActionLink("Descargar Comprobante", "Download", new { file = filename })
+                @Html.LabelFor(Model => Model.FechaGasto)*
+                @Html.EditorFor(Model => Model.FechaGasto, new { htmlAttributes = new { @type = "date" } })
+                @Html.ValidationMessageFor(Model => Model.FechaGasto)<br />
 
-                </div>
-                <div class="row">
-                    <div class="col">
-                        @Html.LabelFor(Model => Model.Monto)
-                    </div>
-                    <div class="col col-lg-2">
-                    </div>
-                    <div class="col-md-auto">
-                        *<input type="text" name="Monto" value="@Model.Monto" />
-                    </div>
-                </div>
-                <div class="mb-2">
-                    @Html.ValidationMessageFor(Model => Model.Monto)
-                </div>
+                @Html.Label("Expensa")*
+                @Html.LabelFor(Model => Model.AnioExpensa, new { @class = "label-expensa" })
+                @Html.EditorFor(Model => Model.AnioExpensa, new { htmlAttributes = new { @class = "input-expensa-anio" } })*
+                @Html.LabelFor(Model => Model.MesExpensa, new { @class = "label-expensa" })
+                @Html.EditorFor(Model => Model.MesExpensa, new { htmlAttributes = new { @class = "input-expensa-mes" } })
+                @Html.ValidationMessageFor(Model => Model.AnioExpensa)
+                @Html.ValidationMessageFor(Model => Model.MesExpensa)<br />
+
+                @Html.LabelFor(Model => Model.ArchivoComprobante)*
+                <div class="no-modificable">@ViewBag.archivo</div>
+                <input id="archivo" class="inputfile inputfile-2" type="file" name="archivo" value="@Model.ArchivoComprobante" />
+                <label for="archivo">
+                    <svg class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+                    <span class="iborrainputfile">Cambiar comprobante</span>
+                </label>
+                @Html.HiddenFor(Model => Model.ArchivoComprobante, new { htmlAttributes = new { type = "file", @Value = Model.ArchivoComprobante } })<br />
+
+                @Html.LabelFor(Model => Model.Monto)*
+                @Html.EditorFor(Model => Model.Monto)
+                @Html.ValidationMessageFor(Model => Model.Monto)
             </div>
 
-            <div class="col-2">
-            </div>
-
-            <div class="col-md-auto">
+            <div class="col-3">
+                * Son campos obligatorios<br /><br />
                 <a href="/gasto/eliminarGasto/@Model.IdGasto" class="btn btn-block btn-sm btn-danger botones-modificar">Eliminar</a>
                 <button class="btn btn-block btn-sm btn-primary botones-modificar" type="submit">Modificar</button>
                 <a href="/gasto/verGastos/@Model.IdConsorcio" class="btn btn-block btn-sm btn-secondary botones-modificar">Cancelar</a>
+                <br /><br /><br /><br /><br /><br />
+                @{
+                    string filename = Model.ArchivoComprobante.Replace("/Gastos/", "");
+                }
+                @Html.ActionLink("Descargar Comprobante", "Download", new { file = filename })
+
             </div>
 
         </form>
     </div>
 </div>
-
+<script src="~/Scripts/PersonalizarInputType/PersonalizarInputType.js"></script>

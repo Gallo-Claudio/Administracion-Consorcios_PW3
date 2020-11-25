@@ -17,7 +17,7 @@ form.inicio input, form.registro_usuario input {
 form.inicio {
     margin-top: -60px;
 }
-input {
+input, textarea {
     width: 206px;
 }
 select {

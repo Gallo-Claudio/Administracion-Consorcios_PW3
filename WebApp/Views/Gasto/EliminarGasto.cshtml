@@ -6,10 +6,9 @@
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
 }
 
-
 <div class="container text-center">
     <div class="recuadro recuadro-elimnar">
-        <p>Esta seguro que desea eliminar el gasto "@Model.Nombre" ?</p>
+        <p>Esta seguro que desea eliminar el gasto "@Model.Nombre" del consorcio "@Model.Consorcio.Nombre" ?</p>
         <form action="/gasto/DarDeBajaGasto" method="post">
             <input hidden name="id" value="@Model.IdGasto" />
 

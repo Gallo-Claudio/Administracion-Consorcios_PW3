@@ -1,4 +1,5 @@
-﻿@using System.Web.Optimization
+﻿@using System.Globalization;
+@using System.Web.Optimization
 @using DataAccessLayer
 @model List<DataAccessLayer.Modelos.Gasto>
 @{
@@ -36,8 +37,8 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Gastos</h1>
-        <a class="btn btn-primary btn-default nuevogasto mb-4" href="/gasto/agregarGasto/@ViewData["consorcioId"]">Nuevo Gasto</a>
+        <h2 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Gastos</h2>
+        <a class="btn btn-primary btn-default btn-agregar" href="/gasto/agregarGasto/@ViewData["consorcioId"]">Nuevo Gasto</a>
 
         <table class="table table-striped table-hover" id="ListadoGeneral">
             <thead class="thead-dark">
@@ -61,8 +62,8 @@
                     <td>@gasto.MesExpensa</td>
                     <td>@gasto.Nombre</td>
                     <td>@gasto.TipoGasto.Nombre</td>
-                    <td>@gasto.FechaGasto</td>
-                    <td>@gasto.Monto</td>
+                    <td>@gasto.FechaGasto.ToString("dd/MM/yyyy", CultureInfo.CreateSpecificCulture("es-ES"))</td>
+                    <td>$@gasto.Monto</td>
                     <td class="text-center">@Html.ActionLink("Descargar", "Download", new { file = filename })</td>
                     <td class="text-center"><a href="/gasto/modificarGasto/@gasto.IdGasto"><img src="~/Img/editar.png" /></a></td>
                     <td class="text-center"><a href="/gasto/eliminarGasto/@gasto.IdGasto"><img src="~/Img/borrar.png" /></a></td>

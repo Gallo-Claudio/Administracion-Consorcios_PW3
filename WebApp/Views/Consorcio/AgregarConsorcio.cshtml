@@ -40,19 +40,18 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Agregar un consorcio</h1>
+        <h2 class="mb-5">Agregar un consorcio</h2>
 
         <form class="row" action="/consorcio/agregarConsorcio" method="post">
 
             <div class="col-9">
-
                 @Html.LabelFor(Model => Model.Nombre)*
                 @Html.EditorFor(Model => Model.Nombre)
                 @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
-                @Html.LabelFor(Model => Model.Provincia)*
-                @Html.DropDownListFor(Model => Model.Provincia.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
-                @Html.ValidationMessageFor(Model => Model.Provincia.IdProvincia)<br />
+                @Html.LabelFor(Model => Model.IdProvincia)*
+                @Html.DropDownListFor(Model => Model.IdProvincia, new SelectList((System.Collections.IEnumerable)ViewData["listadoProvincias"], "IdProvincia", "Nombre"), "Elija una Provincia")
+                @Html.ValidationMessageFor(Model => Model.IdProvincia)<br />
 
                 @Html.LabelFor(Model => Model.Ciudad)*
                 @Html.EditorFor(Model => Model.Ciudad)
@@ -68,13 +67,11 @@
 
                 @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
                 @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
-
-                * Son campos obligatorios
+                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />                
             </div>
 
-
             <div class="col-3">
+                * Son campos obligatorios<br /><br />
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button>
