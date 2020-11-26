@@ -80,7 +80,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante, int? id)
         {
-            var fileName = Path.GetFileName(ArchivoComprobante.FileName);
+            string nombre = Path.GetFileNameWithoutExtension(ArchivoComprobante.FileName);
+            string extension = Path.GetExtension(ArchivoComprobante.FileName);
+
+            string fileName = string.Format("{0}_{2:yyyyMMdd-HHmmss}{1}", nombre, extension, DateTime.Now);
             nuevoGasto.ArchivoComprobante = fileName;
             if (ModelState.IsValid)
             {
@@ -114,6 +117,10 @@ namespace WebApp.Controllers
             }
             else
             {
+                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
+                ViewData["listadoTipoGasto"] = listaTipoGasto;
+                ViewData["consorcioId"] = nuevoGasto.IdConsorcio;
+                ViewData["consorcioNombre"] = nuevoGasto.Nombre;
                 return View(nuevoGasto);
             }
         }
@@ -153,10 +160,13 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = "";
+                string fileName = "";
                 if (archivo != null)
                 {
-                    fileName = Path.GetFileName(archivo.FileName);
+                    string nombre = Path.GetFileNameWithoutExtension(archivo.FileName);
+                    string extension = Path.GetExtension(archivo.FileName);
+
+                    fileName = string.Format("{0}_{2:yyyyMMdd-HHmmss}{1}", nombre, extension, DateTime.Now);
                     gastoModificado.ArchivoComprobante = "/Gastos/" + fileName;
                 }
                 try
