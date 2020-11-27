@@ -87,7 +87,7 @@ namespace WebApp.Controllers
                 return View(nuevaUnidad);
             }
 
-            List<string> definiciones = new List<string>() { "La unidad", nuevaUnidad.Nombre };
+            List<string> definiciones = new List<string>() { "La unidad", nuevaUnidad.Nombre, "creado" };
             TempData["definiciones"] = definiciones;
 
             switch (id)
@@ -132,7 +132,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<string> definiciones = new List<string>() { "La unidad", unidadModificado.Nombre };
+                List<string> definiciones = new List<string>() { "La unidad", unidadModificado.Nombre, "modificado" };
                 try
                 {
                     unidad.ModificarUnidad(unidadModificado);

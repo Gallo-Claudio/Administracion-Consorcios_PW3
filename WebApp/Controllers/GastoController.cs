@@ -37,8 +37,7 @@ namespace WebApp.Controllers
                     node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
                 }
 
-                ViewData["consorcioNombre"] = busquedaConsorcio.Nombre;
-                ViewData["consorcioId"] = busquedaConsorcio.IdConsorcio;
+                ViewData["consorcio"] = busquedaConsorcio;
                 List<Gasto> listadoGasto = gasto.ListarGastos(id);
                 return View(listadoGasto);
             }
@@ -64,8 +63,6 @@ namespace WebApp.Controllers
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
 
                 ViewData["consorcio"] = busquedaConsorcio;
-                ViewData["consorcioNombre"] = busquedaConsorcio.Nombre;
-                ViewData["consorcioId"] = busquedaConsorcio.IdConsorcio;
                 ViewData["listadoTipoGasto"] = listaTipoGasto;
                 return View();
             }
@@ -80,21 +77,18 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult AgregarGasto(Gasto nuevoGasto, HttpPostedFileBase ArchivoComprobante, int? id)
         {
-            string nombre = Path.GetFileNameWithoutExtension(ArchivoComprobante.FileName);
-            string extension = Path.GetExtension(ArchivoComprobante.FileName);
-
-            string fileName = string.Format("{0}_{2:yyyyMMdd-HHmmss}{1}", nombre, extension, DateTime.Now);
-            nuevoGasto.ArchivoComprobante = fileName;
+            string nombreArchivoConFecha = gasto.NombreArchivoASubir(ArchivoComprobante);
+            nuevoGasto.ArchivoComprobante = nombreArchivoConFecha;
             if (ModelState.IsValid)
             {
-                List<string> definiciones = new List<string>() { "El gasto", nuevoGasto.Nombre };
+                List<string> definiciones = new List<string>() { "El gasto", nuevoGasto.Nombre, "creado" };
                 TempData["definiciones"] = definiciones;
                 try
                 {
                     gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);
                     if (ArchivoComprobante.ContentLength > 0)
                     {
-                        var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
+                        string path = Path.Combine(Server.MapPath("~/Gastos/"), nombreArchivoConFecha);
                         ArchivoComprobante.SaveAs(path);
                     }
 
@@ -117,10 +111,8 @@ namespace WebApp.Controllers
             }
             else
             {
-                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
-                ViewData["listadoTipoGasto"] = listaTipoGasto;
-                ViewData["consorcioId"] = nuevoGasto.IdConsorcio;
-                ViewData["consorcioNombre"] = nuevoGasto.Nombre;
+                ViewData["listadoTipoGasto"] = tipoGasto.Listar();
+                ViewData["consorcio"] = nuevoGasto;
                 return View(nuevoGasto);
             }
         }
@@ -140,10 +132,9 @@ namespace WebApp.Controllers
 
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
-                TempData["consorcio"] = consorcioResultado;
                 ViewData["consorcioNombre"] = consorcioResultado.Nombre;
 
-                ViewBag.archivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
+                ViewBag.nombreArchivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
                 return View(busqueadaGasto);
             }
             else
@@ -152,7 +143,6 @@ namespace WebApp.Controllers
                 TempData["Accion"] = "ModificarGasto";
                 return RedirectToAction("Ingresar", "Home");
             }
-
         }
 
         [HttpPost]
@@ -163,14 +153,11 @@ namespace WebApp.Controllers
                 string fileName = "";
                 if (archivo != null)
                 {
-                    string nombre = Path.GetFileNameWithoutExtension(archivo.FileName);
-                    string extension = Path.GetExtension(archivo.FileName);
-
-                    fileName = string.Format("{0}_{2:yyyyMMdd-HHmmss}{1}", nombre, extension, DateTime.Now);
-                    gastoModificado.ArchivoComprobante = "/Gastos/" + fileName;
+                    string nombreArchivoConFecha = gasto.NombreArchivoASubir(archivo);
+                    gastoModificado.ArchivoComprobante = "/Gastos/" + nombreArchivoConFecha;
                 }
 
-                List<string> definiciones = new List<string>() { "El gasto", gastoModificado.Nombre };
+                List<string> definiciones = new List<string>() { "El gasto", gastoModificado.Nombre, "modificado" };
                 TempData["definiciones"] = definiciones;
                 try
                 {
@@ -181,8 +168,7 @@ namespace WebApp.Controllers
                         archivo.SaveAs(path);
                     }
 
-                    int idConsorcio = gasto.Buscar(gastoModificado.IdGasto).IdConsorcio;
-                    return RedirectToAction("VerGastos/" + idConsorcio);
+                    return RedirectToAction("VerGastos/" + gastoModificado.IdConsorcio);
                 }
                 catch
                 {

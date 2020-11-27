@@ -1,9 +1,10 @@
 ﻿@using System.Web.Optimization
-@using DataAccessLayer
+@using DataAccessLayer.Modelos
 @model DataAccessLayer.Modelos.Gasto
 @{
     ViewBag.Titulo = "Ingreso Gasto";
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
+    Consorcio consorcio = (Consorcio)ViewData["consorcio"];
 }
 
 @Styles.Render("~/Content/gasto-estilos.css")
@@ -14,21 +15,17 @@
 
 @Html.Partial("_PartialMensajes")
 
-@{
-    string nombreConsorcio = ViewData["consorcioNombre"].ToString();
-}
-
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Cargar nuevo gasto</h1>
+        <h1 class="mb-5">Consorcio "@consorcio.Nombre" - Cargar nuevo gasto</h1>
 
         <form class="row" action="/gasto/agregarGasto" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="idConsorcio" value="@ViewData["consorcioId"]" />
+            <input type="hidden" name="idConsorcio" value="@consorcio.IdConsorcio" />
 
             <div class="col-9">
 
                 @Html.LabelFor(Model => Model.Consorcio)&nbsp&nbsp
-                @Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled", @Value = nombreConsorcio } })<br />
+                @Html.EditorFor(Model => Model.Consorcio.Nombre, new { htmlAttributes = new { @disabled = "disabled", @Value = consorcio.Nombre } })<br />
 
                 @Html.LabelFor(Model => Model.IdTipoGasto)*
                 @Html.DropDownListFor(Model => Model.IdTipoGasto, new SelectList((System.Collections.IEnumerable)ViewData["listadoTipoGasto"], "IdTipoGasto", "Nombre"), "Seleccione Tipo de Gasto")
@@ -70,7 +67,7 @@
             <div class="col-3">
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/gasto/agregarGasto/1">Guardar y Crear otro Gasto</button>
-                <a href="/gasto/verGastos/@ViewData["consorcioId"]" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
+                <a href="/gasto/verGastos/@consorcio.IdConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
             </div>
 
         </form>
