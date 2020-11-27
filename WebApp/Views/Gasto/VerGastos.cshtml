@@ -11,29 +11,8 @@
 @Scripts.Render("~/bundles/sweetAlert")
 @Styles.Render("~/Content/dataTables")
 
-@*El primer ingreso a la vista lo hace con el TempData vacio.*@
-@if (TempData["exito"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" fue creado con exito',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
-    </script>
 
-}
-@if (TempData["modificado"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" fue modificado',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
-    </script>
-
-}
+@Html.Partial("_PartialMensajes")
 
 <div class="container mb-5">
     <div class="pb-5">

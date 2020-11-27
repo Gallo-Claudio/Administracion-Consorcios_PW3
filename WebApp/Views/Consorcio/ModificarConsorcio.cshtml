@@ -10,19 +10,7 @@
 @Scripts.Render("~/bundles/sweetAlert")
 
 
-
-@*El primer ingreso a la vista lo hace con el TempData vacio.*@
-@if (TempData["error"] as string != null)
-{
-    <script>
-                Swal.fire({
-                    text: '"@TempData["error"]"',
-                    icon: 'error',
-                    confirmButtonText: 'Ok'
-                })
-    </script>
-}
-
+@Html.Partial("_PartialMensajes")
 
 <div class="container mb-5">
     <div class="pb-5">

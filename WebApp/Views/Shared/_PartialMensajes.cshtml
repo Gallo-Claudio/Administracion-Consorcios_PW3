@@ -1,0 +1,37 @@
+﻿@{
+    List<string> listado = new List<string>();
+    if (ViewData["definiciones"] != null)
+    {
+        listado = ViewData["definiciones"] as List<string>;
+    }
+    else
+    {
+        listado = TempData["definiciones"] as List<string>;
+    }
+}
+
+@*El primer ingreso a la vista lo hace con el listado en null.*@
+
+@if (listado != null)
+{
+    if (TempData["error"] as string == "true")
+    {
+        <script>
+            Swal.fire({
+                text: '@listado[0] "@listado[1]" no pudo ser creada',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        </script>
+    }
+    else
+    {
+        <script>
+                Swal.fire({
+                    text: '@listado[0] "@listado[1]" fue creada con exito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+        </script>
+    }
+}

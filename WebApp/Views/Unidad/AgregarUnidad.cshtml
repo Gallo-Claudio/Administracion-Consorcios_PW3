@@ -11,33 +11,7 @@
 @Scripts.Render("~/bundles/sweetAlert")
 
 
-
-@*El primer ingreso a la vista lo hace con el TempData vacio.*@
-@if (TempData["nombreUnidad"] as string != null)
-{
-    if (TempData["error"] as string != null)
-    {
-        <script>
-            Swal.fire({
-                text: 'La unidad "@TempData["nombreUnidad"]" no pudo ser creada',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
-        </script>
-    }
-    else
-    {
-        <script>
-                Swal.fire({
-                    text: 'La unidad "@TempData["nombreUnidad"]" fue creada con exito',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-        </script>
-    }
-
-}
-
+@Html.Partial("_PartialMensajes")
 
 <div class="container mb-5">
     <div class="pb-5">
@@ -73,7 +47,6 @@
 
                 * Son campos obligatorios
             </div>
-
 
             <div class="col-3">
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>

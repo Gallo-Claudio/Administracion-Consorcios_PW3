@@ -11,29 +11,9 @@
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
 
-@if (TempData["exito"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" fue creado con exito',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            })
-    </script>
 
-}
+@Html.Partial("_PartialMensajes")
 
-@if (TempData["error"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" no pudo ser creado',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
-    </script>
-
-}
 @{
     string nombreConsorcio = ViewData["consorcioNombre"].ToString();
 }

@@ -309,6 +309,7 @@
     <Content Include="Views\Unidad\AgregarUnidad.cshtml" />
     <Content Include="Views\Unidad\ModificarUnidad.cshtml" />
     <Content Include="Views\Unidad\EliminarUnidad.cshtml" />
+    <Content Include="Views\Shared\_PartialMensajes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
