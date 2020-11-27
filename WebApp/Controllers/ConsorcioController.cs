@@ -68,9 +68,8 @@ namespace WebApp.Controllers
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo guardar el registro";
+                    TempData["error"] = "true";
                 }
-
             }
             else
             {
@@ -79,20 +78,24 @@ namespace WebApp.Controllers
                 return View(nuevoConsorcio);
             }
 
-            TempData["nombreConsorcio"] = nuevoConsorcio.Nombre;
+            List<string> definiciones = new List<string>() { "El consorcio", nuevoConsorcio.Nombre };
+            TempData["definiciones"] = definiciones;
+
             switch (id)
             {
                 case 1:
                     return RedirectToAction("AgregarConsorcio");
+
                 case 2:
                     if (TempData["error"] == null)
                     {
-                        return RedirectToAction("AgregarUnidad", "Unidad");  // ("Accion", "Controlador")
+                        return Redirect("/Unidad/AgregarUnidad/" + nuevoConsorcio.IdConsorcio);
                     }
                     else
                     {
                         return RedirectToAction("AgregarConsorcio");
                     }
+
                 default:
                     return RedirectToAction("ListarConsorcio");
             }
@@ -126,13 +129,16 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> definiciones = new List<string>() { "El consorcio", consorcioModificado.Nombre };
+
                 try
                 {
                     consorcio.ModificarConsorcio(consorcioModificado);
+                    return RedirectToAction("ListarConsorcio");
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo modificar el registro";
+                    TempData["error"] = "true";
 
                     List<Provincia> listadoProvincias = provincia.Listar();
                     ViewData["listadoProvincias"] = listadoProvincias;
@@ -154,8 +160,6 @@ namespace WebApp.Controllers
 
                 return View(consorcioModificado);
             }
-
-            return RedirectToAction("ListarConsorcio");
         }
 
         public ActionResult EliminarConsorcio(int id)

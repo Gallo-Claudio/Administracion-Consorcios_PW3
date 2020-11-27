@@ -78,9 +78,8 @@ namespace WebApp.Controllers
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo guardar el registro";
+                    TempData["error"] = "true";
                 }
-
             }
             else
             {
@@ -88,12 +87,13 @@ namespace WebApp.Controllers
                 return View(nuevaUnidad);
             }
 
-            TempData["nombreUnidad"] = nuevaUnidad.Nombre;
+            List<string> definiciones = new List<string>() { "La unidad", nuevaUnidad.Nombre };
+            TempData["definiciones"] = definiciones;
+
             switch (id)
             {
                 case 1:
-                    ViewData["Consorcio"] = consorcio.Buscar(nuevaUnidad.IdConsorcio);
-                    return RedirectToAction("AgregarUnidad");
+                    return RedirectToAction("AgregarUnidad/" + nuevaUnidad.IdConsorcio);
 
                 default:
                     string url = "/unidad/ListarUnidades/" + nuevaUnidad.IdConsorcio;
@@ -132,14 +132,17 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> definiciones = new List<string>() { "La unidad", unidadModificado.Nombre };
                 try
                 {
                     unidad.ModificarUnidad(unidadModificado);
+                    TempData["definiciones"] = definiciones;
+                    return Redirect("/unidad/ListarUnidades/" + unidadModificado.IdConsorcio);
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo modificar el registro";
-
+                    TempData["error"] = "true";
+                    TempData["definiciones"] = definiciones;
                     ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
                     return View(unidadModificado);
                 }
@@ -149,9 +152,6 @@ namespace WebApp.Controllers
                 ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
                 return View(unidadModificado);
             }
-
-            string url = "/unidad/ListarUnidades/" + unidadModificado.IdConsorcio;
-            return Redirect(url);
         }
 
         public ActionResult EliminarUnidad(int id)

@@ -10,33 +10,7 @@
 @Scripts.Render("~/bundles/sweetAlert")
 
 
-
-@*El primer ingreso a la vista lo hace con el TempData vacio.*@
-@if (TempData["nombreConsorcio"] as string != null)
-{
-    if (TempData["error"] as string != null)
-    {
-        <script>
-            Swal.fire({
-                text: 'Consorcio "@TempData["nombreConsorcio"]" no pudo ser creado',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
-        </script>
-    }
-    else
-    {
-        <script>
-                Swal.fire({
-                    text: 'Consorcio "@TempData["nombreConsorcio"]" fue creado con exito',
-                    icon: 'success',
-                    confirmButtonText: 'Ok'
-                })
-        </script>
-    }
-
-}
-
+@Html.Partial("_PartialMensajes")
 
 <div class="container mb-5">
     <div class="pb-5">
@@ -67,7 +41,7 @@
 
                 @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
                 @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />                
+                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
             </div>
 
             <div class="col-3">

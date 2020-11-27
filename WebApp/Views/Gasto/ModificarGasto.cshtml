@@ -11,17 +11,7 @@
 @Scripts.Render("~/bundles/sweetAlert")
 
 
-@if (TempData["error"] as string != null)
-{
-    <script>
-            Swal.fire({
-                text: 'Gasto "@TempData["nombreGasto"]" no pudo ser modificado',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
-    </script>
-
-}
+@Html.Partial("_PartialMensajes")
 
 @{
     string nombreConsorcio = ViewData["consorcioNombre"].ToString();

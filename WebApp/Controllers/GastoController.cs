@@ -87,7 +87,8 @@ namespace WebApp.Controllers
             nuevoGasto.ArchivoComprobante = fileName;
             if (ModelState.IsValid)
             {
-                TempData["nombreGasto"] = nuevoGasto.Nombre;
+                List<string> definiciones = new List<string>() { "El gasto", nuevoGasto.Nombre };
+                TempData["definiciones"] = definiciones;
                 try
                 {
                     gasto.AgregarGasto(nuevoGasto, Session["IdUsuario"]);
@@ -97,7 +98,6 @@ namespace WebApp.Controllers
                         ArchivoComprobante.SaveAs(path);
                     }
 
-                    TempData["exito"] = "Se guardo el registro";
                     if (id == 1)
                     {
                         return RedirectToAction("AgregarGasto/" + nuevoGasto.IdConsorcio);
@@ -110,7 +110,7 @@ namespace WebApp.Controllers
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo guardar el registro";
+                    TempData["error"] = "true";
                     return RedirectToAction("AgregarGasto/" + nuevoGasto.IdConsorcio);
                 }
 
@@ -169,6 +169,9 @@ namespace WebApp.Controllers
                     fileName = string.Format("{0}_{2:yyyyMMdd-HHmmss}{1}", nombre, extension, DateTime.Now);
                     gastoModificado.ArchivoComprobante = "/Gastos/" + fileName;
                 }
+
+                List<string> definiciones = new List<string>() { "El gasto", gastoModificado.Nombre };
+                TempData["definiciones"] = definiciones;
                 try
                 {
                     gasto.ModificarGasto(gastoModificado);
@@ -177,26 +180,19 @@ namespace WebApp.Controllers
                         var path = Path.Combine(Server.MapPath("~/Gastos/"), fileName);
                         archivo.SaveAs(path);
                     }
-                    TempData["modificado"] = "Se modifico el registro";
-                    TempData["nombreGasto"] = gastoModificado.Nombre;
+
                     int idConsorcio = gasto.Buscar(gastoModificado.IdGasto).IdConsorcio;
                     return RedirectToAction("VerGastos/" + idConsorcio);
                 }
                 catch
                 {
-                    TempData["error"] = "No se pudo modificar el registro";
-                    TempData["nombreGasto"] = gastoModificado.Nombre;
                     return RedirectToAction("ModificarGasto/" + gastoModificado.IdGasto);
                 }
             }
             else
             {
-                TempData["error"] = "La modificacion del registro no es valida";
-                TempData["nombreGasto"] = gastoModificado.Nombre;
                 return RedirectToAction("ModificarGasto/" + gastoModificado.IdGasto);
             }
-
-
         }
 
         public ActionResult EliminarGasto(int id)
