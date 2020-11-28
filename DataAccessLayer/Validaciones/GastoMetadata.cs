@@ -26,7 +26,7 @@ namespace DataAccessLayer.Modelos
         public System.DateTime FechaGasto { get; set; }
 
         [Display(Name = "Año")]
-        [Required(ErrorMessage = "Ingrese un año de expensa.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")]
+        [Required(ErrorMessage = "Ingrese un año de expensa.")]
         public int AnioExpensa { get; set; }
 
         [Display(Name = "Mes")]

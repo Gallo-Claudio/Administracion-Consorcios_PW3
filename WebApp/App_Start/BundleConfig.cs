@@ -12,8 +12,11 @@ namespace WebApp.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-3.*",
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery-3.*"));
+            
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-3.*",
+            //            "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
                         "~/Scripts/DTables/datatables.min.js",
@@ -26,7 +29,7 @@ namespace WebApp.App_Start
 
 
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/towers-group.css"));
 
             bundles.Add(new StyleBundle("~/Content/dataTables").Include("~/Content/DTables/datatables.min.css"));
 

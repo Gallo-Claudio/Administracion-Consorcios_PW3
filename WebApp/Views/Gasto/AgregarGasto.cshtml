@@ -7,8 +7,6 @@
     Consorcio consorcio = (Consorcio)ViewData["consorcio"];
 }
 
-@Styles.Render("~/Content/gasto-estilos.css")
-
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
 
@@ -17,7 +15,7 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h1 class="mb-5">Consorcio "@consorcio.Nombre" - Cargar nuevo gasto</h1>
+        <h2 class="mb-5">Consorcio "@consorcio.Nombre" - Cargar nuevo gasto</h2>
 
         <form class="row" action="/gasto/agregarGasto" method="post" enctype="multipart/form-data">
             <input type="hidden" name="idConsorcio" value="@consorcio.IdConsorcio" />
@@ -65,6 +63,7 @@
             </div>
 
             <div class="col-3">
+                <p class="obligatorios">* Son campos obligatorios</p>
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/gasto/agregarGasto/1">Guardar y Crear otro Gasto</button>
                 <a href="/gasto/verGastos/@consorcio.IdConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>

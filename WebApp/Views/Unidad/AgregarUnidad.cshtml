@@ -43,12 +43,11 @@
                 @Html.ValidationMessageFor(Model => Model.EmailPropietario)<br />
 
                 @Html.LabelFor(Model => Model.Superficie)&nbsp&nbsp
-                @Html.EditorFor(Model => Model.Superficie)<br /><br />
-
-                * Son campos obligatorios
+                @Html.EditorFor(Model => Model.Superficie)
             </div>
 
             <div class="col-3">
+                <p class="obligatorios">* Son campos obligatorios</p>
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/unidad/agregarUnidad/1">Guardar y Crear otra Unidad</button>
                 <a href="/unidad/listarUnidades/@consorcio.IdConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
