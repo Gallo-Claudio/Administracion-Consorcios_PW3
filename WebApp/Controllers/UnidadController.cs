@@ -83,7 +83,14 @@ namespace WebApp.Controllers
             }
             else
             {
-                ViewData["Consorcio"] = consorcio.Buscar(nuevaUnidad.IdConsorcio);
+                Consorcio busquedaConsorcio = consorcio.Buscar(nuevaUnidad.IdConsorcio);
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                }
+
+                ViewData["Consorcio"] = busquedaConsorcio;
                 return View(nuevaUnidad);
             }
 
@@ -93,6 +100,18 @@ namespace WebApp.Controllers
             switch (id)
             {
                 case 1:
+                    if (TempData["error"] == "true")
+                    {
+                        Consorcio busquedaConsorcio = consorcio.Buscar(nuevaUnidad.IdConsorcio);
+                        var node = SiteMaps.Current.CurrentNode;
+                        if (node != null && node.ParentNode != null)
+                        {
+                            node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                        }
+
+                        ViewData["Consorcio"] = busquedaConsorcio;
+                        return View(nuevaUnidad);
+                    }
                     return RedirectToAction("AgregarUnidad/" + nuevaUnidad.IdConsorcio);
 
                 default:
@@ -143,13 +162,28 @@ namespace WebApp.Controllers
                 {
                     TempData["error"] = "true";
                     TempData["definiciones"] = definiciones;
-                    ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
+
+                    Consorcio busquedaConsorcio = consorcio.Buscar(unidadModificado.IdConsorcio);
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    }
+
+                    ViewData["Consorcio"] = busquedaConsorcio;
                     return View(unidadModificado);
                 }
             }
             else
             {
-                ViewData["Consorcio"] = consorcio.Buscar(unidadModificado.IdConsorcio);
+                Consorcio busquedaConsorcio = consorcio.Buscar(unidadModificado.IdConsorcio);
+                var node = SiteMaps.Current.CurrentNode;
+                if (node != null && node.ParentNode != null)
+                {
+                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                }
+
+                ViewData["Consorcio"] = busquedaConsorcio;
                 return View(unidadModificado);
             }
         }
