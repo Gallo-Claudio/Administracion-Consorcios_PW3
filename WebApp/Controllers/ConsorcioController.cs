@@ -78,23 +78,25 @@ namespace WebApp.Controllers
             List<string> definiciones = new List<string>() { "El consorcio", nuevoConsorcio.Nombre, "creado" };
             TempData["definiciones"] = definiciones;
 
-            switch (id)
+
+            if (TempData["error"] == "true" && id == 1 || id == 2)
             {
-                case 1:
-                    return RedirectToAction("AgregarConsorcio");
-
-                case 2:
-                    if (TempData["error"] == null)
-                    {
-                        return Redirect("/Unidad/AgregarUnidad/" + nuevoConsorcio.IdConsorcio);
-                    }
-                    else
-                    {
+                ViewData["listadoProvincias"] = provincia.Listar();
+                return View(nuevoConsorcio);
+            }
+            else
+            {
+                switch (id)
+                {
+                    case 1:
                         return RedirectToAction("AgregarConsorcio");
-                    }
 
-                default:
-                    return RedirectToAction("ListarConsorcio");
+                    case 2:
+                        return Redirect("/Unidad/AgregarUnidad/" + nuevoConsorcio.IdConsorcio);
+
+                    default:
+                        return RedirectToAction("ListarConsorcio");
+                }
             }
         }
 
@@ -119,11 +121,11 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarConsorcio(Consorcio consorcioModificado)
+        public ActionResult ModificarConsorcio(Consorcio consorcioModificado, string nombreDeConsorcio)
         {
             if (ModelState.IsValid)
             {
-                List<string> definiciones = new List<string>() { "El consorcio", consorcioModificado.Nombre, "modificado" };
+                List<string> definiciones = new List<string>() { "El consorcio", nombreDeConsorcio, "modificado" };
                 TempData["definiciones"] = definiciones;
                 try
                 {
@@ -133,6 +135,7 @@ namespace WebApp.Controllers
                 catch
                 {
                     TempData["error"] = "true";
+                    SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + nombreDeConsorcio + "\" > Editando Consorcio";
                     ViewData["listadoProvincias"] = provincia.Listar();
 
                     int id = consorcioModificado.IdConsorcio;
@@ -144,8 +147,10 @@ namespace WebApp.Controllers
             }
             else
             {
-                ViewData["listadoProvincias"] = provincia.Listar();
+                Consorcio busquedaConsorcioId = consorcio.Buscar(consorcioModificado.IdConsorcio);
+                SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + busquedaConsorcioId.Nombre + "\" > Editando Consorcio";
 
+                ViewData["listadoProvincias"] = provincia.Listar();
                 int id = consorcioModificado.IdConsorcio;
                 ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
 

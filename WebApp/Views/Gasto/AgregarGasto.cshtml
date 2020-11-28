@@ -44,7 +44,7 @@
 
                 @Html.Label("Expensa")*
                 @Html.LabelFor(Model => Model.AnioExpensa, new { @class = "label-expensa" })
-                @Html.EditorFor(Model => Model.AnioExpensa, new { htmlAttributes = new { @class = "input-expensa-anio" } })
+                @Html.EditorFor(Model => Model.AnioExpensa, new { htmlAttributes = new { @class = "input-expensa-anio" } })*
                 @Html.LabelFor(Model => Model.MesExpensa, new { @class = "label-expensa" })
                 @Html.EditorFor(Model => Model.MesExpensa, new { htmlAttributes = new { @class = "input-expensa-mes" } })
                 @Html.ValidationMessageFor(Model => Model.AnioExpensa)
