@@ -163,13 +163,6 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Consorcio consorcioAEliminar = consorcio.Buscar(id);
-
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.Title = "Consorcio \"" + consorcioAEliminar.Nombre + "\"";
-                }
-
                 return View(consorcioAEliminar);
             }
             else

@@ -6,17 +6,13 @@
 	<mvcSiteMapNode title="Mis Consorcios" controller="Consorcio" action="ListarConsorcio">
 
 		<mvcSiteMapNode title="Nuevo Consorcio" action="AgregarConsorcio"/>
-		<mvcSiteMapNode title="Editando Consorcio" controller="Consorcio" action="ModificarConsorcio" preservedRouteParameters="id">
-			
-			<mvcSiteMapNode title="Eliminar" controller="Consorcio" action="EliminarConsorcio" preservedRouteParameters="id"/>
+		<mvcSiteMapNode title="Editando Consorcio" controller="Consorcio" action="ModificarConsorcio" preservedRouteParameters="id">			
 
 			<mvcSiteMapNode title="Unidades" controller="Unidad" action="ListarUnidades" preservedRouteParameters="id">
-				<mvcSiteMapNode title="Editando Unidad" action="ModificarUnidad" preservedRouteParameters="id, id2"/>
 				<mvcSiteMapNode title="Nueva Unidad" action="AgregarUnidad" preservedRouteParameters="id"/>
 			</mvcSiteMapNode>
 
 			<mvcSiteMapNode title="Gastos" controller="Gasto" action="VerGastos" preservedRouteParameters="id">
-				<mvcSiteMapNode title="Editando Gasto" action="ModificarGasto" preservedRouteParameters="id, id2"/>
 				<mvcSiteMapNode title="Cargar nuevo gasto" action="AgregarGasto" preservedRouteParameters="id"/>
 			</mvcSiteMapNode>
 

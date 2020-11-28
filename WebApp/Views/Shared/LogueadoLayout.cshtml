@@ -1,5 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/BaseLayout.cshtml";
+    List<string> listado = new List<string>();
+    listado = ViewData["breadcumb"] as List<string>;
 }
 
 @section Encabezado{
@@ -31,6 +33,18 @@
     </container>
 
     <div class="colorbody">
+
+        @if (listado != null)
+        {
+            <a href="/Consorcio/ListarConsorcio">Mis Consorcios</a>
+            <span> > </span>
+            <a href="/Consorcio/ModificarConsorcio/@listado[1]">Consorcio "@listado[0]"</a>
+            <span> > </span>
+            <a href="@listado[3]@listado[1]">@listado[2]</a>
+            <span>@listado[4]</span>
+            <br />
+        }
+
         @Html.MvcSiteMap().SiteMapPath()
     </div>
 }
