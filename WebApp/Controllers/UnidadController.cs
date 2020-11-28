@@ -125,14 +125,9 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Unidad unidadFuncional = unidad.Buscar(id);
-
-                Consorcio busquedaConsorcio = consorcio.Buscar(unidadFuncional.IdConsorcio);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
-                }
-
+                Consorcio busquedaConsorcio = unidadFuncional.Consorcio;
+                List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, ""+busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
+                ViewData["breadcumb"] = breadcumb;
                 ViewData["Consorcio"] = busquedaConsorcio;
 
                 return View(unidadFuncional);

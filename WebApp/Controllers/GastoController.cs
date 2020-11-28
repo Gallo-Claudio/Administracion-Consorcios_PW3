@@ -141,12 +141,8 @@ namespace WebApp.Controllers
             {
                 Gasto busqueadaGasto = gasto.Buscar(id);
                 Consorcio consorcioResultado = busqueadaGasto.Consorcio;
-
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + consorcioResultado.Nombre + "\"";
-                }
+                List<string> mensaje = new List<string>() { consorcioResultado.Nombre, "" + consorcioResultado.IdConsorcio, "Gastos", "/Gasto/VerGastos/", "> Editando Gasto" };
+                ViewData["breadcumb"] = mensaje;
 
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
