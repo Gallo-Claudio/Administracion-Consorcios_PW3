@@ -1,9 +1,7 @@
 ﻿.label-expensa {
     width: auto;
 }
-/*.input-expensa { 
-    width: 74px;
-}*/
+
 .input-expensa-anio {
     width: 63px;
     margin-right: 23px;
@@ -14,7 +12,8 @@
 }
 
 .field-validation-error {
-    color: red;
+    color: #ff4141;
+    margin-left: 10px;
 }
 
 .botones-modificar {
@@ -106,4 +105,95 @@ label[for=" nuestroinput"] {
     padding-left: 5px;
     padding-top: 2px;
     margin-right: 7px;
+}
+
+.obligatorios {
+    padding-bottom: 4px;
+    border-bottom: 1px solid;
+    margin-bottom: 18px;
+}
+
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.footer-box {
+    width: fit-content;
+}
+
+
+form.inicio input, form.registro_usuario input {
+    margin-top: 12px;
+    width: 350px;
+}
+
+form.inicio {
+    margin-top: -60px;
+}
+
+input, textarea {
+    width: 206px;
+}
+
+select {
+    height: 30px;
+    width: 206px;
+}
+
+label {
+    width: 200px;
+    margin-bottom: 18px;
+}
+
+.navbar {
+    padding: 0rem 1rem;
+}
+
+.btn-inicio {
+    font-size: 22px;
+    display: inline-block;
+}
+
+.ingresar {
+    margin-top: 25px;
+    width: 200px;
+}
+
+.recuadro {
+    border: 1px solid;
+    width: fit-content;
+    padding: 20px 20px 35px 20px;
+    display: inline-block;
+}
+
+body div.colorbody {
+    background-color: #222 !important;
+    max-width: 1140px;
+    padding-top: 15px;
+    height: 50px;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.anonimo {
+    height: 180px;
+    display: block;
+}
+
+.recuadro-elimnar {
+    margin-top: 150px;
+    background-color: rgb(231 76 60 / 22%);
+}
+
+.registro {
+    margin-top: -90px;
 }

@@ -41,11 +41,11 @@
 
                 @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
                 @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
+                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)
             </div>
 
             <div class="col-3">
-                * Son campos obligatorios<br /><br />
+                <p class="obligatorios">* Son campos obligatorios</p>
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/1">Guardar y Crear otro Consorcio</button>
                 <button class="btn btn-block btn-sm btn-primary" type="submit" formaction="/consorcio/agregarConsorcio/2">Guardar y Crear Unidades</button>

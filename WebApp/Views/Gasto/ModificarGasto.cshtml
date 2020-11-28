@@ -6,7 +6,6 @@
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
 }
 
-@Styles.Render("~/Content/gasto-estilos.css")
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
 
@@ -64,7 +63,7 @@
             </div>
 
             <div class="col-3">
-                * Son campos obligatorios<br /><br />
+                <p class="obligatorios">* Son campos obligatorios</p>
                 <a href="/gasto/eliminarGasto/@Model.IdGasto" class="btn btn-block btn-sm btn-danger botones-modificar">Eliminar</a>
                 <button class="btn btn-block btn-sm btn-primary botones-modificar" type="submit">Modificar</button>
                 <a href="/gasto/verGastos/@Model.IdConsorcio" class="btn btn-block btn-sm btn-secondary botones-modificar">Cancelar</a>
@@ -72,7 +71,7 @@
                 @{
                     string filename = Model.ArchivoComprobante.Replace("/Gastos/", "");
                 }
-                @Html.ActionLink("Descargar Comprobante", "Download", new { file = filename })
+                @Html.ActionLink("Descargar Comprobante", "Download", new { file = filename }, new { @class = "btn btn-block btn-sm btn-primary botones-modificar" })
 
             </div>
 

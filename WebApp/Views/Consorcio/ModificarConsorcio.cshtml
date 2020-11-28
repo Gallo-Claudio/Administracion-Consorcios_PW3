@@ -47,19 +47,20 @@
 
                 @Html.LabelFor(Model => Model.DiaVencimientoExpensas)*
                 @Html.EditorFor(Model => Model.DiaVencimientoExpensas)
-                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)<br /><br />
-
-                * Son campos obligatorios
+                @Html.ValidationMessageFor(Model => Model.DiaVencimientoExpensas)
             </div>
 
 
             <div class="col-3">
                 El consorcio tiene @ViewBag.cantidadUnidades Unidades<br /><br />
 
+
+
                 <a href="/unidad/listarUnidad/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Unidades</a>
                 <a href="/expensa/listarExpensa/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Expensas</a>
-                <a href="/gasto/listarGasto/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Gastos</a><br /><br />
+                <a href="/gasto/listarGasto/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Gastos</a><br /><br /><br />
 
+                <p class="obligatorios">* Son campos obligatorios</p>
                 <a href="/consorcio/eliminarConsorcio/@Model.IdConsorcio" class="btn btn-block btn-sm btn-danger">Eliminar Consorcio</a>
                 <button class="btn btn-block btn-sm btn-primary" type="submit">Guardar</button>
                 <a href="/consorcio/listarConsorcio" class="btn btn-block btn-sm btn-secondary">Cancelar</a>
