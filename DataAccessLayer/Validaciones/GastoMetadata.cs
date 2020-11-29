@@ -24,18 +24,19 @@ namespace DataAccessLayer.Modelos
         public string Descripcion { get; set; }
 
         [Display(Name = "Fecha")]
+        [Required(ErrorMessage = "La fecha es obligatoria")]
         [DataType(DataType.Date, ErrorMessage = "Solamente fecha")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime FechaGasto { get; set; }
 
         [Display(Name = "Año")]
         [Required(ErrorMessage = "Ingrese un año de expensa.")]
-        [RangeYearToCurrent(1900, ErrorMessage = "El año es invalido")]
+        [RangeYearToCurrent(ErrorMessage = "El año es invalido. Solo puede ser el actual o el anterior")]
         public int AnioExpensa { get; set; }
 
         [Display(Name = "Mes")]
         [Required(ErrorMessage = "Ingrese un mes de expensa")]
-        [Range(1, 12, ErrorMessage = "El mes debe estar entre 1 y 12")]
+        [RangoMes(1, ErrorMessage = "El mes debe estar entre 1 y el mes actual")]
         public int MesExpensa { get; set; }
 
         [Display(Name = "Comprobante")]

@@ -9,9 +9,9 @@ using System.Web.Mvc;
 namespace DataAccessLayer.Validaciones
 {
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    public class RangeYearToCurrent : RangeAttribute, IClientValidatable
+    public class RangoMes : RangeAttribute, IClientValidatable
     {
-        public RangeYearToCurrent() : base((DateTime.Today.Year)-1, DateTime.Today.Year) { }
+        public RangoMes(int from) : base(from, DateTime.Today.Month) { }
 
         #region IClientValidatable Members
 
