@@ -30,7 +30,7 @@ namespace DataAccessLayer.Modelos
 
         [Display(Name = "Año")]
         [Required(ErrorMessage = "Ingrese un año de expensa.")]
-        [RangeYearToCurrent(1995, ErrorMessage = "El año es invalido")]
+        [RangeYearToCurrent(1900, ErrorMessage = "El año es invalido")]
         public int AnioExpensa { get; set; }
 
         [Display(Name = "Mes")]
