@@ -121,6 +121,7 @@
     <Compile Include="Validaciones\ConsorcioMetadata.cs" />
     <Compile Include="Validaciones\GastoMetadata.cs" />
     <Compile Include="Validaciones\RangeYearToCurrent.cs" />
+    <Compile Include="Validaciones\RangoMes.cs" />
     <Compile Include="Validaciones\Unidad.cs" />
     <Compile Include="Validaciones\UnidadMetadata.cs" />
   </ItemGroup>
