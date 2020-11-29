@@ -13,28 +13,43 @@ namespace WebApp.Controllers
     {
         ConsorcioServicio consorcio;
         UnidadServicio unidad;
+        UsuarioServicios usuario;
 
         public UnidadController()
         {
             ContextoEntities contexto = new ContextoEntities();
             consorcio = new ConsorcioServicio(contexto);
             unidad = new UnidadServicio(contexto);
+            usuario = new UsuarioServicios(contexto);
         }
 
         public ActionResult ListarUnidades(int id)
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.Buscar(id);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
+
+                if (autentica)
                 {
-                    node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    }
+
+                    ViewBag.idConsorcio = id;
+                    List<Unidad> listadoUnidades = unidad.ListarUnidades(id);
+                    return View(listadoUnidades);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
                 }
 
-                ViewBag.idConsorcio = id;
-                List<Unidad> listadoUnidades = unidad.ListarUnidades(id);
-                return View(listadoUnidades);
+
             }
             else
             {
@@ -49,15 +64,26 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.Buscar(id);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
-                }
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
 
-                ViewData["Consorcio"] = busquedaConsorcio;
-                return View();
+                if (autentica)
+                {
+                    Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    }
+
+                    ViewData["Consorcio"] = busquedaConsorcio;
+                    return View();
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -126,11 +152,23 @@ namespace WebApp.Controllers
             {
                 Unidad unidadFuncional = unidad.Buscar(id);
                 Consorcio busquedaConsorcio = unidadFuncional.Consorcio;
-                List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, ""+busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
-                ViewData["breadcumb"] = breadcumb;
-                ViewData["Consorcio"] = busquedaConsorcio;
 
-                return View(unidadFuncional);
+                bool autentica = usuario.AutenticacionDatosPorUsuario(busquedaConsorcio.IdConsorcio, Session["IdUsuario"]);
+
+                if (autentica)
+                {
+                    List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, "" + busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
+                    ViewData["breadcumb"] = breadcumb;
+                    ViewData["Consorcio"] = busquedaConsorcio;
+
+                    return View(unidadFuncional);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -189,15 +227,18 @@ namespace WebApp.Controllers
             {
                 Unidad unidadAEliminar = unidad.Buscar(id);
 
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.Title = "Consorcio \"" + unidadAEliminar.Nombre + "\"";
-                }
+                bool autentica = usuario.AutenticacionDatosPorUsuario(unidadAEliminar.Consorcio.IdConsorcio, Session["IdUsuario"]);
 
-                Consorcio consorcioBuscado = consorcio.Buscar(unidadAEliminar.IdConsorcio);
-                ViewBag.NombreConsorcio = consorcioBuscado.Nombre;
-                return View(unidadAEliminar);
+                if (autentica)
+                {
+                    return View(unidadAEliminar);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {

@@ -12,11 +12,13 @@ namespace Servicios
     public class UsuarioServicios
     {
         UsuarioRepositorio repoUsuario;
+        ConsorcioServicio consorcio;
 
         public UsuarioServicios(ContextoEntities contexto)
         {
             ContextoEntities ctx = contexto;
             repoUsuario = new UsuarioRepositorio(ctx);
+            consorcio = new ConsorcioServicio(ctx);
         }
 
 
@@ -74,6 +76,21 @@ namespace Servicios
         {
             Usuario usuarioActualizar = repoUsuario.BuscaPorMail(Email);
             repoUsuario.UltimoLogin(usuarioActualizar);
+        }
+
+        public bool AutenticacionDatosPorUsuario(int id, object Session)
+        {
+            List<Consorcio> listadoConsorcio = consorcio.ListarConsorcios(Session);
+
+            foreach (Consorcio consorcio in listadoConsorcio)
+            {
+                if (consorcio.IdConsorcio == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
