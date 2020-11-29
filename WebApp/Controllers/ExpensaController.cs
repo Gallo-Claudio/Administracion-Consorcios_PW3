@@ -38,7 +38,7 @@ namespace WebApp.Controllers
 
             ViewData["CantidadUnidades"] = unidad.ListarUnidades(id).Count;
             ViewData["Consorcio"] = Consorcio;
-            return View(expensas);
+            return View(expensaListado);
         }
     }
 }
