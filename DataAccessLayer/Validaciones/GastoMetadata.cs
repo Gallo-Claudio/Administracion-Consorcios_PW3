@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DataAccessLayer.Validaciones;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccessLayer.Modelos
 {
     internal class GastoMetadata
     {
+
         [Required(ErrorMessage = "Debe ingresar un nombre")]
         [StringLength(200, ErrorMessage = "No puede ingresar un nombre tan largo")]
         public string Nombre { get; set; }
@@ -27,6 +30,7 @@ namespace DataAccessLayer.Modelos
 
         [Display(Name = "Año")]
         [Required(ErrorMessage = "Ingrese un año de expensa.")]
+        [RangeYearToCurrent(1995, ErrorMessage = "El año es invalido")]
         public int AnioExpensa { get; set; }
 
         [Display(Name = "Mes")]
