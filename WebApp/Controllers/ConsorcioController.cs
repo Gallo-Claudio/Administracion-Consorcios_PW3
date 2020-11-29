@@ -15,6 +15,7 @@ namespace WebApp.Controllers
         ProvinciaServicio provincia;
         UnidadServicio unidad;
         GastoServicio gasto;
+        UsuarioServicios usuario;
 
         public ConsorcioController()
         {
@@ -23,6 +24,7 @@ namespace WebApp.Controllers
             provincia = new ProvinciaServicio(contexto);
             unidad = new UnidadServicio(contexto);
             gasto = new GastoServicio(contexto);
+            usuario = new UsuarioServicios(contexto);
         }
 
         public ActionResult ListarConsorcio()
@@ -104,13 +106,24 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcioId = consorcio.Buscar(id);
-                SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + busquedaConsorcioId.Nombre + "\" > Editando Consorcio";
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
 
-                ViewData["listadoProvincias"] = provincia.Listar();
-                ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
+                if (autentica)
+                {
+                    Consorcio busquedaConsorcioId = consorcio.Buscar(id);
+                    SiteMaps.Current.CurrentNode.Title = "Consorcio \"" + busquedaConsorcioId.Nombre + "\" > Editando Consorcio";
 
-                return View(busquedaConsorcioId);
+                    ViewData["listadoProvincias"] = provincia.Listar();
+                    ViewBag.cantidadUnidades = unidad.ListarUnidades(id).Count;
+
+                    return View(busquedaConsorcioId);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -163,7 +176,19 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Consorcio consorcioAEliminar = consorcio.Buscar(id);
-                return View(consorcioAEliminar);
+
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
+
+                if (autentica)
+                {
+                    return View(consorcioAEliminar);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {

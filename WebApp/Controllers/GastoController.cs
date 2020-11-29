@@ -17,6 +17,7 @@ namespace WebApp.Controllers
         GastoServicio gasto;
         ConsorcioServicio consorcio;
         TipoGastoServicio tipoGasto;
+        UsuarioServicios usuario;
 
         public GastoController()
         {
@@ -24,22 +25,34 @@ namespace WebApp.Controllers
             gasto = new GastoServicio(contexto);
             consorcio = new ConsorcioServicio(contexto);
             tipoGasto = new TipoGastoServicio(contexto);
+            usuario = new UsuarioServicios(contexto);
         }
 
         public ActionResult VerGastos(int id)
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.Buscar(id);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
-                }
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
 
-                ViewData["consorcio"] = busquedaConsorcio;
-                List<Gasto> listadoGasto = gasto.ListarGastos(id);
-                return View(listadoGasto);
+                if (autentica)
+                {
+                    Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    }
+
+                    ViewData["consorcio"] = busquedaConsorcio;
+                    List<Gasto> listadoGasto = gasto.ListarGastos(id);
+                    return View(listadoGasto);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -53,18 +66,29 @@ namespace WebApp.Controllers
         {
             if (Session["IdUsuario"] != null)
             {
-                Consorcio busquedaConsorcio = consorcio.Buscar(id);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
+                bool autentica = usuario.AutenticacionDatosPorUsuario(id, Session["IdUsuario"]);
+
+                if (autentica)
                 {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    Consorcio busquedaConsorcio = consorcio.Buscar(id);
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
+                    }
+
+                    List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
+
+                    ViewData["consorcio"] = busquedaConsorcio;
+                    ViewData["listadoTipoGasto"] = listaTipoGasto;
+                    return View();
                 }
-
-                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
-
-                ViewData["consorcio"] = busquedaConsorcio;
-                ViewData["listadoTipoGasto"] = listaTipoGasto;
-                return View();
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -141,15 +165,27 @@ namespace WebApp.Controllers
             {
                 Gasto busqueadaGasto = gasto.Buscar(id);
                 Consorcio consorcioResultado = busqueadaGasto.Consorcio;
-                List<string> mensaje = new List<string>() { consorcioResultado.Nombre, "" + consorcioResultado.IdConsorcio, "Gastos", "/Gasto/VerGastos/", "> Editando Gasto" };
-                ViewData["breadcumb"] = mensaje;
 
-                List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
-                TempData["listadoTipoGasto"] = listaTipoGasto;
-                ViewData["consorcioNombre"] = consorcioResultado.Nombre;
+                bool autentica = usuario.AutenticacionDatosPorUsuario(consorcioResultado.IdConsorcio, Session["IdUsuario"]);
 
-                ViewBag.nombreArchivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
-                return View(busqueadaGasto);
+                if (autentica)
+                {
+                    List<string> mensaje = new List<string>() { consorcioResultado.Nombre, "" + consorcioResultado.IdConsorcio, "Gastos", "/Gasto/VerGastos/", "> Editando Gasto" };
+                    ViewData["breadcumb"] = mensaje;
+
+                    List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
+                    TempData["listadoTipoGasto"] = listaTipoGasto;
+                    ViewData["consorcioNombre"] = consorcioResultado.Nombre;
+
+                    ViewBag.nombreArchivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
+                    return View(busqueadaGasto);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {
@@ -225,7 +261,19 @@ namespace WebApp.Controllers
             if (Session["IdUsuario"] != null)
             {
                 Gasto busqueadaGastoId = gasto.Buscar(id);
-                return View(busqueadaGastoId);
+
+                bool autentica = usuario.AutenticacionDatosPorUsuario(busqueadaGastoId.Consorcio.IdConsorcio, Session["IdUsuario"]);
+
+                if (autentica)
+                {
+                    return View(busqueadaGastoId);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
             else
             {

@@ -14,6 +14,7 @@ namespace WebApp.Controllers
         ExpensasServicio expensa;
         ConsorcioServicio consorcio;
         UnidadServicio unidad;
+        UsuarioServicios usuario;
 
         public ExpensaController()
         {
@@ -21,24 +22,47 @@ namespace WebApp.Controllers
             consorcio = new ConsorcioServicio(contexto);
             unidad = new UnidadServicio(contexto);
             expensa = new ExpensasServicio();
+            usuario = new UsuarioServicios(contexto);
         }
 
         public ActionResult ListarExpensa(int id)
         {
-            Consorcio Consorcio = consorcio.Buscar(id);
-            var node = SiteMaps.Current.CurrentNode;
-            if (node != null && node.ParentNode != null)
+            if (Session["IdUsuario"] != null)
             {
-                node.ParentNode.Title = "Consorcio \"" + Consorcio.Nombre + "\"";
+                Consorcio Consorcio = consorcio.Buscar(id);
+
+                bool autentica = usuario.AutenticacionDatosPorUsuario(Consorcio.IdConsorcio, Session["IdUsuario"]);
+
+                if (autentica)
+                {
+
+                    var node = SiteMaps.Current.CurrentNode;
+                    if (node != null && node.ParentNode != null)
+                    {
+                        node.ParentNode.Title = "Consorcio \"" + Consorcio.Nombre + "\"";
+                    }
+
+                    List<sp_Expensas_Result> expensas = expensa.GetExpensas(id);
+
+                    List<sp_Expensas_Result> expensaListado = expensa.DeterminaMesActual(expensas);
+
+                    ViewData["CantidadUnidades"] = unidad.ListarUnidades(id).Count;
+                    ViewData["Consorcio"] = Consorcio;
+                    return View(expensaListado);
+                }
+                else
+                {
+                    @ViewBag.Title = "Acceso de datos indebidos";
+                    ViewBag.DescripcionError = "Los datos solicitados no son de su propiedad";
+                    return View("~/views/error/PaginaError.cshtml");
+                }
             }
-
-            List<sp_Expensas_Result> expensas = expensa.GetExpensas(id);
-
-            List<sp_Expensas_Result> expensaListado = expensa.DeterminaMesActual(expensas);
-
-            ViewData["CantidadUnidades"] = unidad.ListarUnidades(id).Count;
-            ViewData["Consorcio"] = Consorcio;
-            return View(expensaListado);
+            else
+            {
+                TempData["Controlador"] = "Expensa";
+                TempData["Accion"] = "ListarExpensa";
+                return RedirectToAction("Ingresar", "Home");
+            }
         }
     }
 }
