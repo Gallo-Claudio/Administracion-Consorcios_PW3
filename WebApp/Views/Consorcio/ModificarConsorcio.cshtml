@@ -15,7 +15,7 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h2 class="mb-5">Modificar un consorcio</h2>
+        <h2 class="mb-5">Consorcio "@Model.Nombre" - Editando</h2>
 
         <form class="row" action="/consorcio/modificarConsorcio" method="post">
             <input hidden name="IdConsorcio" value="@Model.IdConsorcio" />
@@ -54,11 +54,9 @@
             <div class="col-3">
                 El consorcio tiene @ViewBag.cantidadUnidades Unidades<br /><br />
 
-
-
-                <a href="/unidad/listarUnidad/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Unidades</a>
+                <a href="/unidad/listarUnidades/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Unidades</a>
                 <a href="/expensa/listarExpensa/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Expensas</a>
-                <a href="/gasto/listarGasto/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Gastos</a><br /><br /><br />
+                <a href="/gasto/verGastos/@Model.IdConsorcio" class="btn btn-block btn-sm btn-primary">Ver Gastos</a><br /><br /><br />
 
                 <p class="obligatorios">* Son campos obligatorios</p>
                 <a href="/consorcio/eliminarConsorcio/@Model.IdConsorcio" class="btn btn-block btn-sm btn-danger">Eliminar Consorcio</a>
