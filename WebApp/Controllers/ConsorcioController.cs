@@ -81,7 +81,7 @@ namespace WebApp.Controllers
             TempData["definiciones"] = definiciones;
 
 
-            if (TempData["error"] == "true" && id == 1 || id == 2)
+            if ((TempData["error"] == "true" && id == 1) || (TempData["error"] == "true" && id == 2))
             {
                 ViewData["listadoProvincias"] = provincia.Listar();
                 return View(nuevoConsorcio);

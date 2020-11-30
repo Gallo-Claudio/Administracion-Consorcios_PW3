@@ -10,7 +10,6 @@
 @Scripts.Render("~/bundles/dataTables")
 @Scripts.Render("~/bundles/sweetAlert")
 
-
 @Html.Partial("_PartialMensajes")
 
 <div class="container mb-5">
@@ -34,7 +33,7 @@
                 @Html.ValidationMessageFor(Model => Model.Nombre)<br />
 
                 @Html.LabelFor(Model => Model.Descripcion)&nbsp&nbsp
-                @Html.EditorFor(Model => Model.Descripcion)<br />
+                @Html.TextAreaFor(Model => Model.Descripcion)<br />
 
                 @Html.LabelFor(Model => Model.FechaGasto)*
                 @Html.EditorFor(Model => Model.FechaGasto, new { htmlAttributes = new { @type = "date" } })
