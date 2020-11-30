@@ -14,11 +14,12 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h2 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Editando gasto "@Model.Nombre"</h2>
+        <h2 class="mb-5">Consorcio "@ViewData["consorcioNombre"]" - Editando gasto "@ViewBag.nombreGasto"</h2>
 
         <form class="row" action="/gasto/ModificarGasto" method="post" enctype="multipart/form-data">
             @Html.HiddenFor(Model => Model.IdGasto)
             <input type="hidden" name="idConsorcio" value="@Model.IdConsorcio" />
+            <input hidden name="nombreDeGasto" value="@ViewBag.nombreGasto" />
 
             <div class="col-9">
 

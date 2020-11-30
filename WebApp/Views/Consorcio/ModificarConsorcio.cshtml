@@ -4,7 +4,6 @@
 @{
     ViewBag.Titulo = "Modificación de Consorcios";
     Layout = "~/Views/Shared/LogueadoLayout.cshtml";
-    string nombreDeConsorcio = Model.Nombre;
 }
 
 @Scripts.Render("~/bundles/dataTables")
@@ -15,13 +14,13 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h2 class="mb-5">Consorcio "@Model.Nombre" - Editando</h2>
+        <h2 class="mb-5">Consorcio "@ViewBag.nombreConsorcio" - Editando</h2>
 
         <form class="row" action="/consorcio/modificarConsorcio" method="post">
             <input hidden name="IdConsorcio" value="@Model.IdConsorcio" />
             <input hidden name="IdUsuarioCreador" value="@Model.IdUsuarioCreador" />
             <input hidden name="FechaCreacion" value="@Model.FechaCreacion" />
-            <input hidden name="nombreDeConsorcio" value="@nombreDeConsorcio" />
+            <input hidden name="nombreDeConsorcio" value="@ViewBag.nombreConsorcio" />
 
             <div class="col-9">
 

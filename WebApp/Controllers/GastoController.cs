@@ -178,6 +178,7 @@ namespace WebApp.Controllers
                     ViewData["consorcioNombre"] = consorcioResultado.Nombre;
 
                     ViewBag.nombreArchivo = Regex.Replace(busqueadaGasto.ArchivoComprobante, @"/Gastos/", "");
+                    ViewBag.nombreGasto = busqueadaGasto.Nombre;
                     return View(busqueadaGasto);
                 }
                 else
@@ -196,7 +197,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarGasto(Gasto gastoModificado, HttpPostedFileBase archivo)
+        public ActionResult ModificarGasto(Gasto gastoModificado, HttpPostedFileBase archivo, string nombreDeGasto)
         {
             if (ModelState.IsValid)
             {
@@ -205,10 +206,12 @@ namespace WebApp.Controllers
                 {
                     string nombreArchivoConFecha = gasto.NombreArchivoASubir(archivo);
                     gastoModificado.ArchivoComprobante = "/Gastos/" + nombreArchivoConFecha;
+                    fileName = nombreArchivoConFecha;
                 }
 
                 List<string> definiciones = new List<string>() { "El gasto", gastoModificado.Nombre, "modificado" };
                 TempData["definiciones"] = definiciones;
+
                 try
                 {
                     gasto.ModificarGasto(gastoModificado);
@@ -224,16 +227,14 @@ namespace WebApp.Controllers
                 {
                     TempData["error"] = "true";
                     Consorcio consorcioResultado = consorcio.Buscar(gastoModificado.IdConsorcio);
-                    var node = SiteMaps.Current.CurrentNode;
-                    if (node != null && node.ParentNode != null)
-                    {
-                        node.ParentNode.ParentNode.Title = "Consorcio \"" + consorcioResultado.Nombre + "\"";
-                    }
+                    List<string> mensaje = new List<string>() { consorcioResultado.Nombre, "" + consorcioResultado.IdConsorcio, "Gastos", "/Gasto/VerGastos/", "> Editando Gasto" };
+                    ViewData["breadcumb"] = mensaje;
 
                     List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                     TempData["listadoTipoGasto"] = listaTipoGasto;
                     ViewData["consorcioNombre"] = consorcioResultado.Nombre;
 
+                    ViewBag.nombreGasto = nombreDeGasto;
                     ViewBag.nombreArchivo = Regex.Replace(gastoModificado.ArchivoComprobante, @"/Gastos/", "");
                     return View(gastoModificado);
                 }
@@ -241,16 +242,14 @@ namespace WebApp.Controllers
             else
             {
                 Consorcio consorcioResultado = consorcio.Buscar(gastoModificado.IdConsorcio);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + consorcioResultado.Nombre + "\"";
-                }
+                List<string> mensaje = new List<string>() { consorcioResultado.Nombre, "" + consorcioResultado.IdConsorcio, "Gastos", "/Gasto/VerGastos/", "> Editando Gasto" };
+                ViewData["breadcumb"] = mensaje;
 
                 List<TipoGasto> listaTipoGasto = tipoGasto.Listar();
                 TempData["listadoTipoGasto"] = listaTipoGasto;
                 ViewData["consorcioNombre"] = consorcioResultado.Nombre;
 
+                ViewBag.nombreGasto = nombreDeGasto;
                 ViewBag.nombreArchivo = Regex.Replace(gastoModificado.ArchivoComprobante, @"/Gastos/", "");
                 return View(gastoModificado);
             }

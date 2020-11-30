@@ -160,7 +160,7 @@ namespace WebApp.Controllers
                     List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, "" + busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
                     ViewData["breadcumb"] = breadcumb;
                     ViewData["Consorcio"] = busquedaConsorcio;
-
+                    ViewBag.nombreUnidad = unidadFuncional.Nombre;
                     return View(unidadFuncional);
                 }
                 else
@@ -180,7 +180,7 @@ namespace WebApp.Controllers
 
 
         [HttpPost]
-        public ActionResult ModificarUnidad(Unidad unidadModificado)
+        public ActionResult ModificarUnidad(Unidad unidadModificado, string nombreDeUnidad)
         {
             if (ModelState.IsValid)
             {
@@ -197,12 +197,10 @@ namespace WebApp.Controllers
                     TempData["definiciones"] = definiciones;
 
                     Consorcio busquedaConsorcio = consorcio.Buscar(unidadModificado.IdConsorcio);
-                    var node = SiteMaps.Current.CurrentNode;
-                    if (node != null && node.ParentNode != null)
-                    {
-                        node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
-                    }
+                    List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, "" + busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
+                    ViewData["breadcumb"] = breadcumb;
 
+                    ViewBag.nombreUnidad = nombreDeUnidad;
                     ViewData["Consorcio"] = busquedaConsorcio;
                     return View(unidadModificado);
                 }
@@ -210,12 +208,10 @@ namespace WebApp.Controllers
             else
             {
                 Consorcio busquedaConsorcio = consorcio.Buscar(unidadModificado.IdConsorcio);
-                var node = SiteMaps.Current.CurrentNode;
-                if (node != null && node.ParentNode != null)
-                {
-                    node.ParentNode.ParentNode.Title = "Consorcio \"" + busquedaConsorcio.Nombre + "\"";
-                }
+                List<string> breadcumb = new List<string>() { busquedaConsorcio.Nombre, "" + busquedaConsorcio.IdConsorcio, "Unidades", "/Unidad/ListarUnidades/", "> Editando Unidad" };
+                ViewData["breadcumb"] = breadcumb;
 
+                ViewBag.nombreUnidad = nombreDeUnidad;
                 ViewData["Consorcio"] = busquedaConsorcio;
                 return View(unidadModificado);
             }

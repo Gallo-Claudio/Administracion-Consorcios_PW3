@@ -15,7 +15,7 @@
 
 <div class="container mb-5">
     <div class="pb-5">
-        <h2 class="mb-5">Consorcio "@consorcio.Nombre" - Editando unidad "@Model.Nombre"</h2>
+        <h2 class="mb-5">Consorcio "@consorcio.Nombre" - Editando unidad "@ViewBag.nombreUnidad"</h2>
 
         <form class="row" action="/unidad/modificarUnidad" method="post">
 
@@ -23,6 +23,7 @@
 
                 <input hidden name="IdConsorcio" value="@consorcio.IdConsorcio" />
                 <input hidden name="IdUnidad" value="@Model.IdUnidad" />
+                <input hidden name="nombreDeUnidad" value="@ViewBag.nombreUnidad" />
 
 
                 <label>Consorcio:</label>&nbsp&nbsp&nbsp<input type="text" value="@consorcio.Nombre" disabled><br>
