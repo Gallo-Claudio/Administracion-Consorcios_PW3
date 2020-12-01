@@ -1,9 +1,9 @@
 USE [master]
 GO
 /****** Object:  Database [PW3_TP_20202C]    Script Date: 22/10/2020 11:28:30 ******/
-CREATE DATABASE [PW3_TP_20202CGALLO]
+CREATE DATABASE [PW3_TP_20202C]
  GO
-USE [PW3_TP_20202CGALLO]
+USE [PW3_TP_20202C]
 GO
 /****** Object:  Table [dbo].[Consorcio]    Script Date: 22/10/2020 11:28:30 ******/
 SET ANSI_NULLS ON
@@ -119,18 +119,34 @@ CREATE TABLE [dbo].[Usuario](
 GO
 SET IDENTITY_INSERT [dbo].[Consorcio] ON 
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (1, N'Edificio Godoy Cruz', 2, N'CABA', N'Godoy Cruz', 2369, 6, CAST(N'2020-09-29T22:50:00.837' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (1, N'Edificio Godoy Cruz', 2, N'CABA', N'Godoy Cruz', 2369, 6, CAST(N'2020-09-29T22:50:00.837' AS DateTime), 1)
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2, N'Edificio Arieta', 1, N'San Justo', N'Arieta', 2748, 12, CAST(N'2020-09-29T22:50:48.663' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2, N'Edificio Arieta', 1, N'San Justo', N'Arieta', 2748, 12, CAST(N'2020-09-29T22:50:48.663' AS DateTime), 1)
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (3, N'Edificio Alberdi', 2, N'CABA', N'Alberdi', 2387, 1, CAST(N'2020-09-29T22:51:37.607' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (3, N'Edificio Alberdi', 2, N'CABA', N'Alberdi', 2387, 1, CAST(N'2020-09-29T22:51:37.607' AS DateTime), 1)
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (4, N'Torres Florencia', 1, N'Ramos Mejia', N'Dr. Gabriel Ardoino', 364, 5, CAST(N'2020-09-29T22:51:56.580' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (4, N'Torres Florencia', 1, N'Ramos Mejia', N'Dr. Gabriel Ardoino', 364, 5, CAST(N'2020-09-29T22:51:56.580' AS DateTime), 1)
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (5, N'Vilanova', 1, N'Ramos Mejia', N'Tacuari', 620, 21, CAST(N'2020-09-29T22:53:31.700' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (5, N'Vilanova', 1, N'Ramos Mejia', N'Tacuari', 620, 21, CAST(N'2020-09-29T22:53:31.700' AS DateTime), 1)
 GO
-INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (6, N'Altos de Gandara', 1, N'Haedo', N'Juez de la Gandara', 851, 2, CAST(N'2020-09-29T22:58:32.020' AS DateTime), NULL)
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (6, N'Altos de Gandara', 1, N'Haedo', N'Juez de la Gandara', 851, 2, CAST(N'2020-09-29T22:58:32.020' AS DateTime), 1)
 GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2104, N'Le Parc', 6, N'Villa Carlos Paz', N'Amenegui', 562, 21, CAST(N'2020-11-30 18:31:56.820' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2105, N'Torres Altamira', 11, N'Santa Rosa', N'Rio San Tome', 763, 15, CAST(N'2020-11-30 18:33:40.060' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2106, N'Manatiales', 3, N'Andagalá', N'Cerro colorado', 467, 25, CAST(N'2020-11-30 18:35:41.677' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2107, N'Las Carmelias', 2, N'CABA', N'Rivadavia', 7561, 7, CAST(N'2020-11-30 18:37:17.973' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2108, N'Plaza Bizkaia', 1, N'Morón', N'Farewell', 297, 11, CAST(N'2020-11-30 18:38:41.230' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2109, N'Torres Mannesi', 2, N'CABA', N'Bermejo', 423, 9, CAST(N'2020-11-30 18:40:31.870' AS DateTime), 1)
+GO
+INSERT [dbo].[Consorcio] ([IdConsorcio], [Nombre], [IdProvincia], [Ciudad], [Calle], [Altura], [DiaVencimientoExpensas], [FechaCreacion], [IdUsuarioCreador]) VALUES (2110, N'Complejo Candelaria', 2, N'CABA', N'Lafayete', 842, 9, CAST(N'2020-11-30 18:42:02.170' AS DateTime), 1)
+GO
+
+
 SET IDENTITY_INSERT [dbo].[Consorcio] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Gasto] ON 
@@ -154,6 +170,10 @@ INSERT [dbo].[Gasto] ([IdGasto], [Nombre], [Descripcion], [IdConsorcio], [IdTipo
 GO
 INSERT [dbo].[Gasto] ([IdGasto], [Nombre], [Descripcion], [IdConsorcio], [IdTipoGasto], [FechaGasto], [AnioExpensa], [MesExpensa], [ArchivoComprobante], [Monto], [FechaCreacion], [IdUsuarioCreador]) VALUES (6, N'Sueldos Agosto', N'Se abonaron los sueldos de los 3 encargados', 1, 1, CAST(N'2020-08-30T00:00:00.000' AS DateTime), 2020, 8, N'/Gastos/liquidacion-sueldos-2020-08.pdf', CAST(150000.00 AS Decimal(18, 2)), CAST(N'2020-09-01T00:00:00.000' AS DateTime), 1)
 GO
+INSERT [dbo].[Gasto] ([IdGasto], [Nombre], [Descripcion], [IdConsorcio], [IdTipoGasto], [FechaGasto], [AnioExpensa], [MesExpensa], [ArchivoComprobante], [Monto], [FechaCreacion], [IdUsuarioCreador]) VALUES (91, N'La Caja', N'Seguro contra incendio', 1, 4, CAST(N'2020-11-30 00:00:00.000' AS DateTime), 2020, 11, N'/Gastos/Documento de prueba_20201130-185349.pdf', CAST(550000.00 AS Decimal(18, 2)), CAST(N'2020-11-30 18:53:49.683' AS DateTime), 1)
+GO
+
+
 SET IDENTITY_INSERT [dbo].[Gasto] OFF
 GO
 INSERT [dbo].[Provincia] ([IdProvincia], [Nombre]) VALUES (1, N'Buenos Aires')
@@ -252,21 +272,21 @@ INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario],
 GO
 INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (17, 2, N'1C', N'Sara', N'Tancredi', N'sara@test.com', NULL, CAST(N'2020-09-29T23:47:03.817' AS DateTime), 1)
 GO
-INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (19, 3, N'Unidad 1', N'Tokio', NULL, N'tokio@test.com', NULL, CAST(N'2020-09-29T23:47:53.770' AS DateTime), 1)
+INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (19, 3, N'Unidad 1', N'Tokio', N'Sakamoto', N'tokio@test.com', NULL, CAST(N'2020-09-29T23:47:53.770' AS DateTime), 1)
 GO
-INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (20, 3, N'Unidad 2', N'Berlin', NULL, N'berlin@test.com', NULL, CAST(N'2020-09-29T23:48:07.327' AS DateTime), 1)
+INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (20, 3, N'Unidad 2', N'Berlin', N'Hellmann', N'berlin@test.com', NULL, CAST(N'2020-09-29T23:48:07.327' AS DateTime), 1)
 GO
-INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (21, 3, N'Unidad 3', N'Denver', NULL, N'denver@test.com', NULL, CAST(N'2020-09-29T23:48:26.127' AS DateTime), 1)
+INSERT [dbo].[Unidad] ([IdUnidad], [IdConsorcio], [Nombre], [NombrePropietario], [ApellidoPropietario], [EmailPropietario], [Superficie], [FechaCreacion], [IdUsuarioCreador]) VALUES (21, 3, N'Unidad 3', N'Denver', N'Oneill', N'denver@test.com', NULL, CAST(N'2020-09-29T23:48:26.127' AS DateTime), 1)
 GO
 SET IDENTITY_INSERT [dbo].[Unidad] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] ON 
 GO
-INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (1, N'Pablo                                                                           ', N'pnsanchez@unlam.edu.ar', N'Test1234!', CAST(N'2020-09-29T22:45:36.567' AS DateTime), CAST(N'2020-09-29T22:05:36.567' AS DateTime))
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (1, N'Pablo', N'pnsanchez@unlam.edu.ar', N'VABlAHMAdAAxADIAMwA0ACEA', CAST(N'2020-09-29T22:45:36.567' AS DateTime), CAST(N'2020-09-29T22:05:36.567' AS DateTime))
 GO
-INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (2, N'Matias                                                                          ', N'mpaz@unlam.edu.ar', N'Test1234!', CAST(N'2020-09-29T22:45:36.567' AS DateTime), CAST(N'2020-09-29T22:55:36.567' AS DateTime))
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (2, N'Matias', N'mpaz@unlam.edu.ar', N'VABlAHMAdAAxADIAMwA0ACEA', CAST(N'2020-09-29T22:45:36.567' AS DateTime), CAST(N'2020-09-29T22:55:36.567' AS DateTime))
 GO
-INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (3, N'Mariano                                                                         ', N'mjuiz@unlam.edu.ar', N'Test1234!', CAST(N'2020-09-29T22:45:36.567' AS DateTime), NULL)
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Email], [Password], [FechaRegistracion], [FechaUltLogin]) VALUES (3, N'Mariano', N'mjuiz@unlam.edu.ar', N'VABlAHMAdAAxADIAMwA0ACEA', CAST(N'2020-09-29T22:45:36.567' AS DateTime), NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] OFF
 GO
@@ -317,3 +337,19 @@ USE [master]
 GO
 ALTER DATABASE [PW3_TP_20202C] SET  READ_WRITE 
 GO
+
+
+
+/****** Script para el comando SelectTopNRows de SSMS  ******/
+
+CREATE PROC sp_Expensas @idConsorcio int
+AS
+	SET NOCOUNT ON;
+	SELECT AnioExpensa AS Año, MesExpensa AS Mes, sum(Monto) AS Gasto_Total
+	FROM Gasto
+	WHERE idConsorcio = @idConsorcio
+	GROUP BY MesExpensa, AnioExpensa
+	order by AnioExpensa desc, MesExpensa desc
+GO
+
+EXEC sp_Expensas 1
