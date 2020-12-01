@@ -22,9 +22,16 @@ namespace WebApp.Controllers
         // GET: Home
         public ActionResult Inicio()
         {
-            TempData["Controlador"] = "Consorcio";
-            TempData["Accion"] = "ListarConsorcio";
-            return View();
+            if (Session["IdUsuario"] == null)
+            {
+                TempData["Controlador"] = "Consorcio";
+                TempData["Accion"] = "ListarConsorcio";
+                return View();
+            } else
+            {
+                return RedirectToAction("ListarConsorcio", "Consorcio");
+            }
+            
         }
 
         public ActionResult Ingresar()
