@@ -346,7 +346,7 @@ CREATE PROC sp_Expensas @idConsorcio int
 AS
 	SET NOCOUNT ON;
 	SELECT AnioExpensa AS Año, MesExpensa AS Mes, sum(Monto) AS Gasto_Total
-	FROM Gasto
+	FROM PW3_TP_20202C.dbo.Gasto
 	WHERE idConsorcio = @idConsorcio
 	GROUP BY MesExpensa, AnioExpensa
 	order by AnioExpensa desc, MesExpensa desc
